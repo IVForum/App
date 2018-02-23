@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Main.MainMaster"
+             Title="Master"
+             BackgroundColor="GhostWhite">
+    
+    <StackLayout>
+        
+        <ListView x:Name="MenuItemsListView"
+                  SeparatorVisibility="Default"
+                  HasUnevenRows="true"
+                  ItemsSource="{Binding MenuItems}">
+            
+            <ListView.Header>
+
+                <StackLayout Padding="10" BackgroundColor="#2196F3" Orientation="Horizontal">
+                    
+                    <Image Source="avatar.png"></Image>
+                    
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        
+                        <Label Text="Cristian Moraru" TextColor="White" FontSize="Default"></Label>
+                        
+                        <Label Text="cristian.moraru@live.com" TextColor="White" FontSize="Default"></Label>
+                        
+                    </StackLayout>
+                    
+                </StackLayout>
+
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ViewCell>
+
+                        <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+
+                            <Frame>
+
+                                <StackLayout Orientation="Horizontal">
+
+                                    <Image Source="{Binding Icon}"></Image>
+                                    
+                                    <Label VerticalOptions="FillAndExpand" 
+                                           VerticalTextAlignment="Center"
+                                           Text="{Binding Title}" 
+                                           FontSize="Medium"/>
+                                    
+                                </StackLayout>
+
+                            </Frame>
+                            
+                        </StackLayout>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <Button Text="Tanca sessió" Clicked="Logout">
+            <Button.Image>
+                <FileImageSource File="logout.png"/>
+            </Button.Image>
+        </Button>
+
+    </StackLayout>
+    
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Account.LoginPage"
+             Title="Iniciar sessió"
+             BackgroundColor="GhostWhite">
+        
+    <ContentPage.Content>
+        
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True" BackgroundColor="White">
+                
+                <StackLayout>
+                    
+                    <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
+
+                    <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
+                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True"></Entry>
+
+                    <Button Text="Iniciar sessió" Clicked="Login">
+                        <Button.Image>
+                            <FileImageSource File="login.png"/>
+                        </Button.Image>
+                    </Button>
+                    
+                </StackLayout>
+                
+            </Frame>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

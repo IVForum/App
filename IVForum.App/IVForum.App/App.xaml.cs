@@ -1,20 +1,25 @@
-﻿using System;
+﻿using IVForum.App.Services;
+using IVForum.App.Views.Main;
 
-using IVForum.App.Views;
 using Xamarin.Forms;
 
 namespace IVForum.App
 {
 	public partial class App : Application
 	{
-
-		public App ()
+		public App()
 		{
 			InitializeComponent();
 
-
-            MainPage = new MainPage();
-        }
+			if (Settings.ContainsKey("loggedin"))
+			{
+				MainPage = new Main();
+			}
+			else
+			{
+				MainPage = new StartupTabbedPage();
+			}
+		}
 
 		protected override void OnStart ()
 		{
@@ -24,6 +29,7 @@ namespace IVForum.App
 		protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
+			Current.SavePropertiesAsync();
 		}
 
 		protected override void OnResume ()
