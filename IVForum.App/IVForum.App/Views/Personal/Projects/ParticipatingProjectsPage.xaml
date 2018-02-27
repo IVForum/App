@@ -12,7 +12,7 @@
             <Frame HasShadow="True">
                 
                 <StackLayout>
-                    
+
                     <Label Text="Projectes Participants"></Label>
                     
                 </StackLayout>

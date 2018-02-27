@@ -12,8 +12,11 @@
             <Frame HasShadow="True" BackgroundColor="White">
                 
                 <StackLayout>
-                    
-                    <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
+                        <ActivityIndicator x:Name="LoadingActivity"></ActivityIndicator>
+                    </StackLayout>
 
                     <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
                     <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True"></Entry>

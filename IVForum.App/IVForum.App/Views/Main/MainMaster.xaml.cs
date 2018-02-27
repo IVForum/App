@@ -29,9 +29,10 @@ namespace IVForum.App.Views.Main
             ListView = MenuItemsListView;
         }
 
-		async void Logout(object sender, EventArgs e)
+		public void Logout(object sender, EventArgs e)
 		{
 			Settings.Remove("loggedin");
+			Settings.Remove("token");
 			Application.Current.MainPage = new StartupTabbedPage();
 		}
 
@@ -45,8 +46,8 @@ namespace IVForum.App.Views.Main
                 MenuItems = new ObservableCollection<MainMenuItem>(new[]
                 {
                     new MainMenuItem { Id = 0, Title = "Perfil", TargetType = typeof(MyProfilePage), Icon = "profile.png" },
-					new MainMenuItem { Id = 1, Title = "Fòrums personals", TargetType = typeof(MyForumsTabbedPage), Icon = "personal_forums.png" },
-					new MainMenuItem { Id = 2, Title = "Projectes personals", TargetType = typeof(MyProjectsTabbedPage), Icon = "personal_projects.png" },
+					new MainMenuItem { Id = 1, Title = "Fòrums", TargetType = typeof(MyForumsTabbedPage), Icon = "personal_forums.png" },
+					new MainMenuItem { Id = 2, Title = "Projectes", TargetType = typeof(MyProjectsTabbedPage), Icon = "personal_projects.png" },
                     new MainMenuItem { Id = 3, Title = "Fòrums públics", TargetType = typeof(PublicForumsTabbedPage), Icon = "public_forums.png" },
                     new MainMenuItem { Id = 4, Title = "Projectes públics", TargetType = typeof(PublicProjectsTabbedPage), Icon = "public_projects.png" },
 					new MainMenuItem { Id = 5, Title = "Sobre nosaltres", TargetType = typeof(About), Icon = "about.png" },

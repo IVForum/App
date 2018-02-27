@@ -13,7 +13,10 @@
 
                 <StackLayout>
 
-                    <Label Text="Formulari de registre" FontSize="Medium"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Formulari de registre" FontSize="Medium"></Label>
+                        <ActivityIndicator x:Name="LoadingActivity"></ActivityIndicator>
+                    </StackLayout>
                     
                     <Entry x:Name="EntryName" Placeholder="{Binding Name}"></Entry>
                     <Entry x:Name="EntrySurname" Placeholder="{Binding Surname}"></Entry>

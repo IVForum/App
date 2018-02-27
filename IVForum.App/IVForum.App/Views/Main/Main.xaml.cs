@@ -12,8 +12,6 @@ namespace IVForum.App.Views.Main
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-			
-			Detail = new NavigationPage(new Public.Forums.PublicForumsTabbedPage());
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -25,7 +23,7 @@ namespace IVForum.App.Views.Main
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = item.Title;
 
-            Detail = new NavigationPage(page);
+			Detail = new NavigationPage(page);
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;

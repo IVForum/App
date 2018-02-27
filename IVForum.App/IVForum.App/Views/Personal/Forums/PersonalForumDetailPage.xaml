@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Personal.Forums.PersonalForumDetailPage"
+             BackgroundColor="GhostWhite">
+
+    <ContentPage.Content>
+        
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="true">
+
+                <StackLayout>
+
+                    <Label Text="{Binding Title}" FontSize="Large"></Label>
+                    <Label Text="{Binding CreationDate}"></Label>
+                    <Label Text="{Binding Description}"></Label>
+
+                    <Button BackgroundColor="Red" Text="Eliminar" Clicked="DeleteForum"></Button>
+                    
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

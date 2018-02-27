@@ -2,6 +2,8 @@
 {
 	public class Token
     {
-		public string Value { get; set; }
+		public string Id { get; set; }
+		public string Auth_Token { get; set; }
+		public int Expires_In { get; set; }
 	}
 }

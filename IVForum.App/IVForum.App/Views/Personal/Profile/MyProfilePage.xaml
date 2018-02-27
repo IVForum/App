@@ -9,14 +9,40 @@
         
         <StackLayout Padding="5">
 
-            <Frame HasShadow="True">
+            <Frame x:Name="ProfileFrame" HasShadow="True">
 
                 <StackLayout>
+                    <StackLayout Orientation="Horizontal">
 
-                    <Label Text="{Binding Name}" FontSize="Large"></Label>
-                    <Label Text="{Binding Email}" FontSize="Default"></Label>
-                    <Label Text="Repositori:"></Label>
-                    <Label Text="{Binding RepositoryUrl}" FontSize="Default"></Label>
+                        <Image Source="{Binding Avatar}"></Image>
+
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding Name}" FontSize="Large"></Label>
+                            <Label Text="{Binding Email}" FontSize="Default"></Label>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <BoxView HeightRequest="1"
+                             Color="DarkGray"
+                             VerticalOptions="FillAndExpand">
+
+                    </BoxView>
+
+                    <Label Text="Repositori:" FontSize="Medium"></Label>
+                    <Label Text="{Binding RepositoryUrl}"></Label>
+
+                    <Label></Label>
+
+                    <Label Text="Pàgina web:" FontSize="Medium"></Label>
+                    <Label Text="{Binding WebsiteUrl}"></Label>
+
+                    <Label></Label>
+
+                    <Label Text="Facebook:" FontSize="Medium"></Label>
+                    <Label Text="{Binding FacebookUrl}"></Label>
+
+                    <Button Text="Eliminar perfil" BackgroundColor="Red" Clicked="DeleteAccount"></Button>
 
                 </StackLayout>
 

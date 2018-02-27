@@ -6,20 +6,37 @@
              BackgroundColor="GhostWhite">
     
     <ContentPage.Content>
-        
-        <StackLayout Padding="5">
 
-            <Frame HasShadow="True">
+        <ListView x:Name="ForumsListView"
+                  HasUnevenRows="True">
 
-                <StackLayout>
+            <ListView.ItemTemplate>
 
-                    <Label Text="Trending fòrums"></Label>
+                <DataTemplate>
 
-                </StackLayout>
+                    <ViewCell>
 
-            </Frame>
+                        <StackLayout Padding="5, 2.5" BackgroundColor="GhostWhite">
 
-        </StackLayout>
+                            <Frame HasShadow="True">
+
+                                <StackLayout>
+
+                                    <Label Text="Paceholder"></Label>
+                                    
+                                </StackLayout>
+                                
+                            </Frame>
+                            
+                        </StackLayout>
+                        
+                    </ViewCell>
+                    
+                </DataTemplate>
+                
+            </ListView.ItemTemplate>
+            
+        </ListView>
         
     </ContentPage.Content>
     

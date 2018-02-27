@@ -26,25 +26,37 @@ namespace IVForum.App.Views.Account
 
 		async void SignUp(object sender, EventArgs e)
 		{
-			model = new SignUpViewModel
+			try
 			{
-				Name = EntryName.Text,
-				Surname = EntrySurname.Text,
-				Email = EntryEmail.Text,
-				Password = EntryPassword.Text
-			};
+				LoadingActivity.IsRunning = true;
 
-			var result = await ApiService.RegisterUser(model);
+				// TODO: Regex
+				model = new SignUpViewModel
+				{
+					Name = EntryName.Text,
+					Surname = EntrySurname.Text,
+					Email = EntryEmail.Text,
+					Password = EntryPassword.Text
+				};
 
-			if (!result)
-			{
-				await DisplayAlert("Error", "Failed to register user, try again later", "Ok");
+				var success = await ApiService.RequestSignUp(model);
+
+				if (success)
+				{
+					LoadingActivity.IsRunning = false;
+
+					await DisplayAlert("Èxit", "L'usuari s'ha creat amb èxit", "Ok");
+
+					Application.Current.MainPage = new Main.Main();
+				}
+				else
+				{
+					await DisplayAlert("Error", "Error al registrar l'usuari, torna a provar més tard", "Ok");
+				}
 			}
-			else
+			catch
 			{
-				await DisplayAlert("Success", "Account created successfully", "Ok");
-				Settings.Save("signedup", true);
-				await Navigation.PopAsync(true);
+				await DisplayAlert("Error", "Error al registrar l'usuari, torna a provar més tard", "Ok");
 			}
 		}
 	}

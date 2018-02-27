@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Personal.Forums.NewForumPage"
+             Title="Nou Fòrum"
+             BackgroundColor="GhostWhite">
+    
+    <ContentPage.Content>
+
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <Label Text="Nou Fòrum" FontSize="Large"></Label>
+
+                    <Entry Placeholder="{Binding Name}"></Entry>
+                    <Entry Placeholder="{Binding Title}"></Entry>
+                    <Entry Placeholder="{Binding Description}"></Entry>
+
+                    <Button Text="Crear"></Button>
+                    <Button Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
+                    
+                </StackLayout>
+                
+            </Frame>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

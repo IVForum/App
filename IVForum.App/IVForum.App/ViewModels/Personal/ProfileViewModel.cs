@@ -6,16 +6,18 @@ namespace IVForum.App.ViewModels
     {
 		public string Name { get; set; }
 		public string Email { get; set; }
+		public string Avatar { get; set; }
 		public string RepositoryUrl { get; set; }
-		public string WebsireUrl { get; set; }
+		public string WebsiteUrl { get; set; }
 		public string FacebookUrl { get; set; }
 
 		public ProfileViewModel(User user)
 		{
 			Name = user.Name + " " + user.Surname;
 			Email = user.Email;
+			Avatar = user.Avatar;
 			RepositoryUrl = user.RepositoryUrl;
-			WebsireUrl = user.WebsiteUrl;
+			WebsiteUrl = user.WebsiteUrl;
 			FacebookUrl = user.FacebookUrl;
 		}
     }

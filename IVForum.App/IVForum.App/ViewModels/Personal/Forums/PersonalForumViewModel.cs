@@ -1,12 +1,19 @@
 ﻿using IVForum.App.Models;
 
+using System;
+
 namespace IVForum.App.ViewModels.Personal.Forums
 {
 	public class PersonalForumViewModel
-    {
+	{
+		public string Id { get; set; }
 		public string Name { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
+
+		public DateTime CreationDate { get; set; }
+
+		public string Owner { get; set; }
 
 		public string Icon { get; set; }
 		public string Background { get; set; }
@@ -17,9 +24,11 @@ namespace IVForum.App.ViewModels.Personal.Forums
 
 		public PersonalForumViewModel(Forum f)
 		{
+			Id = f.Id;
 			Name = f.Name;
 			Title = f.Title;
 			Description = f.Description;
+			CreationDate = f.CreationDate;
 
 			Icon = f.Icon;
 			Background = f.Background;

@@ -12,6 +12,7 @@ namespace IVForum.App.Views.Account
 	public partial class LoginPage : ContentPage
 	{
 		private LoginViewModel model;
+
 		public LoginPage()
 		{
 			InitializeComponent();
@@ -34,18 +35,33 @@ namespace IVForum.App.Views.Account
 
 		async void Login(object sender, EventArgs e)
 		{
-			model = new LoginViewModel
+			try
 			{
-				Email = EntryEmail.Text,
-				Password = EntryPassword.Text
-			};
+				LoadingActivity.IsRunning = true;
 
-			bool result = await ApiService.Login(model);
+				// TODO: Regex
+				model = new LoginViewModel
+				{
+					Email = EntryEmail.Text,
+					Password = EntryPassword.Text
+				};
 
-			if (result)
+				var success = await ApiService.RequestLogin(model);
+
+				if (success)
+				{
+					Settings.Save("loggedin", true);
+					LoadingActivity.IsRunning = false;
+					Application.Current.MainPage = new Main.Main();
+				}
+				else
+				{
+					await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
+				}
+			}
+			catch
 			{
-				Settings.Save("loggedin", true);
-				Application.Current.MainPage = new Main.Main();
+				await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
 			}
 		}
 	}

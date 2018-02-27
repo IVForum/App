@@ -13,7 +13,11 @@
 
                 <StackLayout>
 
-                    <Button Text="Desa" Clicked="SaveChanges"></Button>
+                    <Button Text="Desa" Clicked="SaveChanges">
+                        <Button.Image>
+                            <FileImageSource File="save.png"/>
+                        </Button.Image>
+                    </Button>
                     
                 </StackLayout>
                 

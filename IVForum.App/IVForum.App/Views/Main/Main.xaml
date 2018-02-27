@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Main.Main"
-             xmlns:pages="clr-namespace:IVForum.App.Views.Main">
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:pages="clr-namespace:IVForum.App.Views.Main"
+                  xmlns:home="clr-namespace:IVForum.App.Views.Public.Forums"
+                  x:Class="IVForum.App.Views.Main.Main">
     
     <MasterDetailPage.Master>
         
@@ -16,7 +17,7 @@
             
             <x:Arguments>
                 
-                <pages:MainDetail />
+                <home:PublicForumsTabbedPage />
                 
             </x:Arguments>
             

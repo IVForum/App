@@ -1,8 +1,6 @@
-﻿using System;
+﻿using IVForum.App.ViewModels.Public.Forums;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,9 +10,18 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TopForumsPage : ContentPage
 	{
-		public TopForumsPage ()
+		public List<PublicForumViewModel> ForumModels { get; set; } = new List<PublicForumViewModel>();
+		public TopForumsPage()
 		{
-			InitializeComponent ();
+			InitializeComponent();
+			ForumModels.Add(new PublicForumViewModel());
+			ForumsListView.ItemsSource = ForumModels;
+			ForumsListView.ItemSelected += ForumsListView_ItemSelected;
+		}
+
+		private async void ForumsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			await Navigation.PushAsync(new ForumDetailPage((PublicForumViewModel)e.SelectedItem), true);
 		}
 	}
 }

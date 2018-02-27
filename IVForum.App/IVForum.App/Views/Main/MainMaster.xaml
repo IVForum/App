@@ -36,7 +36,7 @@
 
                     <ViewCell>
 
-                        <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="FillAndExpand">
 
                             <Frame>
 
