@@ -11,7 +11,7 @@ namespace IVForum.App
 			InitializeComponent();
 		}
 
-		protected override void OnStart ()
+		protected override void OnStart()
 		{
 			// Handle when your app starts
 			bool loggedin = Current.Properties.ContainsKey("loggedin");
@@ -29,6 +29,7 @@ namespace IVForum.App
 		protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
+			Current.SavePropertiesAsync();
 		}
 
 		protected override void OnResume ()

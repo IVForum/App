@@ -34,12 +34,12 @@ namespace IVForum.App.Views.Personal.Projects
 
 		private async void ProjectsListView_ItemTapped(object sender, ItemTappedEventArgs e)
 		{
-			await Navigation.PushAsync(new PersonalProjectDetailPage((PersonalProjectViewModel)e.Item));
+			await Navigation.PushAsync(new PersonalProjectDetailPage((PersonalProjectViewModel)e.Item), true);
 		}
 
 		async void AddNew(object sender, EventArgs e)
 		{
-			await Navigation.PushModalAsync(new NewProjectPage(), true);
+			await Navigation.PushAsync(new NewProjectPage(), true);
 		}
 	}
 }

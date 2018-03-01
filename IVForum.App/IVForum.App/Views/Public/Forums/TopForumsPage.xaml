@@ -8,7 +8,8 @@
     <ContentPage.Content>
 
         <ListView x:Name="ForumsListView"
-                  HasUnevenRows="True">
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None">
 
             <ListView.ItemTemplate>
 
@@ -22,7 +23,10 @@
 
                                 <StackLayout>
 
-                                    <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="public_forums.png"></Image>
+                                        <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                                    </StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="Data Creació:"></Label>
@@ -31,10 +35,10 @@
                                     
                                     <Label Text="{Binding Description}"></Label>
 
-                                    <StackLayout Orientation="Horizontal">
+                                    <!--<StackLayout Orientation="Horizontal">
                                         <Label Text="Creador:"></Label>
                                         <Label Text="{Binding Owner}" FontAttributes="Bold"></Label>
-                                    </StackLayout>
+                                    </StackLayout>-->
 
                                 </StackLayout>
 

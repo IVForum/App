@@ -19,7 +19,7 @@
                     <Entry Placeholder="{Binding Title}"></Entry>
                     <Entry Placeholder="{Binding Description}"></Entry>
 
-                    <Button Text="Crear"></Button>
+                    <Button Text="Crear" Clicked="Add"></Button>
                     <Button Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
                     
                 </StackLayout>

@@ -15,9 +15,14 @@ namespace IVForum.App.Services
 {
 	public class ApiService
     {
-		private static string BaseUrl = Properties.Resources.BaseUrl;
-		private static string MediaType = Properties.Resources.MediaType;
+		private static string BaseUrl = Properties.Res.BaseUrl;
+		private static string MediaType = Properties.Res.MediaType;
 		private static HttpClient client = new HttpClient() { BaseAddress = new System.Uri(BaseUrl) };
+
+		private static void AuthorizeRequest(string token)
+		{
+			client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+		}
 
 		public static async Task<bool> RequestSignUp(SignUpViewModel sender)
 		{
@@ -33,7 +38,8 @@ namespace IVForum.App.Services
 
 					Token token = JsonConvert.DeserializeObject<Token>(answer);
 
-					Settings.Save("token", token);
+					Settings.Save("token_auth", token.Auth_Token);
+					Settings.Save("user_id", token.Id);
 
 					return true;
 				}
@@ -62,7 +68,8 @@ namespace IVForum.App.Services
 
 					Token token = JsonConvert.DeserializeObject<Token>(answer);
 
-					Settings.Save("token", token);
+					Settings.Save("token_auth", token.Auth_Token);
+					Settings.Save("user_id", token.Id);
 
 					return true;
 				}
@@ -89,7 +96,9 @@ namespace IVForum.App.Services
 
 					Token token = JsonConvert.DeserializeObject<Token>(answer);
 
-					Settings.Save("token", token);
+					Settings.Save("token_auth", token.Auth_Token);
+					Settings.Save("user_id", token.Id);
+					Settings.Save("expire_date", token.Expires_In);
 
 					return true;
 				}
@@ -114,9 +123,8 @@ namespace IVForum.App.Services
 		{
 			try
 			{
-				Token token = (Token)Settings.GetValue("token");
-
-				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Auth_Token);
+				string token = (string)Settings.GetValue("token_auth");
+				AuthorizeRequest(token);
 
 				HttpResponseMessage response = await client.GetAsync("account/get");
 
@@ -139,9 +147,12 @@ namespace IVForum.App.Services
 
 		public static async Task RequestForums()
 		{
-			client.DefaultRequestHeaders.Add("Bearer", "");
-			HttpResponseMessage response = await client.GetAsync("forums/get");
-			Debug.WriteLine(response.Content);
+			string token = (string) Settings.GetValue("token_auth");
+			AuthorizeRequest(token);
+
+			string user = (string) Settings.GetValue("user_id");
+
+			HttpResponseMessage response = await client.GetAsync("forums/get/" + user);
 		}
 
 		public static async Task RequestProjects()
@@ -176,6 +187,23 @@ namespace IVForum.App.Services
 		private static StringContent GetStringContent(string serializedModel)
 		{
 			return new StringContent(serializedModel, Encoding.UTF8, MediaType);
+		}
+
+		public static async Task Startup()
+		{
+			if (Settings.Contains("loggedin"))
+			{
+				string email = (string)Settings.GetValue("email");
+				string password = (string)Settings.GetValue("password");
+
+				LoginViewModel model = new LoginViewModel()
+				{
+					Email = email,
+					Password = password
+				};
+
+				await RequestLogin(model);
+			}
 		}
 	}
 }

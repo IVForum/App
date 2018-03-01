@@ -20,7 +20,8 @@ namespace IVForum.App.Views.Account
 				Name = "Nom",
 				Surname = "Cognom",
 				Email = "Correu electrònic",
-				Password = "Contrasenya"
+				Password = "Contrasenya",
+				Legal = Properties.Res.Legal
 			};
 		}
 

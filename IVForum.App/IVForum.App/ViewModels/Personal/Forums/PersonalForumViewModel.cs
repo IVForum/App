@@ -31,11 +31,10 @@ namespace IVForum.App.ViewModels.Personal.Forums
 			CreationDate = f.CreationDate;
 
 			Icon = f.Icon;
-			Background = f.Background;
+			Background = "banner.jpg";
 
 			WebsiteUrl = f.WebsiteUrl;
 			RepositoryUrl = f.RepositoryUrl;
-			FacebookUrl = f.FacebookUrl;
 		}
     }
 }

@@ -6,21 +6,54 @@
              BackgroundColor="GhostWhite">
     
     <ContentPage.Content>
-        
-        <StackLayout Padding="5">
 
-            <Frame HasShadow="True">
+        <ListView x:Name="ForumsListView"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None">
 
-                <StackLayout>
+            <ListView.ItemTemplate>
 
-                    <Label Text="Nous fòrums"></Label>
+                <DataTemplate>
 
-                </StackLayout>
+                    <ViewCell>
 
-            </Frame>
+                        <StackLayout Padding="5, 2.5" BackgroundColor="GhostWhite">
 
-        </StackLayout>
-        
+                            <Frame HasShadow="True">
+
+                                <StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="public_forums.png"></Image>
+                                        <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Data Creació:"></Label>
+                                        <Label Text="{Binding CreationDate}" FontAttributes="Bold"></Label>
+                                    </StackLayout>
+
+                                    <Label Text="{Binding Description}"></Label>
+
+                                    <!--<StackLayout Orientation="Horizontal">
+                                        <Label Text="Creador:"></Label>
+                                        <Label Text="{Binding Owner}" FontAttributes="Bold"></Label>
+                                    </StackLayout>-->
+
+                                </StackLayout>
+
+                            </Frame>
+
+                        </StackLayout>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+
     </ContentPage.Content>
     
 </ContentPage>

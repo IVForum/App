@@ -23,7 +23,9 @@
                     <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
                     <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True"></Entry>
 
-                    <Button Text="Registrar" Clicked="SignUp" HeightRequest="50">
+                    <Label Text="{Binding Legal}" FontAttributes="Bold"></Label>
+
+                    <Button Text="Registrar" Clicked="SignUp">
                         <Button.Image>
                             <FileImageSource File="signup.png"/>
                         </Button.Image>

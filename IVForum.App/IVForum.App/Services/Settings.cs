@@ -4,10 +4,10 @@ namespace IVForum.App.Services
 {
 	public class Settings
 	{
-		public static async void Save(string key, object value)
+		public static void Save(string key, object value)
 		{
-			Application.Current.Properties.Add(key, value);
-			await Application.Current.SavePropertiesAsync();
+			Application.Current.Properties[key] = value;
+			Application.Current.SavePropertiesAsync();
 		}
 
 		public static bool Contains(string key)

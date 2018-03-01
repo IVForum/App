@@ -16,7 +16,6 @@ namespace IVForum.App.Models
 		public string Background { get; set; }
 
 		public string WebsiteUrl { get; set; }
-		public string FacebookUrl { get; set; }
 		public string RepositoryUrl { get; set; }
 
 		public virtual Forum Forum { get; set; } = null;

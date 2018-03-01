@@ -20,6 +20,9 @@ namespace IVForum.App.Views.Main
     public partial class MainMaster : ContentPage
     {
         public ListView ListView;
+		public string Username;
+		public string Email;
+		public string Avatar;
 
         public MainMaster()
         {
@@ -54,7 +57,7 @@ namespace IVForum.App.Views.Main
 					new MainMenuItem { Id = 6, Title = "Configuració", TargetType = typeof(SettingsPage), Icon = "settings.png" },
                 });
 
-				User = new MainMasterUserViewModel();
+				User = new MainMasterUserViewModel(IVForum.App.Resources.Content.Cristian);
             }
 
 			#region INotifyPropertyChanged Implementation

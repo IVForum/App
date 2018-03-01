@@ -1,26 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Personal.Projects.PersonalProjectDetailPage">
+             x:Class="IVForum.App.Views.Personal.Projects.PersonalProjectDetailPage"
+             Title="{Binding Name}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Editar" Clicked="EditProject"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
 
-        <StackLayout Padding="5">
+        <ScrollView>
 
-            <Frame HasShadow="True">
+            <StackLayout Padding="5">
 
-                <StackLayout>
+                <Frame HasShadow="True" Padding="0">
 
-                    <Label Text="{Binding Name}"></Label>
-                    <Label Text="{Binding Title}"></Label>
-                    <Label Text="{Binding Description}"></Label>
+                    <Image Source="{Binding Background}"></Image>
 
-                    <Button Text="Eliminar" BackgroundColor="Red"></Button>
+                </Frame>
 
-                </StackLayout>
+                <Frame HasShadow="True">
 
-            </Frame>
+                    <StackLayout Orientation="Horizontal">
 
-        </StackLayout>
+                        <Image Source="personal_projects.png"></Image>
+                        <Label Text="{Binding Title}" FontSize="Medium"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="info.png"></Image>
+                            <Label Text="Descripció:" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding Description}"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="repo.png"></Image>
+                            <Label Text="Repositori:" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding RepositoryUrl}" TextColor="Blue">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OpenRepository"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="web.png"></Image>
+                            <Label Text="Pàgina web:" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding WebsiteUrl}" TextColor="Blue"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Button Image="cross.png" Text="Eliminar" BackgroundColor="Red"></Button>
+
+            </StackLayout>
+
+        </ScrollView>
         
     </ContentPage.Content>
 </ContentPage>

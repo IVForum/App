@@ -16,13 +16,13 @@
 
                 <StackLayout Padding="10" BackgroundColor="#2196F3" Orientation="Horizontal">
                     
-                    <Image Source="avatar.png"></Image>
+                    <Image Source="{Binding User.Avatar}"></Image>
                     
                     <StackLayout VerticalOptions="CenterAndExpand">
                         
-                        <Label Text="Cristian Moraru" TextColor="White" FontSize="Default"></Label>
+                        <Label Text="{Binding User.Username}" TextColor="White" FontSize="Default"></Label>
                         
-                        <Label Text="cristian.moraru@live.com" TextColor="White" FontSize="Default"></Label>
+                        <Label Text="{Binding User.Email}" TextColor="White" FontSize="Default"></Label>
                         
                     </StackLayout>
                     

@@ -46,7 +46,7 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = await ApiService.RequestLogin(model);
+				var success = true;//await ApiService.RequestLogin(model);
 
 				if (success)
 				{

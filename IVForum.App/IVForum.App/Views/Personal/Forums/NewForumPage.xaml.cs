@@ -17,9 +17,15 @@ namespace IVForum.App.Views.Personal.Forums
 			BindingContext = Model;
 		}
 
+		async void Add(object sender, EventArgs e)
+		{
+
+			await Navigation.PopAsync();
+		}
+
 		async void Cancel(object sender, EventArgs e)
 		{
-			await Navigation.PopModalAsync();
+			await Navigation.PopAsync();
 		}
 	}
 }

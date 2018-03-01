@@ -18,11 +18,17 @@ namespace IVForum.App.ViewModels.Personal.Projects
 		public string WebsiteUrl { get; set; }
 		public string RepositoryUrl { get; set; }
 
+		public int Progress { get; set; }
+		public int Goal { get; set; }
+
 		public PersonalProjectViewModel(Project p)
 		{
 			Name = p.Name;
 			Title = p.Title;
 			Description = p.Description;
+
+			Icon = "personal-projects.png";
+			Background = "banner1.jpg";
 
 			CreationDate = p.CreationDate;
 			WebsiteUrl = p.WebsiteUrl;

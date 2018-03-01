@@ -1,25 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:view="IVForum.App.Views.Shared"
-             x:Class="IVForum.App.Views.Public.Forums.ForumDetailPage">
+             x:Class="IVForum.App.Views.Public.Forums.ForumDetailPage"
+             Title="Informació">
 
     <ContentPage.Content>
 
         <StackLayout Padding="5">
 
-            <Frame HasShadow="true">
+            <Frame HasShadow="True" Padding="0">
+
+                <Image Source="{Binding Background}"></Image>
+                
+            </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="public_forums.png"></Image>
+                    <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                </StackLayout>
+                
+            </Frame>
+
+            <Frame HasShadow="True">
 
                 <StackLayout>
 
-                    <Label Text="{Binding Title}" FontSize="Large"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="user_w.png"></Image>
+                        <Label Text="Creador:" FontSize="Medium"></Label>
+                    </StackLayout>
+
+                    <Label Text="{Binding Owner}"></Label>
                     <Label Text="{Binding CreationDate}"></Label>
-                    <Label Text="{Binding Description}"></Label>
+                    
+                </StackLayout>
+                
+            </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Creador:"></Label>
-                        <Label Text="{Binding Owner}"></Label>
+                        <Image Source="info.png"></Image>
+                        <Label Text="Descripció:" FontSize="Medium"></Label>
                     </StackLayout>
+
+                    <Label Text="{Binding Description}"></Label>
 
                 </StackLayout>
 

@@ -12,7 +12,8 @@
     <ContentPage.Content>
 
         <ListView x:Name="ProjectsListView"
-                      HasUnevenRows="True">
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None">
 
             <ListView.ItemTemplate>
 
@@ -27,18 +28,24 @@
                                 <StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="Nom:"></Label>
-                                        <Label Text="{Binding Name}" FontAttributes="Bold"></Label>
+
+                                        <Image Source="personal_projects.png"></Image>
+                                        <Label Text="{Binding Name}" FontSize="Medium"></Label>
+                                        
                                     </StackLayout>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Títol:"></Label>
-                                        <Label Text="{Binding Title}" FontAttributes="Bold"></Label>
-                                    </StackLayout>
+                                    <StackLayout>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Data Creació:"></Label>
-                                        <Label Text="{Binding CreationDate}" FontAttributes="Bold"></Label>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Títol:" FontAttributes="Bold"></Label>
+                                            <Label Text="{Binding Title}"></Label>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Data Creació:" FontAttributes="Bold"></Label>
+                                            <Label Text="{Binding CreationDate}"></Label>
+                                        </StackLayout>
+
                                     </StackLayout>
 
                                 </StackLayout>

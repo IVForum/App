@@ -14,6 +14,7 @@ namespace IVForum.App.Views.Personal.Forums
 	{
 		public List<Forum> Forums { get; set; } = new List<Forum>();
 		public List<PersonalForumViewModel> Models { get; set; } = new List<PersonalForumViewModel>();
+
 		public PersonalForumsPage()
 		{
 			InitializeComponent();
@@ -38,7 +39,7 @@ namespace IVForum.App.Views.Personal.Forums
 
 		async void AddNew(object sender, EventArgs e)
 		{
-			await Navigation.PushModalAsync(new NewForumPage(), true);
+			await Navigation.PushAsync(new NewForumPage(), true);
 		}
 	}
 }

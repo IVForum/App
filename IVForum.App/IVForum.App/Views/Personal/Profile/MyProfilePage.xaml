@@ -9,44 +9,56 @@
         
         <StackLayout Padding="5">
 
-            <Frame x:Name="ProfileFrame" HasShadow="True">
+            <Frame HasShadow="True">
 
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal">
 
-                        <Image Source="{Binding Avatar}"></Image>
+                    <Image Source="{Binding Avatar}"></Image>
 
-                        <StackLayout HorizontalOptions="CenterAndExpand">
-                            <Label Text="{Binding Name}" FontSize="Large"></Label>
-                            <Label Text="{Binding Email}" FontSize="Default"></Label>
-                        </StackLayout>
-
+                    <StackLayout>
+                        <Label Text="{Binding Name}"></Label>
+                        <Label Text="{Binding Email}"></Label>
                     </StackLayout>
-
-                    <BoxView HeightRequest="1"
-                             Color="DarkGray"
-                             VerticalOptions="FillAndExpand">
-
-                    </BoxView>
-
-                    <Label Text="Repositori:" FontSize="Medium"></Label>
-                    <Label Text="{Binding RepositoryUrl}"></Label>
-
-                    <Label></Label>
-
-                    <Label Text="Pàgina web:" FontSize="Medium"></Label>
-                    <Label Text="{Binding WebsiteUrl}"></Label>
-
-                    <Label></Label>
-
-                    <Label Text="Facebook:" FontSize="Medium"></Label>
-                    <Label Text="{Binding FacebookUrl}"></Label>
-
-                    <Button Text="Eliminar perfil" BackgroundColor="Red" Clicked="DeleteAccount"></Button>
 
                 </StackLayout>
 
             </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <Image Source="repo.png"></Image>
+                        <Label Text="Repositori" FontSize="Medium"></Label>
+
+                    </StackLayout>
+
+                    <Label Text="{Binding RepositoryUrl}" TextColor="Blue"></Label>
+
+                </StackLayout>
+                
+            </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <Image Source="web.png"></Image>
+                        <Label Text="Pàgina web" FontSize="Medium"></Label>
+
+                    </StackLayout>
+
+                    <Label Text="{Binding WebsiteUrl}" TextColor="Blue"></Label>
+                    
+                </StackLayout>
+
+            </Frame>
+
+            <Button Text="Eliminar perfil" BackgroundColor="Red" Clicked="DeleteAccount"></Button>
 
         </StackLayout>
         
