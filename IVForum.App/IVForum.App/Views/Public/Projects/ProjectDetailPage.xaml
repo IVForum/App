@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Public.Forums.ForumDetailPage">
-
+             x:Class="IVForum.App.Views.Public.Projects.ProjectDetailPage">
+    
     <ContentPage.Content>
 
         <ScrollView>
@@ -18,23 +18,23 @@
                 <Frame HasShadow="True">
 
                     <StackLayout Orientation="Horizontal">
-                        <Image Source="public_forums.png"></Image>
+
+                        <Image Source="public_projects.png"></Image>
                         <Label Text="{Binding Title}" FontSize="Medium"></Label>
+
                     </StackLayout>
 
                 </Frame>
 
                 <Frame HasShadow="True">
 
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ShowProfile"/>
-                    </Frame.GestureRecognizers>
-
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
+
                             <Image Source="user_w.png"></Image>
-                            <Label Text="Creador" FontSize="Medium"></Label>
+                            <Label Text="Creador"></Label>
+
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal">
@@ -53,8 +53,10 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
+
                             <Image Source="info.png"></Image>
-                            <Label Text="Descripció:" FontSize="Medium"></Label>
+                            <Label Text="Descripció" FontSize="Medium"></Label>
+
                         </StackLayout>
 
                         <Label Text="{Binding Description}"></Label>
@@ -63,10 +65,44 @@
 
                 </Frame>
 
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="repo.png"></Image>
+                            <Label Text="Repositori" FontSize="Medium"></Label>
+
+                        </StackLayout>
+
+                        <Label Text="{Binding RepositoryUrl}" TextColor="Blue"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+
+                            <Image Source="web.png"></Image>
+                            <Label Text="Pàgina web" FontSize="Medium"></Label>
+
+                        </StackLayout>
+
+                        <Label Text="{Binding WebsiteUrl}" TextColor="Blue"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
             </StackLayout>
 
         </ScrollView>
-
+        
     </ContentPage.Content>
     
 </ContentPage>

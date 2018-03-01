@@ -9,6 +9,9 @@ namespace IVForum.App.ViewModels.Public.Forums
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public DateTime CreationDate { get; set; }
+		public int Views { get; set; }
+
+		public int Projects { get; set; }
 
 		public string Background { get; set; }
 		public string Owner { get; set; }
@@ -19,6 +22,9 @@ namespace IVForum.App.ViewModels.Public.Forums
 			Title = f.Title;
 			Description = f.Description.Substring(0, 140) + "...";
 			CreationDate = f.CreationDate;
+			Views = f.Views;
+
+			Projects = f.Projects.Count;
 
 			Background = "banner.jpg";
 			Owner = f.Owner.Name + " " + f.Owner.Surname;

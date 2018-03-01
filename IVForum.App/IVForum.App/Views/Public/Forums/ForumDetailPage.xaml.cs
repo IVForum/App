@@ -1,4 +1,6 @@
-﻿using IVForum.App.ViewModels.Public.Forums;
+﻿using IVForum.App.Models;
+
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,13 +10,15 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumDetailPage : ContentPage
 	{
-		public PublicForumDetailViewModel Model { get; set; }
-
-		public ForumDetailPage(PublicForumViewModel forumView)
+		public ForumDetailPage(Forum model)
 		{
 			InitializeComponent();
-			Model = new PublicForumDetailViewModel(forumView);
-			BindingContext = Model;
+			BindingContext = model;
+		}
+
+		private async void ShowProfile(object sender, EventArgs e)
+		{
+			// ...
 		}
 	}
 }

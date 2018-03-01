@@ -7,7 +7,7 @@ namespace IVForum.App.Views.Main
     {
         public MainMenuItem()
         {
-            TargetType = typeof(Public.Forums.PublicForumsTabbedPage);
+            TargetType = typeof(Public.Forums.ForumTabbedPage);
         }
 
         public int Id { get; set; }

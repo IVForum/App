@@ -71,22 +71,16 @@
     <EmbeddedResource Update="Views\Public\Forums\ForumDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Forums\ForumDetailProjectsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Public\Forums\ForumDetailTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Forums\NewForumsPage.xaml">
+    <EmbeddedResource Update="Views\Public\Forums\ForumPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Forums\PublicForumsTabbedPage.xaml">
+    <EmbeddedResource Update="Views\Public\Forums\ForumTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Forums\TopForumsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Forums\TrendingForumsPage.xaml">
+    <EmbeddedResource Update="Views\Public\Profile\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Public\Profile\PublicProfileDetailPage.xaml">
@@ -95,16 +89,13 @@
     <EmbeddedResource Update="Views\Public\Profile\PublicProfileTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Projects\NewProjectsPage.xaml">
+    <EmbeddedResource Update="Views\Public\Projects\ProjectTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Projects\PublicProjectsTabbedPage.xaml">
+    <EmbeddedResource Update="Views\Public\Projects\ProjectDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Projects\TopProjectsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Projects\TrendingProjectsPage.xaml">
+    <EmbeddedResource Update="Views\Public\Projects\ProjectPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Shared\ContributionsView.xaml">
@@ -126,6 +117,15 @@
     </Compile>
     <Compile Update="Views\Main\MainMenuItem.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Public\Forums\ForumPage.xaml.cs">
+      <DependentUpon>ForumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Public\Forums\ForumTabbedPage.xaml.cs">
+      <DependentUpon>ForumTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Public\Projects\ProjectTabbedPage.xaml.cs">
+      <DependentUpon>ProjectTabbedPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

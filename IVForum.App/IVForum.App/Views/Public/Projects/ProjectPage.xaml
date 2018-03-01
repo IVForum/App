@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Public.Forums.ForumDetailProjectsPage"
-             Title="Projectes"
-             BackgroundColor="GhostWhite">
+             x:Class="IVForum.App.Views.Public.Projects.ProjectPage">
     
     <ContentPage.Content>
 
         <ListView x:Name="ProjectsListView"
-                      HasUnevenRows="True"
+                  SeparatorColor="Transparent"
                   SeparatorVisibility="None"
-                  SeparatorColor="Transparent">
+                  HasUnevenRows="True">
 
             <ListView.ItemTemplate>
 
@@ -25,31 +23,33 @@
                                 <StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
+
                                         <Image Source="public_projects.png"></Image>
                                         <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                                        
                                     </StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Source="info.png"></Image>
-                                        <Label Text="Descripció:" FontSize="Medium"></Label>
+                                        <Label Text="Data creació:"></Label>
+                                        <Label Text="{Binding CreationDate}" FontAttributes="Bold"></Label>
                                     </StackLayout>
 
                                     <Label Text="{Binding Description}"></Label>
-
+                                    
                                 </StackLayout>
-
+                                
                             </Frame>
-
+                            
                         </StackLayout>
-
+                        
                     </ViewCell>
-
+                    
                 </DataTemplate>
-
+                
             </ListView.ItemTemplate>
-
+            
         </ListView>
-
+        
     </ContentPage.Content>
     
 </ContentPage>

@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Public.Forums.TopForumsPage"
-             Title="Top"
-             BackgroundColor="GhostWhite">
-
+             x:Class="IVForum.App.Views.Public.Forums.ForumPage">
+    
     <ContentPage.Content>
-
+        
         <ListView x:Name="ForumsListView"
                   HasUnevenRows="True"
                   SeparatorVisibility="None">
@@ -32,7 +30,7 @@
                                         <Label Text="Data Creació:"></Label>
                                         <Label Text="{Binding CreationDate}" FontAttributes="Bold"></Label>
                                     </StackLayout>
-                                    
+
                                     <Label Text="{Binding Description}"></Label>
 
                                     <!--<StackLayout Orientation="Horizontal">
@@ -53,7 +51,7 @@
             </ListView.ItemTemplate>
 
         </ListView>
-
+        
     </ContentPage.Content>
     
 </ContentPage>
