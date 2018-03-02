@@ -18,13 +18,34 @@
                         <ActivityIndicator x:Name="LoadingActivity"></ActivityIndicator>
                     </StackLayout>
 
-                    <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
-                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True"></Entry>
+                    <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Text="" Keyboard="Email"></Entry>
+                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" Text="" IsPassword="True"></Entry>
 
                     <Button Text="Iniciar sessió" Clicked="Login">
+                        
                         <Button.Image>
                             <FileImageSource File="login.png"/>
                         </Button.Image>
+                        
+                        <Button.Triggers>
+
+                            <MultiTrigger TargetType="Button">
+                                
+                                <MultiTrigger.Conditions>
+                                    
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}"
+                                                      Value="0" />
+                                    
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
+                                                      Value="0" />
+                                    
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="IsEnabled" Value="False" />
+                                
+                            </MultiTrigger>
+
+                        </Button.Triggers>
                     </Button>
                     
                 </StackLayout>

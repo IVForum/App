@@ -1,5 +1,6 @@
 ﻿using IVForum.App.Models;
 
+using System.Collections.Generic;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -11,6 +12,14 @@ namespace IVForum.App.Views.Public.Forums
 	public partial class ForumPage : ContentPage
 	{
 		public ForumPage(IOrderedEnumerable<Forum> models)
+		{
+			InitializeComponent();
+
+			ForumsListView.ItemsSource = models;
+			ForumsListView.ItemTapped += ForumsListView_ItemTapped;
+		}
+
+		public ForumPage(List<Forum> models)
 		{
 			InitializeComponent();
 

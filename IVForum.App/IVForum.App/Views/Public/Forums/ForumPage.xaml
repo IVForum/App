@@ -4,7 +4,7 @@
              x:Class="IVForum.App.Views.Public.Forums.ForumPage">
     
     <ContentPage.Content>
-        
+
         <ListView x:Name="ForumsListView"
                   HasUnevenRows="True"
                   SeparatorVisibility="None">
@@ -51,7 +51,7 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        
+
     </ContentPage.Content>
     
 </ContentPage>

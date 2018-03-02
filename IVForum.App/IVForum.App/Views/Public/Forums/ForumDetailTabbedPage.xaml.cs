@@ -1,8 +1,6 @@
 ﻿using IVForum.App.Models;
 using IVForum.App.Views.Public.Projects;
 
-using System.Linq;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +17,7 @@ namespace IVForum.App.Views.Public.Forums
 			BindingContext = Model = model;
 
 			Children.Add(new ForumDetailPage(Model) { Title = "Informació", BackgroundColor = Color.GhostWhite });
-			Children.Add(new ProjectPage(Model.Projects.ToList()) { Title = "Projectes", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ProjectPage(Model.Projects) { Title = "Projectes", BackgroundColor = Color.GhostWhite });
         }
     }
 }

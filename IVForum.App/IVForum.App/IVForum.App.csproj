@@ -35,13 +35,7 @@
     <EmbeddedResource Update="Views\Main\StartupTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Forums\MyForumsTabbedPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Forums\NewForumPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Forums\PersonalForumDetailPage.xaml">
+    <EmbeddedResource Update="Views\Personal\Forums\ForumTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Personal\Projects\NewProjectPage.xaml">
@@ -53,13 +47,7 @@
     <EmbeddedResource Update="Views\Personal\Profile\MyProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Projects\MyProjectsTabbedPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Forums\ParticipatingForumsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Personal\Forums\PersonalForumsPage.xaml">
+    <EmbeddedResource Update="Views\Personal\Projects\ProjectTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Personal\Projects\ParticipatingProjectsPage.xaml">
@@ -117,6 +105,12 @@
     </Compile>
     <Compile Update="Views\Main\MainMenuItem.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Personal\Forums\ForumTabbedPage.xaml.cs">
+      <DependentUpon>ForumTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Personal\Projects\ProjectTabbedPage.xaml.cs">
+      <DependentUpon>ProjectTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Public\Forums\ForumPage.xaml.cs">
       <DependentUpon>ForumPage.xaml</DependentUpon>

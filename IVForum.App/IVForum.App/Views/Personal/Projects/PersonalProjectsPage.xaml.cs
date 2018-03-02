@@ -20,7 +20,7 @@ namespace IVForum.App.Views.Personal.Projects
 		{
 			InitializeComponent();
 
-			Projects = IVForum.App.Resources.Content.GetProjects();
+			//Projects = IVForum.App.Resources.Content.GetProjects();
 
 			foreach (Project p in Projects)
 			{

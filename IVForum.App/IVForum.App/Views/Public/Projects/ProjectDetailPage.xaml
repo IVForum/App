@@ -28,6 +28,10 @@
 
                 <Frame HasShadow="True">
 
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowProfile"/>
+                    </Frame.GestureRecognizers>
+
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">

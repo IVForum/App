@@ -3,8 +3,6 @@ using IVForum.App.ViewModels;
 using IVForum.App.Views.Config;
 using IVForum.App.Views.Info;
 using IVForum.App.Views.Personal;
-using IVForum.App.Views.Public.Forums;
-using IVForum.App.Views.Public.Projects;
 
 using System;
 using System.Collections.ObjectModel;
@@ -46,13 +44,13 @@ namespace IVForum.App.Views.Main
 
             public MainMasterViewModel()
             {
-                MenuItems = new ObservableCollection<MainMenuItem>(new[]
+				MenuItems = new ObservableCollection<MainMenuItem>(new[]
                 {
                     new MainMenuItem { Id = 0, Title = "Perfil", TargetType = typeof(MyProfilePage), Icon = "profile.png" },
-					new MainMenuItem { Id = 1, Title = "Fòrums", TargetType = typeof(MyForumsTabbedPage), Icon = "personal_forums.png" },
-					new MainMenuItem { Id = 2, Title = "Projectes", TargetType = typeof(MyProjectsTabbedPage), Icon = "personal_projects.png" },
-                    new MainMenuItem { Id = 3, Title = "Fòrums públics", TargetType = typeof(ProjectTabbedPage), Icon = "public_forums.png" },
-                    new MainMenuItem { Id = 4, Title = "Projectes públics", TargetType = typeof(ProjectTabbedPage), Icon = "public_projects.png" },
+					new MainMenuItem { Id = 1, Title = "Fòrums", TargetType = typeof(Personal.Forums.ForumTabbedPage), Icon = "personal_forums.png" },
+					new MainMenuItem { Id = 2, Title = "Projectes", TargetType = typeof(Personal.Projects.ProjectTabbedPage), Icon = "personal_projects.png" },
+                    new MainMenuItem { Id = 3, Title = "Fòrums públics", TargetType = typeof(Public.Forums.ForumTabbedPage), Icon = "public_forums.png" },
+                    new MainMenuItem { Id = 4, Title = "Projectes públics", TargetType = typeof(Public.Projects.ProjectTabbedPage), Icon = "public_projects.png" },
 					new MainMenuItem { Id = 5, Title = "Sobre nosaltres", TargetType = typeof(About), Icon = "about.png" },
 					new MainMenuItem { Id = 6, Title = "Configuració", TargetType = typeof(SettingsPage), Icon = "settings.png" },
                 });

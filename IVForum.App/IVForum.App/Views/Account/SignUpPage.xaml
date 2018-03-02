@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:service="clr-namespace:IVForum.App.Services"
              x:Class="IVForum.App.Views.Account.SignUpPage"
              Title="Registrar"
              BackgroundColor="GhostWhite">
@@ -21,7 +22,19 @@
                     <Entry x:Name="EntryName" Placeholder="{Binding Name}"></Entry>
                     <Entry x:Name="EntrySurname" Placeholder="{Binding Surname}"></Entry>
                     <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
-                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True"></Entry>
+                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True">
+
+                        <Entry.Triggers>
+
+                            <EventTrigger Event="TextChanged">
+
+                                <service:PasswordValidatorService/>
+
+                            </EventTrigger>
+
+                        </Entry.Triggers>
+                        
+                    </Entry>
 
                     <Label Text="{Binding Legal}" FontAttributes="Bold"></Label>
 
@@ -29,6 +42,33 @@
                         <Button.Image>
                             <FileImageSource File="signup.png"/>
                         </Button.Image>
+
+                        <Button.Triggers>
+
+                            <MultiTrigger TargetType="Button">
+
+                                <MultiTrigger.Conditions>
+
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntryName}, Path=Text.Length}"
+                                                      Value="0" />
+
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntrySurname}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                                    <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="IsEnabled" Value="False" />
+
+                            </MultiTrigger>
+
+                        </Button.Triggers>
+                        
                     </Button>
                 </StackLayout>
                 

@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IVForum.App.Views.Personal
+namespace IVForum.App.Views.Personal.Projects
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MyProjectsTabbedPage : TabbedPage
+    public partial class ProjectTabbedPage : TabbedPage
     {
-        public MyProjectsTabbedPage ()
+        public ProjectTabbedPage()
         {
             InitializeComponent();
         }

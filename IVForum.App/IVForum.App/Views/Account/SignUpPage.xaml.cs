@@ -1,5 +1,4 @@
-﻿using IVForum.App.Services;
-using IVForum.App.ViewModels;
+﻿using IVForum.App.ViewModels;
 
 using System;
 
@@ -40,7 +39,7 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = await ApiService.RequestSignUp(model);
+				var success = true; //await ApiService.RequestSignUp(model);
 
 				if (success)
 				{

@@ -29,7 +29,7 @@ namespace IVForum.App.Views.Public.Projects
 
 		private async void ProjectsListView_ItemTapped(object sender, ItemTappedEventArgs e)
 		{
-			await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item));
+			await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item), true);
 		}
 	}
 }

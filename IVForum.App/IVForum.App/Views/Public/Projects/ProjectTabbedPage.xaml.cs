@@ -11,7 +11,7 @@ namespace IVForum.App.Views.Public.Projects
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjectTabbedPage : TabbedPage
     {
-		public List<Project> Models { get; set; } = IVForum.App.Resources.Content.GetProjects(); 
+		public List<Project> Models { get; set; } //= IVForum.App.Resources.Content.GetProjects(); 
 
         public ProjectTabbedPage()
         {

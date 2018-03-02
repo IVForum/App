@@ -30,6 +30,23 @@
 
                         <StackLayout Orientation="Horizontal">
 
+                            <Image Source="info.png"></Image>
+                            <Label Text="Descripció" FontSize="Medium"></Label>
+
+                        </StackLayout>
+
+                        <Label Text="{Binding Description}"></Label>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+
                             <Image Source="repo.png"></Image>
                             <Label Text="Repositori" FontSize="Medium"></Label>
 
@@ -56,6 +73,26 @@
 
                     </StackLayout>
 
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                        <Image Source="facebook.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowFacebook"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        
+                        <Image Source="twitter.png">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowTwitter"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        
+                    </StackLayout>
+                    
                 </Frame>
 
             </StackLayout>
