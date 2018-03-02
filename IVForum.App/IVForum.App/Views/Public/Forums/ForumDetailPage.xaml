@@ -63,6 +63,8 @@
 
                 </Frame>
 
+                <Button Image="plus.png" Text="Participar"></Button>
+
             </StackLayout>
 
         </ScrollView>

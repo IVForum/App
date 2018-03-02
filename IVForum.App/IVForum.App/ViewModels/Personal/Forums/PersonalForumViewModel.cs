@@ -6,7 +6,7 @@ namespace IVForum.App.ViewModels.Personal.Forums
 {
 	public class PersonalForumViewModel
 	{
-		public string Id { get; set; }
+		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
@@ -32,9 +32,6 @@ namespace IVForum.App.ViewModels.Personal.Forums
 
 			Icon = f.Icon;
 			Background = "banner.jpg";
-
-			WebsiteUrl = f.WebsiteUrl;
-			RepositoryUrl = f.RepositoryUrl;
 		}
     }
 }

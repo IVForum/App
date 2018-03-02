@@ -2,15 +2,6 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:projects="clr-namespace:IVForum.App.Views.Personal.Projects"
-            x:Class="IVForum.App.Views.Personal.Projects.ProjectTabbedPage"
-            BackgroundColor="GhostWhite">
-
-    <TabbedPage.Children>
-        
-        <projects:PersonalProjectsPage/>
-        
-        <projects:ParticipatingProjectsPage/>
-        
-    </TabbedPage.Children>
+            x:Class="IVForum.App.Views.Personal.Projects.ProjectTabbedPage">
 
 </TabbedPage>

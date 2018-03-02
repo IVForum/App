@@ -57,7 +57,6 @@ namespace IVForum.App.Resources
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Dmytro,
-					RepositoryUrl = "github.com/LemonBF/Farmacies",
 					Projects = new List<Project> {
 						new Project
 						{
@@ -81,8 +80,6 @@ namespace IVForum.App.Resources
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Cristian,
-					WebsiteUrl = "placeholder.cat",
-					RepositoryUrl = "github.com/Flysenberg/Inquisition",
 					Projects = new List<Project> {
 						new Project
 						{
@@ -106,8 +103,6 @@ namespace IVForum.App.Resources
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Hamza,
-					WebsiteUrl = "ivforum.cat",
-					RepositoryUrl = "github.com/Zerixter/ivforum",
 					Projects = new List<Project> {
 						new Project
 						{
@@ -126,5 +121,46 @@ namespace IVForum.App.Resources
 				}
 			};
 		}
+
+		public static List<Project> GetProjects()
+		{
+			return new List<Project>
+			{
+				new Project
+				{
+					Name = "IVForum",
+					Title = "IVForum.cat",
+					Description = Properties.Res.Lorem,
+					CreationDate = DateTime.Now,
+					Owner = Hamza,
+					RepositoryUrl = "gitgub.com/Zerixter/ivforum",
+					WebsiteUrl = "www.ivforum.cat",
+					Background = "banner1.jpg"
+				},
+				new Project
+				{
+					Name = "Inquisition",
+					Title = "Inquisition",
+					Description = Properties.Res.Lorem,
+					CreationDate = DateTime.Now,
+					Owner = Cristian,
+					RepositoryUrl = "github.com/Flysenberg/Inquisition",
+					WebsiteUrl = "www.inquisition-bot.com",
+					Background = "banner1.jpg"
+				},
+				new Project
+				{
+					Name = "Placeholder",
+					Title = "Placeholder.cat",
+					Description = Properties.Res.Lorem,
+					CreationDate = DateTime.Now,
+					Owner = Cristian,
+					RepositoryUrl = "github.com/Flysenberg/Placeholder",
+					WebsiteUrl = "www.placeholder.cat",
+					Background = "banner1.jpg"
+				}
+			};
+		}
+
     }
 }

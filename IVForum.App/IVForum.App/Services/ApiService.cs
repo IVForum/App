@@ -1,4 +1,5 @@
 ﻿using IVForum.App.Models;
+using IVForum.App.Properties;
 using IVForum.App.Resources;
 using IVForum.App.ViewModels;
 using IVForum.App.ViewModels.Personal.Projects;
@@ -15,8 +16,8 @@ namespace IVForum.App.Services
 {
 	public class ApiService
     {
-		private static string BaseUrl = Properties.Res.BaseUrl;
-		private static string MediaType = Properties.Res.MediaType;
+		private static string BaseUrl = Routes.Base;
+		private static string MediaType = Res.MediaType;
 		private static HttpClient client = new HttpClient() { BaseAddress = new System.Uri(BaseUrl) };
 
 		private static void AuthorizeRequest(string token)
@@ -24,6 +25,45 @@ namespace IVForum.App.Services
 			client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 		}
 
+		static ApiService()
+		{
+			if (!client.DefaultRequestHeaders.Contains("Authorization"))
+			{
+				if (Settings.Contains("token_auth"))
+				{
+					string token = (string)Settings.GetValue("token_auth");
+					client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+				}
+				else
+				{
+					if (Settings.Contains("user_email"))
+					{
+						string email = (string) Settings.GetValue("user_email");
+						string pass = (string)Settings.GetValue("user_password");
+
+						LoginViewModel model = new LoginViewModel
+						{
+							Email = email,
+							Password = pass
+						};
+
+						var result = RequestLogin(model).GetAwaiter().GetResult();
+
+						if (!result)
+						{
+							for (int i = 0; i < 3; i++)
+							{
+								result = RequestLogin(model).GetAwaiter().GetResult();
+								if (result)
+									break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		#region Account Login/Register
 		public static async Task<bool> RequestSignUp(SignUpViewModel sender)
 		{
 			try
@@ -118,7 +158,20 @@ namespace IVForum.App.Services
 				Password = model.Password
 			};
 		}
+		#endregion
 
+		#region Forums
+		public static async Task RequestForums()
+		{
+			string token = (string) Settings.GetValue("token_auth");
+			AuthorizeRequest(token);
+
+			string user = (string)Settings.GetValue("user_id");
+
+			HttpResponseMessage response = await client.GetAsync("forums/get/" + user);
+		}
+		
+		#endregion
 		public static async Task<User> RequestUser()
 		{
 			try
@@ -143,16 +196,6 @@ namespace IVForum.App.Services
 			{
 				return null;
 			}
-		}
-
-		public static async Task RequestForums()
-		{
-			string token = (string) Settings.GetValue("token_auth");
-			AuthorizeRequest(token);
-
-			string user = (string) Settings.GetValue("user_id");
-
-			HttpResponseMessage response = await client.GetAsync("forums/get/" + user);
 		}
 
 		public static async Task RequestProjects()
@@ -214,5 +257,62 @@ namespace IVForum.App.Services
 				}
 			}
 		}
+
+		#region AddViews
+		public static async void AddView(Forum f)
+		{
+			try
+			{
+				var View = new
+				{
+					ForumId = f.Id
+				};
+
+				HttpResponseMessage response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+
+				if (response.StatusCode != System.Net.HttpStatusCode.OK)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+							break;
+					}
+				}
+			}
+			catch
+			{
+				return;
+			}
+
+		}
+
+		public static async void AddView(Project p)
+		{
+			try
+			{
+				var View = new
+				{
+					ProjectId = p.Id
+				};
+
+				HttpResponseMessage response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+
+				if (response.StatusCode != System.Net.HttpStatusCode.OK)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+							break;
+					}
+				}
+			}
+			catch
+			{
+				return;
+			}
+		} 
+		#endregion
 	}
 }

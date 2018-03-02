@@ -1,6 +1,7 @@
 ﻿using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
+
 using System;
 
 using Xamarin.Forms;
@@ -51,7 +52,11 @@ namespace IVForum.App.Views.Account
 				if (success)
 				{
 					await Navigation.PopModalAsync();
+
 					Settings.Save("loggedin", true);
+					Settings.Save("user_email", model.Email);
+					Settings.Save("user_password", model.Password);
+
 					Application.Current.MainPage = new Main.Main();
 				}
 				else

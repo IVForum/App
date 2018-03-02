@@ -14,6 +14,7 @@ namespace IVForum.App.Views.Public.Profile
 		{
 			InitializeComponent();
 			BindingContext = model;
+			Title = model.Name + " " + model.Surname;
 		}
 
 		private async void ShowFacebook(object sender, EventArgs e)

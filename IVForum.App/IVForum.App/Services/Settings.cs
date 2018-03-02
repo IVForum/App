@@ -26,5 +26,10 @@ namespace IVForum.App.Services
 			Application.Current.Properties.TryGetValue(key, out object value);
 			return value;
 		}
+
+		public static void TryGetValue(string key, out object value)
+		{
+			Application.Current.Properties.TryGetValue(key, out value);
+		}
 	}
 }
