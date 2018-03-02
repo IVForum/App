@@ -91,6 +91,25 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
+                            <Image Source="money.png"></Image>
+                            <Label Text="Contribucions" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <Button Image="banknote.png" Text="20" BackgroundColor="SteelBlue"></Button>
+                            <Button Image="banknote.png" Text="50" BackgroundColor="SandyBrown"></Button>
+                            <Button Image="banknote.png" Text="100" BackgroundColor="ForestGreen"></Button>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                    
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
 
                             <Image Source="web.png"></Image>
                             <Label Text="Pàgina web" FontSize="Medium"></Label>

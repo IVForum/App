@@ -9,48 +9,52 @@
         
         <StackLayout Padding="5">
 
-            <Frame HasShadow="True" BackgroundColor="White">
-                
-                <StackLayout>
+            <Frame HasShadow="True">
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
-                        <ActivityIndicator x:Name="LoadingActivity"></ActivityIndicator>
-                    </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="login.png"></Image>
+                    <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
+                </StackLayout>
+
+            </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
 
                     <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Text="" Keyboard="Email"></Entry>
                     <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" Text="" IsPassword="True"></Entry>
 
-                    <Button Text="Iniciar sessió" Clicked="Login">
-                        
-                        <Button.Image>
-                            <FileImageSource File="login.png"/>
-                        </Button.Image>
-                        
-                        <Button.Triggers>
-
-                            <MultiTrigger TargetType="Button">
-                                
-                                <MultiTrigger.Conditions>
-                                    
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}"
-                                                      Value="0" />
-                                    
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
-                                                      Value="0" />
-                                    
-                                </MultiTrigger.Conditions>
-
-                                <Setter Property="IsEnabled" Value="False" />
-                                
-                            </MultiTrigger>
-
-                        </Button.Triggers>
-                    </Button>
-                    
                 </StackLayout>
                 
             </Frame>
+
+            <Button Text="Iniciar sessió" Clicked="Login">
+
+                <Button.Image>
+                    <FileImageSource File="login.png"/>
+                </Button.Image>
+
+                <Button.Triggers>
+
+                    <MultiTrigger TargetType="Button">
+
+                        <MultiTrigger.Conditions>
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}"
+                                                      Value="0" />
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsEnabled" Value="False" />
+
+                    </MultiTrigger>
+
+                </Button.Triggers>
+            </Button>
 
         </StackLayout>
         

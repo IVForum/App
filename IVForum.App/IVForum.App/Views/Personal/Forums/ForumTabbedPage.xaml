@@ -3,4 +3,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="IVForum.App.Views.Personal.Forums.ForumTabbedPage">
 
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Icon="plus_w.png" Text="Add" Activated="AddNew"></ToolbarItem>
+    </TabbedPage.ToolbarItems>
+
 </TabbedPage>

@@ -1,6 +1,9 @@
-﻿using IVForum.App.ViewModels;
+﻿using IVForum.App.Services;
+using IVForum.App.ViewModels;
+using IVForum.App.Views.Shared;
 
 using System;
+using System.Text.RegularExpressions;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,7 +31,25 @@ namespace IVForum.App.Views.Account
 		{
 			try
 			{
-				LoadingActivity.IsRunning = true;
+				await Navigation.PushModalAsync(new LoadingPage(), false);
+
+				Regex regexEmail = new Regex("^[a-z0-9._%+-]+@[a-z0-9.-]+[^\\.]\\.[a-z]{2,3}$");
+
+				if (!regexEmail.IsMatch(EntryEmail.Text))
+				{
+					await DisplayAlert("Error", "Correu electrònic invàlid", "Ok");
+					await Navigation.PopModalAsync(false);
+					return;
+				}
+
+				Regex regexPassword = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*(_|[^\\w])).+$");
+
+				if (!regexPassword.IsMatch(EntryPassword.Text))
+				{
+					await DisplayAlert("Error", "Format de la contrasenya incorrecte: Mínim 8 caràcters amb majúscules, minúscules, un número i un caràcter especial", "Ok");
+					await Navigation.PopModalAsync(false);
+					return;
+				}
 
 				// TODO: Regex
 				model = new SignUpViewModel
@@ -39,11 +60,11 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = true; //await ApiService.RequestSignUp(model);
+				var success = await ApiService.RequestSignUp(model);
 
 				if (success)
 				{
-					LoadingActivity.IsRunning = false;
+					await Navigation.PopModalAsync(false);
 
 					await DisplayAlert("Èxit", "L'usuari s'ha creat amb èxit", "Ok");
 
@@ -51,11 +72,13 @@ namespace IVForum.App.Views.Account
 				}
 				else
 				{
+					await Navigation.PopModalAsync(false);
 					await DisplayAlert("Error", "Error al registrar l'usuari, torna a provar més tard", "Ok");
 				}
 			}
 			catch
 			{
+				await Navigation.PopModalAsync(false);
 				await DisplayAlert("Error", "Error al registrar l'usuari, torna a provar més tard", "Ok");
 			}
 		}

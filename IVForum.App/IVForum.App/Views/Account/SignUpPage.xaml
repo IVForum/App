@@ -10,19 +10,37 @@
         
         <StackLayout Padding="5">
 
-            <Frame HasShadow="True" BackgroundColor="White">
+            <Frame HasShadow="True">
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="signup.png"></Image>
+                    <Label Text="Formulari de registre" FontSize="Medium"></Label>
+                </StackLayout>
+
+            </Frame>
+
+            <Frame HasShadow="True">
 
                 <StackLayout>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Formulari de registre" FontSize="Medium"></Label>
-                        <ActivityIndicator x:Name="LoadingActivity"></ActivityIndicator>
-                    </StackLayout>
+                    <Entry x:Name="EntryName" Text="" Placeholder="{Binding Name}"></Entry>
+                    <Entry x:Name="EntrySurname" Text="" Placeholder="{Binding Surname}"></Entry>
                     
-                    <Entry x:Name="EntryName" Placeholder="{Binding Name}"></Entry>
-                    <Entry x:Name="EntrySurname" Placeholder="{Binding Surname}"></Entry>
-                    <Entry x:Name="EntryEmail" Placeholder="{Binding Email}" Keyboard="Email"></Entry>
-                    <Entry x:Name="EntryPassword" Placeholder="{Binding Password}" IsPassword="True">
+                    <Entry x:Name="EntryEmail" Text="" Placeholder="{Binding Email}" Keyboard="Email">
+
+                        <Entry.Triggers>
+
+                            <EventTrigger Event="TextChanged">
+
+                                <service:EmailValidatorService/>
+
+                            </EventTrigger>
+                            
+                        </Entry.Triggers>
+                        
+                    </Entry>
+                    
+                    <Entry x:Name="EntryPassword" Text="" Placeholder="{Binding Password}" IsPassword="True">
 
                         <Entry.Triggers>
 
@@ -36,44 +54,57 @@
                         
                     </Entry>
 
-                    <Label Text="{Binding Legal}" FontAttributes="Bold"></Label>
-
-                    <Button Text="Registrar" Clicked="SignUp">
-                        <Button.Image>
-                            <FileImageSource File="signup.png"/>
-                        </Button.Image>
-
-                        <Button.Triggers>
-
-                            <MultiTrigger TargetType="Button">
-
-                                <MultiTrigger.Conditions>
-
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntryName}, Path=Text.Length}"
-                                                      Value="0" />
-
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntrySurname}, Path=Text.Length}" 
-                                                      Value="0" />
-
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}" 
-                                                      Value="0" />
-
-                                    <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
-                                                      Value="0" />
-
-                                </MultiTrigger.Conditions>
-
-                                <Setter Property="IsEnabled" Value="False" />
-
-                            </MultiTrigger>
-
-                        </Button.Triggers>
-                        
-                    </Button>
                 </StackLayout>
                 
             </Frame>
-            
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="info.png"></Image>
+                        <Label Text="Important" FontSize="Medium"></Label>
+                    </StackLayout>
+                    
+                    <Label Text="{Binding Legal}" FontAttributes="Bold"></Label>
+                </StackLayout>
+
+            </Frame>
+
+            <Button Text="Registrar" Clicked="SignUp">
+                <Button.Image>
+                    <FileImageSource File="signup.png"/>
+                </Button.Image>
+
+                <Button.Triggers>
+
+                    <MultiTrigger TargetType="Button">
+
+                        <MultiTrigger.Conditions>
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntryName}, Path=Text.Length}"
+                                                      Value="0" />
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntrySurname}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                            <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
+                                                      Value="0" />
+
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsEnabled" Value="False" />
+
+                    </MultiTrigger>
+
+                </Button.Triggers>
+
+            </Button>
+
         </StackLayout>
         
     </ContentPage.Content>

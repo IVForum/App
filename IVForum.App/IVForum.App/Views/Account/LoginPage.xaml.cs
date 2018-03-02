@@ -1,6 +1,6 @@
 ﻿using IVForum.App.Services;
 using IVForum.App.ViewModels;
-
+using IVForum.App.Views.Shared;
 using System;
 
 using Xamarin.Forms;
@@ -37,7 +37,7 @@ namespace IVForum.App.Views.Account
 		{
 			try
 			{
-				LoadingActivity.IsRunning = true;
+				await Navigation.PushModalAsync(new LoadingPage(), false);
 
 				// TODO: Regex
 				model = new LoginViewModel
@@ -50,17 +50,19 @@ namespace IVForum.App.Views.Account
 
 				if (success)
 				{
+					await Navigation.PopModalAsync();
 					Settings.Save("loggedin", true);
-					LoadingActivity.IsRunning = false;
 					Application.Current.MainPage = new Main.Main();
 				}
 				else
 				{
+					await Navigation.PopModalAsync();
 					await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
 				}
 			}
 			catch
 			{
+				await Navigation.PopModalAsync();
 				await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
 			}
 		}

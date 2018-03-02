@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Shared.CreateNewPage"
+             BackgroundColor="GhostWhite">
+    
+    <ContentPage.Content>
+
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <Entry x:Name="NameEntry" Placeholder="{Binding Name}"></Entry>
+
+                    <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
+
+                    <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
+
+                    <Button Text="Afegir" Clicked="Add"></Button>
+
+                    <Button Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
+                    
+                </StackLayout>
+                
+            </Frame>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

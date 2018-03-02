@@ -202,7 +202,16 @@ namespace IVForum.App.Services
 					Password = password
 				};
 
-				await RequestLogin(model);
+				var result = await RequestLogin(model);
+
+				if (!result)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						result = await RequestLogin(model);
+						if (result) break;
+					}
+				}
 			}
 		}
 	}
