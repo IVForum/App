@@ -1,4 +1,5 @@
 ﻿using IVForum.App.Models;
+using IVForum.App.Views.Main;
 
 using Xamarin.Forms;
 
@@ -8,8 +9,11 @@ namespace IVForum.App.Services
 	{
 		public static void Save(string key, object value)
 		{
-			Application.Current.Properties[key] = value;
-			Application.Current.SavePropertiesAsync();
+			if (!Contains(key))
+			{
+				Application.Current.Properties.Add(key, value);
+				Application.Current.SavePropertiesAsync();
+			}
 		}
 
 		public static bool Contains(string key)
@@ -27,7 +31,10 @@ namespace IVForum.App.Services
 		{
 			foreach (string key in keys)
 			{
-				Application.Current.Properties.Remove(key);
+				if (Contains(key))
+				{
+					Application.Current.Properties.Remove(key);
+				}
 			}
 
 			Application.Current.SavePropertiesAsync();
@@ -53,6 +60,15 @@ namespace IVForum.App.Services
 		{
 			User user = JsonService.Deserialize<User>((string)GetValue("user"));
 			return user;
+		}
+
+		public static Page GetStartupPage()
+		{
+			if (Contains("loggedin"))
+			{
+				return new Main();
+			}
+			return new StartupTabbedPage();
 		}
 	}
 }

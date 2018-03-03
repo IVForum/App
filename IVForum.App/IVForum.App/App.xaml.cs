@@ -1,4 +1,4 @@
-﻿using IVForum.App.Views.Main;
+﻿using IVForum.App.Services;
 
 using Xamarin.Forms;
 
@@ -13,17 +13,7 @@ namespace IVForum.App
 
 		protected override void OnStart()
 		{
-			// Handle when your app starts
-			bool loggedin = Current.Properties.ContainsKey("loggedin");
-
-			if (loggedin)
-			{
-				MainPage = new Main();
-			}
-			else
-			{
-				MainPage = new StartupTabbedPage();
-			}
+			MainPage = Settings.GetStartupPage();
 		}
 
 		protected override void OnSleep ()

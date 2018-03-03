@@ -1,9 +1,11 @@
-﻿using IVForum.App.Services;
+﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
 
 using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -62,13 +64,16 @@ namespace IVForum.App.Views.Account
 
 				var success = await ApiService.RequestSignUp(model);
 
+				await Task.Delay(1000);
+
 				if (success)
 				{
-					await Navigation.PopModalAsync(false);
-
-					await DisplayAlert("Èxit", "L'usuari s'ha creat amb èxit", "Ok");
-
 					Application.Current.MainPage = new Main.Main();
+					//await DisplayAlert("Èxit", "L'usuari s'ha creat amb èxit", "Ok");
+					Settings.Save("loggedin", true);
+
+					User user = Settings.GetLoggedUser();
+					DependencyService.Get<IMessage>().LongAlert($"Benvingut {user.Name}");
 				}
 				else
 				{

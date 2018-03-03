@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IVForum.App.Views.Main.MainMaster"
-             Title="Master"
-             BackgroundColor="GhostWhite">
+             Title="Master">
     
     <StackLayout>
         
         <ListView x:Name="MenuItemsListView"
                   SeparatorVisibility="Default"
+                  SeparatorColor="DarkGray"
                   HasUnevenRows="true"
                   ItemsSource="{Binding MenuItems}">
             
@@ -20,9 +20,9 @@
                     
                     <StackLayout VerticalOptions="CenterAndExpand">
                         
-                        <Label Text="{Binding User.Username}" TextColor="White" FontSize="Default"></Label>
+                        <Label Text="{Binding User.Username}" TextColor="White"></Label>
                         
-                        <Label Text="{Binding User.Email}" TextColor="White" FontSize="Default"></Label>
+                        <Label Text="{Binding User.Email}" TextColor="White"></Label>
                         
                     </StackLayout>
                     

@@ -1,5 +1,5 @@
-﻿using IVForum.App.Services;
-using IVForum.App.ViewModels;
+﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.Views.Config;
 using IVForum.App.Views.Info;
 using IVForum.App.Views.Public.Profile;
@@ -18,9 +18,6 @@ namespace IVForum.App.Views.Main
     public partial class MainMaster : ContentPage
     {
         public ListView ListView;
-		public string Username;
-		public string Email;
-		public string Avatar;
 
         public MainMaster()
         {
@@ -39,7 +36,7 @@ namespace IVForum.App.Views.Main
 		class MainMasterViewModel : INotifyPropertyChanged
         {
             public ObservableCollection<MainMenuItem> MenuItems { get; set; }
-            public MainMasterUserViewModel User { get; set; }
+            public User User { get; set; }
 
             public MainMasterViewModel()
             {
@@ -54,7 +51,7 @@ namespace IVForum.App.Views.Main
 					new MainMenuItem { Id = 6, Title = "Configuració", TargetType = typeof(SettingsPage), Icon = "settings.png" },
                 });
 
-				User = new MainMasterUserViewModel(IVForum.App.Resources.Content.Cristian);
+				User = Settings.GetLoggedUser();
             }
 
 			#region INotifyPropertyChanged Implementation

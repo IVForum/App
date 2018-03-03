@@ -1,6 +1,7 @@
 ﻿using IVForum.App.Models;
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -20,6 +21,14 @@ namespace IVForum.App.Views.Public.Forums
 		}
 
 		public ForumPage(List<Forum> models)
+		{
+			InitializeComponent();
+
+			ForumsListView.ItemsSource = models;
+			ForumsListView.ItemTapped += ForumsListView_ItemTapped;
+		}
+
+		public ForumPage(ObservableCollection<Forum> models)
 		{
 			InitializeComponent();
 

@@ -1,8 +1,10 @@
-﻿using IVForum.App.Services;
+﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
 
 using System;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -47,17 +49,18 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = true;//await ApiService.RequestLogin(model);
+				var success = await ApiService.RequestLogin(model);
+
+				await Task.Delay(1000);
 
 				if (success)
 				{
-					await Navigation.PopModalAsync();
-
-					Settings.Save("loggedin", true);
-					Settings.Save("user_email", model.Email);
-					Settings.Save("user_password", model.Password);
-
 					Application.Current.MainPage = new Main.Main();
+					Settings.Save("loggedin", true);
+					
+					User user = Settings.GetLoggedUser();
+
+					DependencyService.Get<IMessage>().LongAlert($"Benvingut {user.Name}");
 				}
 				else
 				{

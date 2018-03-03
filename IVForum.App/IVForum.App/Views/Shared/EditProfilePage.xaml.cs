@@ -74,30 +74,18 @@ namespace IVForum.App.Views.Shared
 		{
 			try
 			{
-				bool result = true; //await ApiService.UpdateUser(Model);
+				ValidateSavedModel();
+
+				var result = await ApiService.UpdateUser(Model);
 
 				if (result)
 				{
-					
-					await DisplayAlert("Èxit", "Dades desades corretament", "Ok");
+					DependencyService.Get<IMessage>().ShortAlert("Dades desades correctament");
 				}
 				else
 				{
 					await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
 				}
-
-				//ValidateSavedModel();
-
-				//bool result = ApiService.UpdateUser();
-
-				//if (true)
-				//{
-				//	DependencyService.Get<IMessage>().ShortAlert("Dades desades correctament");
-				//}
-				//else
-				//{
-				//	await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
-				//}
 			}
 			catch
 			{

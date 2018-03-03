@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Shared.EditProjectPage"
+             BackgroundColor="GhostWhite">
+    
+    <ContentPage.Content>
+
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True" Padding="0">
+
+                <Image Source="{Binding Background}"></Image>
+                
+            </Frame>
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <Label Text="Títol:"></Label>
+                    <Entry x:Name="TitleEntry" Placeholder="{Binding Title}" Text="{Binding Title}"></Entry>
+
+                    <Label Text="Descripció:"></Label>
+                    <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}" Text="{Binding Description}"></Entry>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="repo.png"></Image>
+                        <Label Text="Repositori:"></Label>
+                    </StackLayout>
+
+                    <Entry x:Name="RepositoryEntry" Placeholder="{Binding RepositoryUrl}" Text="{Binding RepositoriUrl}"></Entry>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="web.png"></Image>
+                        <Label Text="Pàgina web:"></Label>
+                    </StackLayout>
+
+                    <Entry x:Name="WebsiteEntry" Placeholder="{Binding WebsiteUrl}" Text="{Binding WebsiteUrl}"></Entry>
+                    
+                </StackLayout>
+                
+            </Frame>
+
+            <Button Image="save.png" Text="Desa" Clicked="SaveChanges"></Button>
+            <Button Image="cross.png" Text="Cancel·lar" Clicked="Discard"></Button>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

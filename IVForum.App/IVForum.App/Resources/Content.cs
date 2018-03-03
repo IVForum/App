@@ -9,6 +9,7 @@ namespace IVForum.App.Resources
     {
 		public static User Hamza = new User
 		{
+			Id = Guid.NewGuid(),
 			Name = "Hamza",
 			Surname = "Saddouki",
 			Email = "hamza@gmail.com",
@@ -22,6 +23,7 @@ namespace IVForum.App.Resources
 
 		public static User Cristian = new User
 		{
+			Id = Guid.NewGuid(),
 			Name = "Cristian",
 			Surname = "Moraru",
 			Email = "cristian@gmail.com",
@@ -35,6 +37,7 @@ namespace IVForum.App.Resources
 
 		public static User Dmytro = new User
 		{
+			Id = Guid.NewGuid(),
 			Name = "Dmytro",
 			Surname = "Holota",
 			Email = "dmytro@gmail.com",
@@ -52,6 +55,7 @@ namespace IVForum.App.Resources
 			{
 				new Forum
 				{
+					Id = Guid.NewGuid(),
 					Name = "Apps",
 					Title = "Xamarin Apps",
 					Description = Properties.Res.Lorem,
@@ -60,6 +64,7 @@ namespace IVForum.App.Resources
 					Projects = new List<Project> {
 						new Project
 						{
+							Id = Guid.NewGuid(),
 							Name = "IVForum",
 							Title = "IVForum.cat",
 							Description = Properties.Res.Lorem,
@@ -75,6 +80,7 @@ namespace IVForum.App.Resources
 				},
 				new Forum
 				{
+					Id = Guid.NewGuid(),
 					Name = "Discord Bots",
 					Title = "Discord Bots",
 					Description = Properties.Res.Lorem,
@@ -83,6 +89,7 @@ namespace IVForum.App.Resources
 					Projects = new List<Project> {
 						new Project
 						{
+							Id = Guid.NewGuid(),
 							Name = "Inquisition",
 							Title = "Inquisition",
 							Description = Properties.Res.Lorem,
@@ -98,6 +105,7 @@ namespace IVForum.App.Resources
 				},
 				new Forum
 				{
+					Id = Guid.NewGuid(),
 					Name = "Cendraforum",
 					Title = "Fòrum d'inversions Cendrassos",
 					Description = Properties.Res.Lorem,
@@ -106,6 +114,7 @@ namespace IVForum.App.Resources
 					Projects = new List<Project> {
 						new Project
 						{
+							Id = Guid.NewGuid(),
 							Name = "Placeholder",
 							Title = "Placeholder.cat",
 							Description = Properties.Res.Lorem,
@@ -128,6 +137,7 @@ namespace IVForum.App.Resources
 			{
 				new Project
 				{
+					Id = Guid.NewGuid(),
 					Name = "IVForum",
 					Title = "IVForum.cat",
 					Description = Properties.Res.Lorem,
@@ -139,6 +149,7 @@ namespace IVForum.App.Resources
 				},
 				new Project
 				{
+					Id = Guid.NewGuid(),
 					Name = "Inquisition",
 					Title = "Inquisition",
 					Description = Properties.Res.Lorem,
@@ -150,6 +161,7 @@ namespace IVForum.App.Resources
 				},
 				new Project
 				{
+					Id = Guid.NewGuid(),
 					Name = "Placeholder",
 					Title = "Placeholder.cat",
 					Description = Properties.Res.Lorem,

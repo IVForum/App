@@ -1,6 +1,7 @@
 ﻿using IVForum.App.Models;
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 using Xamarin.Forms;
@@ -11,11 +12,18 @@ namespace IVForum.App.Views.Public.Projects
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProjectPage : ContentPage
 	{
+		private ObservableCollection<Project> Models { get; set; } = new ObservableCollection<Project>();
+
 		public ProjectPage(IOrderedEnumerable<Project> models)
 		{
 			InitializeComponent();
 
-			ProjectsListView.ItemsSource = models;
+			foreach (Project p in models)
+			{
+				Models.Add(p);
+			}
+
+			ProjectsListView.ItemsSource = Models;
 			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
 		}
 
@@ -23,7 +31,22 @@ namespace IVForum.App.Views.Public.Projects
 		{
 			InitializeComponent();
 
-			ProjectsListView.ItemsSource = models;
+			foreach (Project p in models)
+			{
+				Models.Add(p);
+			}
+
+			ProjectsListView.ItemsSource = Models;
+			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
+		}
+
+		public ProjectPage(ObservableCollection<Project> models)
+		{
+			InitializeComponent();
+
+			Models = models;
+
+			ProjectsListView.ItemsSource = Models;
 			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
 		}
 
