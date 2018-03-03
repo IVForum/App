@@ -25,6 +25,7 @@ namespace IVForum.App.Views.Account
 				Surname = "Cognom",
 				Email = "Correu electrònic",
 				Password = "Contrasenya",
+				ValidatePassword = "Confirmar contrasenya",
 				Legal = Properties.Res.Legal
 			};
 		}
@@ -49,6 +50,13 @@ namespace IVForum.App.Views.Account
 				if (!regexPassword.IsMatch(EntryPassword.Text))
 				{
 					await DisplayAlert("Error", "Format de la contrasenya incorrecte: Mínim 8 caràcters amb majúscules, minúscules, un número i un caràcter especial", "Ok");
+					await Navigation.PopModalAsync(false);
+					return;
+				}
+
+				if (EntryPassword.Text != EntryValidatePassword.Text)
+				{
+					await DisplayAlert("Error", "Les contrasenyes no són iguals", "Ok");
 					await Navigation.PopModalAsync(false);
 					return;
 				}

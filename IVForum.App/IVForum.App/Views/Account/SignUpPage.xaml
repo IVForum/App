@@ -23,8 +23,10 @@
 
                 <StackLayout>
 
-                    <Entry x:Name="EntryName" Text="" Placeholder="{Binding Name}"></Entry>
-                    <Entry x:Name="EntrySurname" Text="" Placeholder="{Binding Surname}"></Entry>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                        <Entry x:Name="EntryName" Text="" Placeholder="{Binding Name}" HorizontalOptions="FillAndExpand"></Entry>
+                        <Entry x:Name="EntrySurname" Text="" Placeholder="{Binding Surname}" HorizontalOptions="FillAndExpand"></Entry>
+                    </StackLayout>                    
                     
                     <Entry x:Name="EntryEmail" Text="" Placeholder="{Binding Email}" Keyboard="Email">
 
@@ -53,6 +55,8 @@
                         </Entry.Triggers>
                         
                     </Entry>
+
+                    <Entry x:Name="EntryValidatePassword" Text="" Placeholder="{Binding ValidatePassword}" IsPassword="True"></Entry>
 
                 </StackLayout>
                 

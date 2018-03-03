@@ -19,8 +19,11 @@
                     <Image Source="{Binding User.Avatar}"></Image>
                     
                     <StackLayout VerticalOptions="CenterAndExpand">
-                        
-                        <Label Text="{Binding User.Username}" TextColor="White"></Label>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding User.Name}" TextColor="White"></Label>
+                            <Label Text="{Binding User.Surname}" TextColor="White"></Label>
+                        </StackLayout>
                         
                         <Label Text="{Binding User.Email}" TextColor="White"></Label>
                         

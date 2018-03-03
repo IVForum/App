@@ -132,8 +132,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Personal\Profile\" />
-  </ItemGroup>
-
 </Project>

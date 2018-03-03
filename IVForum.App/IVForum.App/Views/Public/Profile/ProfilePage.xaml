@@ -17,7 +17,12 @@
                         <Image Source="{Binding Avatar}"></Image>
 
                         <StackLayout>
-                            <Label Text="{Binding Name}"></Label>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}"></Label>
+                                <Label Text="{Binding Surname}"></Label>
+                            </StackLayout>
+                            
                             <Label Text="{Binding Email}"></Label>
                         </StackLayout>
 
