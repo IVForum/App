@@ -7,7 +7,7 @@
 
         <ScrollView>
 
-            <StackLayout Padding="5">
+            <StackLayout x:Name="ProfileLayout" Padding="5">
 
                 <Frame HasShadow="True">
 
@@ -84,15 +84,15 @@
                                 <TapGestureRecognizer Tapped="ShowFacebook"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        
+
                         <Image Source="twitter.png">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="ShowTwitter"/>
                             </Image.GestureRecognizers>
                         </Image>
-                        
+
                     </StackLayout>
-                    
+
                 </Frame>
 
             </StackLayout>

@@ -5,4 +5,8 @@
             Title="Fòrums públics"
             BackgroundColor="GhostWhite">
 
+    <!--<TabbedPage.ToolbarItems>
+        <ToolbarItem Icon="magnifier_w.png" Text="Cerca" Clicked="Search"/>
+    </TabbedPage.ToolbarItems>-->
+
 </TabbedPage>

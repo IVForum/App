@@ -15,7 +15,8 @@ namespace IVForum.App.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+			global::Xamarin.Forms.DependencyService.Register<MessageAndroid>();
+			LoadApplication(new App());
         }
     }
 }

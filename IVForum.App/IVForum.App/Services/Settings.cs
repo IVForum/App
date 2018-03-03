@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using IVForum.App.Models;
+
+using Xamarin.Forms;
 
 namespace IVForum.App.Services
 {
@@ -21,6 +23,16 @@ namespace IVForum.App.Services
 			Application.Current.SavePropertiesAsync();
 		}
 
+		public static void Remove(params string[] keys)
+		{
+			foreach (string key in keys)
+			{
+				Application.Current.Properties.Remove(key);
+			}
+
+			Application.Current.SavePropertiesAsync();
+		}
+
 		public static object GetValue(string key)
 		{
 			Application.Current.Properties.TryGetValue(key, out object value);
@@ -30,6 +42,17 @@ namespace IVForum.App.Services
 		public static void TryGetValue(string key, out object value)
 		{
 			Application.Current.Properties.TryGetValue(key, out value);
+		}
+
+		public static void Logout()
+		{
+			Remove("loggedin", "token", "user_email", "user_password");
+		}
+
+		public static User GetLoggedUser()
+		{
+			User user = JsonService.Deserialize<User>((string)GetValue("user"));
+			return user;
 		}
 	}
 }

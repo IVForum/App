@@ -2,7 +2,7 @@
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Config;
 using IVForum.App.Views.Info;
-using IVForum.App.Views.Personal;
+using IVForum.App.Views.Public.Profile;
 
 using System;
 using System.Collections.ObjectModel;
@@ -32,8 +32,7 @@ namespace IVForum.App.Views.Main
 
 		public void Logout(object sender, EventArgs e)
 		{
-			Settings.Remove("loggedin");
-			Settings.Remove("token");
+			Settings.Logout();
 			Application.Current.MainPage = new StartupTabbedPage();
 		}
 
@@ -46,7 +45,7 @@ namespace IVForum.App.Views.Main
             {
 				MenuItems = new ObservableCollection<MainMenuItem>(new[]
                 {
-                    new MainMenuItem { Id = 0, Title = "Perfil", TargetType = typeof(MyProfilePage), Icon = "profile.png" },
+                    new MainMenuItem { Id = 0, Title = "Perfil", TargetType = typeof(ProfilePage), Icon = "profile.png" },
 					new MainMenuItem { Id = 1, Title = "Fòrums", TargetType = typeof(Personal.Forums.ForumTabbedPage), Icon = "personal_forums.png" },
 					new MainMenuItem { Id = 2, Title = "Projectes", TargetType = typeof(Personal.Projects.ProjectTabbedPage), Icon = "personal_projects.png" },
                     new MainMenuItem { Id = 3, Title = "Fòrums públics", TargetType = typeof(Public.Forums.ForumTabbedPage), Icon = "public_forums.png" },

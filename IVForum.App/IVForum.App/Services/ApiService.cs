@@ -29,10 +29,13 @@ namespace IVForum.App.Services
 		{
 			if (!client.DefaultRequestHeaders.Contains("Authorization"))
 			{
-				if (Settings.Contains("token_auth"))
+				if (Settings.Contains("token"))
 				{
-					string token = (string)Settings.GetValue("token_auth");
-					client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+					string tokenString = (string)Settings.GetValue("token");
+
+					Token token = JsonService.Deserialize<Token>(tokenString);
+
+					client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Auth_Token);
 				}
 				else
 				{
@@ -63,7 +66,7 @@ namespace IVForum.App.Services
 			}
 		}
 
-		#region Account Login/Register
+		#region Account
 		public static async Task<bool> RequestSignUp(SignUpViewModel sender)
 		{
 			try
@@ -76,12 +79,17 @@ namespace IVForum.App.Services
 				{
 					var answer = await response.Content.ReadAsStringAsync();
 
-					Token token = JsonConvert.DeserializeObject<Token>(answer);
+					Settings.Save("token", answer);
 
-					Settings.Save("token_auth", token.Auth_Token);
-					Settings.Save("user_id", token.Id);
+					Token token = JsonService.Deserialize<Token>(answer);
+					User user = await RequestLoggedUserDetails(token.Id);
 
-					return true;
+					if (user != null)
+					{
+						string userString = JsonService.Serialize(user);
+						Settings.Save("user", userString);
+						return true;
+					}
 				}
 
 				return false;
@@ -106,12 +114,17 @@ namespace IVForum.App.Services
 				{
 					var answer = await response.Content.ReadAsStringAsync();
 
-					Token token = JsonConvert.DeserializeObject<Token>(answer);
+					Settings.Save("token", answer);
 
-					Settings.Save("token_auth", token.Auth_Token);
-					Settings.Save("user_id", token.Id);
+					Token token = JsonService.Deserialize<Token>(answer);
+					User user = await RequestLoggedUserDetails(token.Id);
 
-					return true;
+					if (user != null)
+					{
+						string userString = JsonService.Serialize(user);
+						Settings.Save("user", userString);
+						return true;
+					}
 				}
 
 				return false;
@@ -132,15 +145,19 @@ namespace IVForum.App.Services
 
 				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					var answer = await response.Content.ReadAsStringAsync();
+					string answer = await response.Content.ReadAsStringAsync();
 
-					Token token = JsonConvert.DeserializeObject<Token>(answer);
+					Settings.Save("token", answer);
 
-					Settings.Save("token_auth", token.Auth_Token);
-					Settings.Save("user_id", token.Id);
-					Settings.Save("expire_date", token.Expires_In);
+					Token token = JsonService.Deserialize<Token>(answer);
+					User user = await RequestLoggedUserDetails(token.Id);
 
-					return true;
+					if (user != null)
+					{
+						string userString = JsonService.Serialize(user);
+						Settings.Save("user", userString);
+						return true;
+					}
 				}
 				return false;
 			}
@@ -148,6 +165,38 @@ namespace IVForum.App.Services
 			{
 				return false;
 			}
+		}
+
+		public static async Task<User> RequestLoggedUserDetails(string userId)
+		{
+			HttpResponseMessage response =  await client.GetAsync(Routes.AccountGetUser);
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			{
+				string userString = await response.Content.ReadAsStringAsync();
+
+				User user = JsonService.Deserialize<User>(userString);
+				return user;
+			}
+			else
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					response = await client.PostAsync(Routes.AccountGetUser, GetStringContent(userId));
+					if (response.StatusCode == System.Net.HttpStatusCode.OK)
+					{
+						string userString = await response.Content.ReadAsStringAsync();
+						User user = JsonService.Deserialize<User>(userString);
+						return user;
+					}
+				}
+				return null;
+			}
+		}
+
+		public static bool UpdateUser()
+		{
+			return true;
 		}
 
 		private static LoginViewModel GetLoginViewModel(SignUpViewModel model)
@@ -172,31 +221,6 @@ namespace IVForum.App.Services
 		}
 		
 		#endregion
-		public static async Task<User> RequestUser()
-		{
-			try
-			{
-				string token = (string)Settings.GetValue("token_auth");
-				AuthorizeRequest(token);
-
-				HttpResponseMessage response = await client.GetAsync("account/get");
-
-				if (response.StatusCode == System.Net.HttpStatusCode.OK)
-				{
-					var answer = await response.Content.ReadAsStringAsync();
-
-					User user = JsonConvert.DeserializeObject<User>(answer);
-
-					return user;
-				}
-
-				return null;
-			}
-			catch
-			{
-				return null;
-			}
-		}
 
 		public static async Task RequestProjects()
 		{

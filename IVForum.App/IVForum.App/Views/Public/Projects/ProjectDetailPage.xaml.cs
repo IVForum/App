@@ -24,7 +24,7 @@ namespace IVForum.App.Views.Public.Projects
 
 		private async void ShowProfile(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new ProfilePage(Model.Owner), true);
+			await Navigation.PushAsync(new ProfileTabbedPage(Model.Owner), true);
 		}
 	}
 }

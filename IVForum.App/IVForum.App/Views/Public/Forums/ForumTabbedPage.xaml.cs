@@ -21,5 +21,10 @@ namespace IVForum.App.Views.Public.Forums
 			Children.Add(new ForumPage(Forums.OrderBy(x => x.Projects.Count)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
 			Children.Add(new ForumPage(Forums.OrderBy(x => x.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
         }
+
+		//private async void Search(object sender, EventArgs e)
+		//{
+		//	await Navigation.PushModalAsync(new SearchPage(), true);
+		//}
     }
 }
