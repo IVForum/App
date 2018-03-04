@@ -87,9 +87,9 @@ namespace IVForum.App.Views.Shared
 					await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
-				await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
+				await DisplayAlert("Error", ex.Message, "Ok");
 			}
 		}
 

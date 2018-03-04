@@ -1,9 +1,10 @@
 ﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.Views.Public.Forums;
 using IVForum.App.Views.Shared;
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,38 +14,27 @@ namespace IVForum.App.Views.Personal.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumTabbedPage : TabbedPage
     {
-		private ObservableCollection<Forum> Models = new ObservableCollection<Forum>();
+		private static List<Forum> PersonalForums = new List<Forum>();
+		private static List<Forum> ParticipatingForums = new List<Forum>();
 
         public ForumTabbedPage()
         {
             InitializeComponent();
-
-			TryGetForums();
-
-			Children.Add(new ForumPage(Models) { Title = "Personals", BackgroundColor = Color.GhostWhite });
-			Children.Add(new ForumPage(Models) { Title = "Participants", BackgroundColor = Color.GhostWhite });
+			Load();
         }
 
-		private async void TryGetForums()
+		private async void Load()
 		{
-			try
+			PersonalForums = await ApiService.RequestForums(Settings.GetLoggedUser().Id);
+			if (PersonalForums != null)
 			{
-				//User user = Settings.GetLoggedUser();
-				//var forums = await ApiService.RequestForums(user.Id);
-				
-				var forums = IVForum.App.Resources.Content.GetForums();
-
-				foreach (Forum f in forums)
-				{
-					Models.Add(f);
-				}
-
-				DependencyService.Get<IMessage>().ShortAlert("Failed to retrieve from Api, using local instead");
-
+				Children.Add(new ForumPage(PersonalForums) { Title = "Personals" }); 
 			}
-			catch (Exception e)
+
+			ParticipatingForums = await ApiService.RequestSubscribedForums(Settings.GetLoggedUser().Id);
+			if (ParticipatingForums != null)
 			{
-				DependencyService.Get<IMessage>().ShortAlert(e.Message);
+				Children.Add(new ForumPage(ParticipatingForums) { Title = "Participants" }); 
 			}
 		}
 

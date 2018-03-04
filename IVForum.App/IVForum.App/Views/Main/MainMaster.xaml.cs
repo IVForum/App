@@ -30,6 +30,7 @@ namespace IVForum.App.Views.Main
 		public void Logout(object sender, EventArgs e)
 		{
 			Settings.Logout();
+			Settings.Cleanup();
 			Application.Current.MainPage = new StartupTabbedPage();
 		}
 

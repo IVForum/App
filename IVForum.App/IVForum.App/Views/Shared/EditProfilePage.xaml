@@ -14,8 +14,6 @@
 
                     <StackLayout>
 
-                        <Label Text="Informació personal" FontSize="Medium"></Label>
-                        
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
 
                             <Image Source="{Binding Avatar}"></Image>
@@ -32,32 +30,35 @@
 
                         </StackLayout>
 
-                        <Label Text="Descripció breu:"></Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="info.png"></Image>
+                            <Label Text="Descripció" FontSize="Medium"></Label>
+                        </StackLayout>
                         <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"  Text="{Binding Description}"></Entry>
 
                         <StackLayout Orientation="Horizontal">
+                            <Image Source="repo.png"></Image>
+                            <Label Text="Repositori" FontSize="Medium"></Label>
+                        </StackLayout>
+                        <Entry x:Name="RepositoryEntry" Placeholder="{Binding RepositoryUrl}" Text="{Binding RepositoryUrl}"></Entry>
+                        
+                        <StackLayout Orientation="Horizontal">
                             <Image Source="web.png"></Image>
-                            <Label Text="Pàgina web:"></Label>
+                            <Label Text="Pàgina web" FontSize="Medium"></Label>
                         </StackLayout>
                         <Entry x:Name="WebsiteEntry" Placeholder="{Binding WebsiteUrl}" Text="{Binding WebsiteUrl}"></Entry>
 
                         <StackLayout Orientation="Horizontal">
                             <Image Source="facebook.png"></Image>
-                            <Label Text="Facebook:"></Label>
+                            <Label Text="Facebook" FontSize="Medium"></Label>
                         </StackLayout>
                         <Entry x:Name="FacebookEntry" Placeholder="{Binding FacebookUrl}" Text="{Binding FacebookUrl}"></Entry>
 
                         <StackLayout Orientation="Horizontal">
                             <Image Source="twitter.png"></Image>
-                            <Label Text="Twitter:"></Label>
+                            <Label Text="Twitter" FontSize="Medium"></Label>
                         </StackLayout>
                         <Entry x:Name="TwitterEntry" Placeholder="{Binding TwitterUrl}" Text="{Binding TwitterUrl}"></Entry>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="repo.png"></Image>
-                            <Label Text="Repositori:"></Label>
-                        </StackLayout>
-                        <Entry x:Name="RepositoryEntry" Placeholder="{Binding RepositoryUrl}" Text="{Binding RepositoryUrl}"></Entry>
 
                     </StackLayout>
 

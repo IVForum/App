@@ -24,11 +24,11 @@
                 <StackLayout>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                        <Entry x:Name="EntryName" Text="" Placeholder="{Binding Name}" HorizontalOptions="FillAndExpand"></Entry>
-                        <Entry x:Name="EntrySurname" Text="" Placeholder="{Binding Surname}" HorizontalOptions="FillAndExpand"></Entry>
+                        <Entry x:Name="EntryName" Text="" Placeholder="Nom" HorizontalOptions="FillAndExpand"></Entry>
+                        <Entry x:Name="EntrySurname" Text="" Placeholder="Cognom" HorizontalOptions="FillAndExpand"></Entry>
                     </StackLayout>                    
                     
-                    <Entry x:Name="EntryEmail" Text="" Placeholder="{Binding Email}" Keyboard="Email">
+                    <Entry x:Name="EntryEmail" Text="" Placeholder="Correu electrònic" Keyboard="Email">
 
                         <Entry.Triggers>
 
@@ -42,7 +42,7 @@
                         
                     </Entry>
                     
-                    <Entry x:Name="EntryPassword" Text="" Placeholder="{Binding Password}" IsPassword="True">
+                    <Entry x:Name="EntryPassword" Text="" Placeholder="Contrasenya" IsPassword="True">
 
                         <Entry.Triggers>
 
@@ -56,7 +56,7 @@
                         
                     </Entry>
 
-                    <Entry x:Name="EntryValidatePassword" Text="" Placeholder="{Binding ValidatePassword}" IsPassword="True"></Entry>
+                    <Entry x:Name="EntryValidatePassword" Text="" Placeholder="Confirmar contrasenya" IsPassword="True"></Entry>
 
                 </StackLayout>
                 

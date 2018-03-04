@@ -18,7 +18,14 @@ namespace IVForum.App.Services
 
 		public static bool Contains(string key)
 		{
-			return Application.Current.Properties.ContainsKey(key);
+			try
+			{
+				return Application.Current.Properties.ContainsKey(key);
+			}
+			catch (System.Exception)
+			{
+				return false;
+			}
 		}
 
 		public static void Remove(string key)
@@ -53,7 +60,7 @@ namespace IVForum.App.Services
 
 		public static void Logout()
 		{
-			Remove("loggedin", "token", "user_email", "user_password");
+			Remove("loggedin", "token", "user");
 		}
 
 		public static User GetLoggedUser()
@@ -69,6 +76,12 @@ namespace IVForum.App.Services
 				return new Main();
 			}
 			return new StartupTabbedPage();
+		}
+
+		public static void Cleanup()
+		{
+			Application.Current.Properties.Clear();
+			Application.Current.SavePropertiesAsync();
 		}
 	}
 }

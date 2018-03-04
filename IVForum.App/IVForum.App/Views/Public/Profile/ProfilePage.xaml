@@ -83,19 +83,29 @@
 
                 <Frame HasShadow="True">
 
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <StackLayout>
 
-                        <Image Source="facebook.png">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ShowFacebook"/>
-                            </Image.GestureRecognizers>
-                        </Image>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="facebook.png"></Image>
+                            <Label Text="Facebook" FontSize="Medium"></Label>
+                        </StackLayout>
 
-                        <Image Source="twitter.png">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ShowTwitter"/>
-                            </Image.GestureRecognizers>
-                        </Image>
+                        <Label Text="{Binding FacebookUrl}" TextColor="Blue"></Label>
+                        
+                    </StackLayout>
+                    
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="twitter.png"></Image>
+                            <Label Text="Twitter" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding TwitterUrl}" TextColor="Blue"></Label>
 
                     </StackLayout>
 

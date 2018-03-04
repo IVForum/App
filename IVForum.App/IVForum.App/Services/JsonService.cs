@@ -6,7 +6,7 @@ namespace IVForum.App.Services
     {
 		public static string Serialize(object value)
 		{
-			return JsonConvert.SerializeObject(value);
+			return JsonConvert.SerializeObject(value, Formatting.Indented);
 		}
 
 		public static T Deserialize<T>(string value) where T: class

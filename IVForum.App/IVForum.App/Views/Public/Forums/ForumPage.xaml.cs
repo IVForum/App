@@ -12,11 +12,18 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumPage : ContentPage
 	{
+		private ObservableCollection<Forum> Forums { get; set; } = new ObservableCollection<Forum>();
+
 		public ForumPage(IOrderedEnumerable<Forum> models)
 		{
 			InitializeComponent();
 
-			ForumsListView.ItemsSource = models;
+			foreach (Forum f in models)
+			{
+				Forums.Add(f);
+			}
+
+			ForumsListView.ItemsSource = Forums;
 			ForumsListView.ItemTapped += ForumsListView_ItemTapped;
 		}
 
@@ -24,7 +31,12 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			InitializeComponent();
 
-			ForumsListView.ItemsSource = models;
+			foreach (Forum f in models)
+			{
+				Forums.Add(f);
+			}
+
+			ForumsListView.ItemsSource = Forums;
 			ForumsListView.ItemTapped += ForumsListView_ItemTapped;
 		}
 
@@ -32,7 +44,9 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			InitializeComponent();
 
-			ForumsListView.ItemsSource = models;
+			Forums = models;
+
+			ForumsListView.ItemsSource = Forums;
 			ForumsListView.ItemTapped += ForumsListView_ItemTapped;
 		}
 

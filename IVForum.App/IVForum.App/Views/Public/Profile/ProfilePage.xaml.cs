@@ -1,4 +1,5 @@
 ﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.Views.Shared;
 
 using System;
@@ -23,9 +24,12 @@ namespace IVForum.App.Views.Public.Profile
 		public ProfilePage()
 		{
 			InitializeComponent();
+			Load();
+		}
 
-			//Model = Settings.GetLoggedUser();
-			Model = IVForum.App.Resources.Content.Cristian;
+		private async void Load()
+		{
+			Model = await ApiService.RequestUserDetails(Settings.GetLoggedUser().Id.ToString());
 
 			BindingContext = Model;
 			Title = Model.Name + " " + Model.Surname;
@@ -39,23 +43,11 @@ namespace IVForum.App.Views.Public.Profile
 			edit.Clicked += Edit_Clicked;
 
 			ToolbarItems.Add(edit);
-
-
 		}
 
 		private async void Edit_Clicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new EditProfilePage(Model), true);
-		}
-
-		private async void ShowFacebook(object sender, EventArgs e)
-		{
-			
-		}
-
-		private async void ShowTwitter(object sender, EventArgs e)
-		{
-			
 		}
 	}
 }
