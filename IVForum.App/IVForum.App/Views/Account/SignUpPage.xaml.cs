@@ -18,7 +18,6 @@ namespace IVForum.App.Views.Account
 	public partial class SignUpPage : ContentPage
 	{
 		public SignUpViewModel model;
-		public string Legal = Res.Legal;
 
 		public SignUpPage()
 		{

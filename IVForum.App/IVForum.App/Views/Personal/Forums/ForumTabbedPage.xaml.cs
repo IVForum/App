@@ -1,7 +1,6 @@
 ﻿using IVForum.App.Models;
 using IVForum.App.Services;
 using IVForum.App.Views.Public.Forums;
-using IVForum.App.Views.Shared;
 
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace IVForum.App.Views.Personal.Forums
 
 		public async void AddNew(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new CreateNewPage() { Title = "Afegir nou fòrum" }, true);
+			await Navigation.PushAsync(new ForumCreatePage() { Title = "Afegir nou fòrum" }, true);
 		}
     }
 }

@@ -270,7 +270,8 @@ namespace IVForum.App.Services
 
 		public static async Task<List<Forum>> RequestForums(Guid userId)
 		{
-			HttpResponseMessage response = await client.GetAsync(Routes.AccountPersonalForums + userId.ToString());
+			string path = Routes.AccountPersonalForums + userId.ToString();
+			HttpResponseMessage response = await client.GetAsync(path);
 
 			if (response.StatusCode == System.Net.HttpStatusCode.OK)
 			{
@@ -321,6 +322,31 @@ namespace IVForum.App.Services
 
 				return new List<Forum>();
 			}
+		}
+
+		public static async Task<bool> CreateForum(CreateNewViewModel model)
+		{
+			string modelString = JsonService.Serialize(model);
+			HttpResponseMessage response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
+
+			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			{
+				return true;
+			}
+			else
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
+					if (response.StatusCode == System.Net.HttpStatusCode.OK)
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
+
 		}
 		#endregion
 

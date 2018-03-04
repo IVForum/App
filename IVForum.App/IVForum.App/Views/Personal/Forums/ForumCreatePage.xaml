@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Personal.Forums.ForumCreatePage"
+             BackgroundColor="GhostWhite">
+    
+    <ContentPage.Content>
+        
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <Label Text="Nom (Personal):"></Label>
+                    <Entry x:Name="NameEntry" Placeholder="{Binding Name}"></Entry>
+
+                    <Label Text="Títol (Públic): "></Label>
+                    <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
+
+                    <Label Text="Descripció:"></Label>
+                    <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
+
+                </StackLayout>
+
+            </Frame>
+
+            <Button Image="plus.png" Text="Afegir" Clicked="Add"></Button>
+
+            <Button Image="cross.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>
