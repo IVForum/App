@@ -22,13 +22,13 @@ namespace IVForum.App.Views.Public.Projects
 
 		private async void Load()
 		{
-			Projects = await ApiService.RequestProjects();
+			Projects = await ApiService.RequestAllProjects();
 
 			if (Projects != null)
 			{
-				Children.Add(new ProjectPage(Projects.OrderBy(x => x.Views)) { Title = "Top", BackgroundColor = Color.GhostWhite });
-				Children.Add(new ProjectPage(Projects.OrderBy(x => x.Bills.Count)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
-				Children.Add(new ProjectPage(Projects.OrderByDescending(x => x.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
+				Children.Add(new ProjectPage(Projects.OrderBy(x => x.Views)) { Title = "Top" });
+				Children.Add(new ProjectPage(Projects.OrderBy(x => x.Bills.Count)) { Title = "Popular" });
+				Children.Add(new ProjectPage(Projects.OrderByDescending(x => x.CreationDate)) { Title = "Nous" });
 			}
 		}
     }

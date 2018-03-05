@@ -20,8 +20,17 @@
 
                     <StackLayout Orientation="Horizontal">
 
-                        <Image Source="public_projects.png"></Image>
-                        <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+
+                            <Image Source="public_projects.png"></Image>
+                            <Label Text="{Binding Title}" FontSize="Medium"></Label>
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image Source="view.png"></Image>
+                            <Label Text="{Binding Views}"></Label>
+                        </StackLayout>
 
                     </StackLayout>
 
@@ -82,25 +91,6 @@
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Bills.Count}"></Label>
                             <Label Text="€"></Label>
-                        </StackLayout>
-                        
-                    </StackLayout>
-                    
-                </Frame>
-
-                <Frame HasShadow="True">
-
-                    <StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="money.png"></Image>
-                            <Label Text="Contribuir" FontSize="Medium"></Label>
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            <Button Image="banknote.png" Text="20" BackgroundColor="SteelBlue"></Button>
-                            <Button Image="banknote.png" Text="50" BackgroundColor="SandyBrown"></Button>
-                            <Button Image="banknote.png" Text="100" BackgroundColor="ForestGreen"></Button>
                         </StackLayout>
 
                     </StackLayout>

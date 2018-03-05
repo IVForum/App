@@ -1,5 +1,4 @@
-﻿
-using IVForum.App.Services;
+﻿using IVForum.App.Services;
 using IVForum.App.ViewModels;
 
 using System;
@@ -7,14 +6,14 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IVForum.App.Views.Personal.Forums
+namespace IVForum.App.Views.Personal.Projects
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ForumCreatePage : ContentPage
+	public partial class ProjectCreatePage : ContentPage
 	{
-		private CreateNewViewModel Model = new CreateNewViewModel();
+		private CreateNewViewModel Model;
 
-		public ForumCreatePage()
+		public ProjectCreatePage()
 		{
 			InitializeComponent();
 		}
@@ -28,16 +27,16 @@ namespace IVForum.App.Views.Personal.Forums
 				Description = DescriptionEntry.Text
 			};
 
-			var result = await ApiService.CreateForum(Model);
+			var result = await ApiService.CreateProject(Model);
 
 			if (result)
 			{
-				Alert.Send("Fòrum afegit correctament");
+				Alert.Send("Projecte afegit correctament");
 				await Navigation.PopToRootAsync(true);
 			}
 			else
 			{
-				Alert.Send("Error al afegir el fòrum");
+				Alert.Send("Error al afegir el projecte");
 			}
 		}
 

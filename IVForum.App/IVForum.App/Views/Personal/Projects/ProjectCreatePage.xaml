@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Shared.CreateNewPage"
+             x:Class="IVForum.App.Views.Personal.Projects.ProjectCreatePage"
              BackgroundColor="GhostWhite">
     
     <ContentPage.Content>
-
+        
         <StackLayout Padding="5">
 
             <Frame HasShadow="True">
@@ -22,7 +22,7 @@
                     <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
 
                 </StackLayout>
-                
+
             </Frame>
 
             <Button Image="plus.png" Text="Afegir" Clicked="Add"></Button>

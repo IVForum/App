@@ -12,7 +12,7 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumPage : ContentPage
 	{
-		private ObservableCollection<Forum> Forums { get; set; } = new ObservableCollection<Forum>();
+		private ObservableCollection<Forum> Forums = new ObservableCollection<Forum>();
 
 		public ForumPage(IOrderedEnumerable<Forum> models)
 		{

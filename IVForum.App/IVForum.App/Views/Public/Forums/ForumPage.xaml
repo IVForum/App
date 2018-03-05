@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Public.Forums.ForumPage">
+             x:Class="IVForum.App.Views.Public.Forums.ForumPage"
+             BackgroundColor="GhostWhite">
     
     <ContentPage.Content>
 
@@ -32,11 +33,6 @@
                                     </StackLayout>
 
                                     <Label Text="{Binding Description}"></Label>
-
-                                    <!--<StackLayout Orientation="Horizontal">
-                                        <Label Text="Creador:"></Label>
-                                        <Label Text="{Binding Owner}" FontAttributes="Bold"></Label>
-                                    </StackLayout>-->
 
                                 </StackLayout>
 

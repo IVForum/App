@@ -1,6 +1,8 @@
 ﻿using IVForum.App.Models;
+using IVForum.App.Services;
 using IVForum.App.Views.Public.Projects;
 
+using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -11,14 +13,27 @@ namespace IVForum.App.Views.Personal.Projects
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProjectTabbedPage : TabbedPage
     {
-		public List<Project> Models { get; set; } = IVForum.App.Resources.Content.GetProjects();
+		public List<Project> PersonalProjects = new List<Project>();
+		private List<Project> ParticipatingProjects = new List<Project>();
 
         public ProjectTabbedPage()
         {
             InitializeComponent();
-
-			Children.Add(new ProjectPage(Models) { Title = "Personals", BackgroundColor = Color.GhostWhite });
-			Children.Add(new ProjectPage(Models) { Title = "Participants", BackgroundColor = Color.GhostWhite });
+			Load();
         }
-    }
+
+		private async void Load()
+		{
+			PersonalProjects = await ApiService.RequestPersonalProjects(Settings.GetLoggedUser().Id);
+			Children.Add(new ProjectPage(PersonalProjects) { Title = "Personals" });
+
+			ParticipatingProjects = await ApiService.RequestParticipatingProjects(Settings.GetLoggedUser().Id);
+			Children.Add(new ProjectPage(new List<Project>()) { Title = "Participants" });
+		}
+
+		public async void AddNew(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new ProjectCreatePage() { Title = "Afegir nou projecte" }, true);
+		}
+	}
 }

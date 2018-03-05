@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:projects="clr-namespace:IVForum.App.Views.Personal.Projects"
-            x:Class="IVForum.App.Views.Personal.Projects.ProjectTabbedPage">
+            x:Class="IVForum.App.Views.Personal.Projects.ProjectTabbedPage"
+            BackgroundColor="GhostWhite">
 
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Icon="plus_w.png" Text="Add" Activated="AddNew"></ToolbarItem>
+    </TabbedPage.ToolbarItems>
+    
 </TabbedPage>

@@ -9,11 +9,8 @@ namespace IVForum.App.Services
 	{
 		public static void Save(string key, object value)
 		{
-			if (!Contains(key))
-			{
-				Application.Current.Properties.Add(key, value);
-				Application.Current.SavePropertiesAsync();
-			}
+			Application.Current.Properties[key] = value;
+			Application.Current.SavePropertiesAsync();
 		}
 
 		public static bool Contains(string key)
@@ -58,11 +55,6 @@ namespace IVForum.App.Services
 			Application.Current.Properties.TryGetValue(key, out value);
 		}
 
-		public static void Logout()
-		{
-			Remove("loggedin", "token", "user");
-		}
-
 		public static User GetLoggedUser()
 		{
 			User user = JsonService.Deserialize<User>((string)GetValue("user"));
@@ -78,7 +70,7 @@ namespace IVForum.App.Services
 			return new StartupTabbedPage();
 		}
 
-		public static void Cleanup()
+		public static void Logout()
 		{
 			Application.Current.Properties.Clear();
 			Application.Current.SavePropertiesAsync();

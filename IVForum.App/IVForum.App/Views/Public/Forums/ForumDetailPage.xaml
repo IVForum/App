@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IVForum.App.Views.Public.Forums.ForumDetailPage">
+             x:Class="IVForum.App.Views.Public.Forums.ForumDetailPage"
+             BackgroundColor="GhostWhite">
 
     <ContentPage.Content>
 
         <ScrollView>
 
-            <StackLayout Padding="5">
+            <StackLayout x:Name="ForumStackLayout" Padding="5">
 
                 <Frame HasShadow="True" Padding="0">
 
@@ -18,8 +19,17 @@
                 <Frame HasShadow="True">
 
                     <StackLayout Orientation="Horizontal">
-                        <Image Source="public_forums.png"></Image>
-                        <Label Text="{Binding Title}" FontSize="Medium"></Label>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Image Source="public_forums.png"></Image>
+                            <Label Text="{Binding Title}" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image Source="view.png"></Image>
+                            <Label Text="{Binding Views}"></Label>
+                        </StackLayout>
+
                     </StackLayout>
 
                 </Frame>
@@ -62,8 +72,6 @@
                     </StackLayout>
 
                 </Frame>
-
-                <Button Image="plus.png" Text="Participar"></Button>
 
             </StackLayout>
 

@@ -1,9 +1,12 @@
 ﻿using IVForum.App.Models;
 using IVForum.App.Services;
+using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Profile;
 using IVForum.App.Views.Shared;
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -15,28 +18,109 @@ namespace IVForum.App.Views.Public.Projects
 	public partial class ProjectDetailPage : ContentPage
 	{
 		private Project Model { get; set; } = new Project();
+		public List<Bill> Bills { get; set; } = new List<Bill>();
+		private ObservableCollection<Button> Contributions = new ObservableCollection<Button>();
+		public bool Subscribed { get; set; } = false;
 
 		public ProjectDetailPage(Project model)
 		{
+			model.Owner = new User();
 			InitializeComponent();
-			BindingContext = Model = model;
+			Model = model;
+			Load();
+		}
 
-			Title = model.Title;
+		private async void Load()
+		{
+			User owner = await ApiService.RequestUserDetails(Model.Owner.Id.ToString());
+			Model.Owner = owner;
+			BindingContext = Model;
+			Title = Model.Title;
+			ApiService.AddView(Model);
 
-			User user = Settings.GetLoggedUser();
+			if (Subscribed)
+			{
+				GenerateContributions();
+			}
+		}
+		
+		private async void GenerateContributions()
+		{
+			ObservableCollection<Button> contributions = new ObservableCollection<Button>();
 
-			//if (user.Id == model.Owner.Id)
-			//{
-				Button delete = new Button
+			Frame frame = new Frame()
+			{
+				HasShadow = true
+			};
+
+			StackLayout buttons = new StackLayout()
+			{
+				Orientation = StackOrientation.Horizontal,
+				HorizontalOptions = LayoutOptions.CenterAndExpand
+			};
+
+			foreach (Bill b in Bills)
+			{
+				Button btn = new Button()
 				{
-					Image = "cross.png",
-					Text = "Eliminar",
-					BackgroundColor = Color.Red
+					Text = b.Value.ToString(),
+					Image = "banknote.png"
 				};
-				delete.Clicked += Delete_Clicked;
+				btn.Clicked += Vote;
 
-				ProjectStackLayout.Children.Add(delete);
-			//}
+				contributions.Add(btn);
+				buttons.Children.Add(btn);
+			}
+
+			Image money = new Image()
+			{
+				Source = "money.png"
+			};
+
+			Label title = new Label()
+			{
+				Text = "Contribucions",
+				FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+			};
+
+			StackLayout header = new StackLayout() {
+				Orientation = StackOrientation.Horizontal
+			};
+
+			header.Children.Add(money);
+			header.Children.Add(title);
+
+			StackLayout general = new StackLayout();
+			general.Children.Add(header);
+			general.Children.Add(buttons);
+
+			frame.Content = general;
+
+			ProjectStackLayout.Children.Add(frame);
+		}
+
+		private async void Vote(object sender, EventArgs e)
+		{
+			Button btn = sender as Button;
+
+			VoteViewModel vote = new VoteViewModel()
+			{
+				ProjectId = Model.Id.ToString(),
+				Value = btn.Text
+			};
+
+			bool result = await ApiService.VoteProject(vote);
+
+			if (result)
+			{
+				Alert.Send("Vot enviat");
+				btn.IsEnabled = false;
+				Contributions.Remove(btn);
+			}
+			else
+			{
+				Alert.Send("Hi ha hagut un error al processar el vot");
+			}
 		}
 
 		private async void Delete_Clicked(object sender, EventArgs e)

@@ -13,6 +13,8 @@ namespace IVForum.App.Views.Public.Projects
 	public partial class ProjectPage : ContentPage
 	{
 		private ObservableCollection<Project> Models { get; set; } = new ObservableCollection<Project>();
+		public List<Bill> Bills { get; set; } = new List<Bill>();
+		public bool Subscribed { get; set; } = false;
 
 		public ProjectPage(IOrderedEnumerable<Project> models)
 		{
@@ -24,7 +26,9 @@ namespace IVForum.App.Views.Public.Projects
 			}
 
 			ProjectsListView.ItemsSource = Models;
-			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
+			ProjectsListView.ItemTapped += async (sender, e) => {
+				await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item), true);
+			};
 		}
 
 		public ProjectPage(List<Project> models)
@@ -37,22 +41,21 @@ namespace IVForum.App.Views.Public.Projects
 			}
 
 			ProjectsListView.ItemsSource = Models;
-			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
+			ProjectsListView.ItemTapped += async (sender, e) => {
+				await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item) { Subscribed = this.Subscribed ,Bills = this.Bills }, true);
+			};
 		}
 
-		public ProjectPage(ObservableCollection<Project> models)
+		public ProjectPage(ObservableCollection<Project> models, bool userSubscribed)
 		{
 			InitializeComponent();
 
 			Models = models;
 
 			ProjectsListView.ItemsSource = Models;
-			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
-		}
-
-		private async void ProjectsListView_ItemTapped(object sender, ItemTappedEventArgs e)
-		{
-			await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item), true);
+			ProjectsListView.ItemTapped += async (sender, e) => {
+				await Navigation.PushAsync(new ProjectDetailPage((Project)e.Item), true);
+			};
 		}
 	}
 }

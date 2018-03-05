@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,9 +92,9 @@ namespace IVForum.App.Services
 
 				return false;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				Debug.WriteLine(e);
+				Alert.Send("Error de connexió");
 				return false;
 			}
 		}
@@ -131,17 +130,17 @@ namespace IVForum.App.Services
 			}
 			catch
 			{
+				Alert.Send("Error de connexió");
 				return false;
 			}
 		}
 
-		public static async Task<bool> RequestLogin(LoginViewModel sender)
+		public static async Task<bool> RequestLogin(LoginViewModel model)
 		{
 			try
 			{
-				string modelString = JsonConvert.SerializeObject(sender, Formatting.Indented);
-
-				HttpResponseMessage response = await client.PostAsync(Routes.AccountLogin, new StringContent(modelString, Encoding.UTF8, "application/json"));
+				string modelString = JsonService.Serialize(model);
+				HttpResponseMessage response = await client.PostAsync(Routes.AccountLogin, GetStringContent(modelString));
 
 				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
@@ -163,34 +162,81 @@ namespace IVForum.App.Services
 			}
 			catch
 			{
+				Alert.Send("Error de connexió");
 				return false;
+			}
+		}
+
+		public static async Task<User> RequestUserDetails(Guid userId)
+		{
+			try
+			{
+				EnsureTokenExists();
+				string route = Routes.AccountGetUser + userId.ToString();
+				HttpResponseMessage response = await client.GetAsync(route);
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					string userString = await response.Content.ReadAsStringAsync();
+					User user = JsonService.Deserialize<User>(userString);
+					return user;
+				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.GetAsync(Routes.AccountGetUser);
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							string userString = await response.Content.ReadAsStringAsync();
+							User user = JsonService.Deserialize<User>(userString);
+							Settings.Save("user", userString);
+							return user;
+						}
+					}
+					return null;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return null;
 			}
 		}
 
 		public static async Task<User> RequestUserDetails(string userId)
 		{
-			EnsureTokenExists();
-			HttpResponseMessage response = await client.GetAsync(Routes.AccountGetUser);
+			try
+			{
+				EnsureTokenExists();
+				string route = Routes.AccountGetUser + userId;
+				HttpResponseMessage response = await client.GetAsync(route);
 
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				string userString = await response.Content.ReadAsStringAsync();
-				User user = JsonService.Deserialize<User>(userString);
-				return user;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					response = await client.GetAsync(Routes.AccountGetUser);
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						string userString = await response.Content.ReadAsStringAsync();
-						User user = JsonService.Deserialize<User>(userString);
-						Settings.Save("user", userString);
-						return user;
-					}
+					string userString = await response.Content.ReadAsStringAsync();
+					User user = JsonService.Deserialize<User>(userString);
+					return user;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.GetAsync(Routes.AccountGetUser);
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							string userString = await response.Content.ReadAsStringAsync();
+							User user = JsonService.Deserialize<User>(userString);
+							Settings.Save("user", userString);
+							return user;
+						}
+					}
+					return null;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
 				return null;
 			}
 		}
@@ -212,25 +258,80 @@ namespace IVForum.App.Services
 
 		public static async Task<bool> UpdateUser(User model)
 		{
-			EnsureTokenExists();
-
-			string modelString = JsonService.Serialize(model);
-
-			HttpResponseMessage response = await client.PostAsync(Routes.AccountUpdate, GetStringContent(modelString));
-
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
+			try
 			{
-				return true;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				EnsureTokenExists();
+
+				string modelString = JsonService.Serialize(model);
+
+				HttpResponseMessage response = await client.PostAsync(Routes.AccountUpdate, GetStringContent(modelString));
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					response = await client.PostAsync(Routes.AccountUpdate, GetStringContent(modelString));
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-						return true;
+					return true;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.AccountUpdate, GetStringContent(modelString));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+							return true;
+					}
 
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return false;
+			}
+		}
+
+		public static async Task<bool> SubscribeToForum(Forum model)
+		{
+			try
+			{
+				EnsureTokenExists();
+
+				string modelString = JsonService.Serialize(model);
+				HttpResponseMessage response = await client.PostAsync(Routes.AccountSubscribeToForum, GetStringContent(modelString));
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					return true;
+				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.AccountSubscribeToForum, GetStringContent(modelString));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+							return true;
+					}
+
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return false;
+			}
+		}
+
+		public static async Task<bool> IsSubscribedToForum(string forumId)
+		{
+			try
+			{
+				string route = Routes.ForumSubscribed + forumId;
+				HttpResponseMessage response = await client.GetAsync(route);
+				return response.StatusCode == System.Net.HttpStatusCode.OK;
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
 				return false;
 			}
 		}
@@ -259,105 +360,152 @@ namespace IVForum.App.Services
 					string forumsString = await response.Content.ReadAsStringAsync();
 					return JsonService.Deserialize<List<Forum>>(forumsString);
 				}
-				return null;
+				return new List<Forum>();
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				Debug.WriteLine(e);
-				return null;
+				Alert.Send("Error de connexió");
+				return new List<Forum>();
 			}
 		}
 
 		public static async Task<List<Forum>> RequestForums(Guid userId)
 		{
-			string path = Routes.AccountPersonalForums + userId.ToString();
-			HttpResponseMessage response = await client.GetAsync(path);
+			try
+			{
+				string path = Routes.AccountPersonalForums + userId.ToString();
+				HttpResponseMessage response = await client.GetAsync(path);
 
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				string forumsString = await response.Content.ReadAsStringAsync();
-				List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-				return forums;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					response = await client.GetAsync(Routes.Base + Routes.AccountPersonalForums + userId);
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						string forumsString = await response.Content.ReadAsStringAsync();
-						List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-						return forums;
-					}
+					string forumsString = await response.Content.ReadAsStringAsync();
+					List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
+					return forums;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.GetAsync(Routes.Base + Routes.AccountPersonalForums + userId);
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							string forumsString = await response.Content.ReadAsStringAsync();
+							List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
+							return forums;
+						}
+					}
 
-				return null;
+					return new List<Forum>();
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return new List<Forum>();
 			}
 		}
 
 		public static async Task<List<Forum>> RequestSubscribedForums(Guid userId)
 		{
-			string route = Routes.ForumSubscribed + userId.ToString();
-			HttpResponseMessage response = await client.GetAsync(route);
+			try
+			{
+				EnsureTokenExists();
+				string route = Routes.AccountGetSubscribedForums + userId.ToString();
+				HttpResponseMessage response = await client.GetAsync(route);
 
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				string forumsString = await response.Content.ReadAsStringAsync();
-				List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-				return forums;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					response = await client.GetAsync(Routes.ForumSubscribed + userId.ToString());
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						string forumsString = await response.Content.ReadAsStringAsync();
-						List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-						return forums;
-					}
+					string forumsString = await response.Content.ReadAsStringAsync();
+					List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
+					return forums;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.GetAsync(Routes.ForumSubscribed + userId.ToString());
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							string forumsString = await response.Content.ReadAsStringAsync();
+							List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
+							return forums;
+						}
+					}
 
+					return new List<Forum>();
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
 				return new List<Forum>();
 			}
 		}
 
 		public static async Task<bool> CreateForum(CreateNewViewModel model)
 		{
-			string modelString = JsonService.Serialize(model);
-			HttpResponseMessage response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
+			try
+			{
+				EnsureTokenExists();
+				string modelString = JsonService.Serialize(model);
+				HttpResponseMessage response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
 
-			if (response.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				return true;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						return true;
-					}
+					return true;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							return true;
+						}
+					}
 
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
 				return false;
 			}
+		}
 
+		public static async Task<bool> AddProjectToForum(SubscriptionViewModel model)
+		{
+			try
+			{
+				string route = Routes.ForumSubscribeProject;
+				string modelString = JsonService.Serialize(model);
+				HttpResponseMessage response = await client.PostAsync(route, GetStringContent(modelString));
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					return true;
+				}
+				return false;
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return false;
+			}
 		}
 		#endregion
 
 		#region Projects
-		public static async Task<List<Project>> RequestProjects()
+		public static async Task<List<Project>> RequestPersonalProjects(Guid userId)
 		{
 			try
 			{
 				EnsureTokenExists();
 
-				HttpResponseMessage response = await client.GetAsync(Routes.ProjectGetAll);
+				string route = Routes.ProjectGetPersonal + userId.ToString();
+				HttpResponseMessage response = await client.GetAsync(route);
 
 				if (response.StatusCode == System.Net.HttpStatusCode.OK)
 				{
@@ -366,30 +514,140 @@ namespace IVForum.App.Services
 				}
 				return null;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
-				Debug.WriteLine(e);
+				Alert.Send("Error de connexió");
+				return new List<Project>();
+			}
+		}
+
+		public static async Task<List<Project>> RequestAllProjects()
+		{
+			try
+			{
+				EnsureTokenExists();
+				HttpResponseMessage response = await client.GetAsync(Routes.ProjectGetAll);
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					string forumsString = await response.Content.ReadAsStringAsync();
+					return JsonService.Deserialize<List<Project>>(forumsString);
+				}
+				return new List<Project>();
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return new List<Project>();
+			}
+		}
+
+		public static async Task<List<Project>> RequestProjects(Guid userId)
+		{
+			try
+			{
+				EnsureTokenExists();
+
+				string route = Routes.ProjectGetPersonal + userId.ToString();
+				HttpResponseMessage response = await client.GetAsync(route);
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					string forumsString = await response.Content.ReadAsStringAsync();
+					return JsonService.Deserialize<List<Project>>(forumsString);
+				}
 				return null;
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return null;
+			}
+		}
+
+		public static async Task<List<Project>> RequestForumProjects(Guid forumId)
+		{
+			try
+			{
+				string route = Routes.ForumProjects + forumId.ToString() + "/projects";
+				HttpResponseMessage response = await client.GetAsync(route);
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					string projectsString = await response.Content.ReadAsStringAsync();
+					return JsonService.Deserialize<List<Project>>(projectsString);
+				}
+				return new List<Project>();
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return new List<Project>();
+			}
+		}
+
+		public static async Task<List<Project>> RequestParticipatingProjects(Guid userId)
+		{
+			return new List<Project>();
+		}
+
+		public static async Task<bool> CreateProject(CreateNewViewModel model)
+		{
+			try
+			{
+				string modelString = JsonService.Serialize(model);
+				HttpResponseMessage response = await client.PostAsync(Routes.ProjectCreate, GetStringContent(modelString));
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					return true;
+				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(Routes.ForumCreate, GetStringContent(modelString));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							return true;
+						}
+					}
+
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return false;
 			}
 		}
 
 		public static async Task<bool> UpdateProject(Project model)
 		{
-			string content = JsonService.Serialize(model);
-			var result = await client.PostAsync(Routes.Base + Routes.ProjectUpdate, GetStringContent(content));
+			try
+			{
+				string content = JsonService.Serialize(model);
+				var result = await client.PostAsync(Routes.Base + Routes.ProjectUpdate, GetStringContent(content));
 
-			if (result.StatusCode == System.Net.HttpStatusCode.OK)
-			{
-				return true;
-			}
-			else
-			{
-				for (int i = 0; i < 3; i++)
+				if (result.StatusCode == System.Net.HttpStatusCode.OK)
 				{
-					result = await client.PostAsync(Routes.Base + Routes.ProjectUpdate, GetStringContent(content));
-					if (result.StatusCode == System.Net.HttpStatusCode.OK)
-						return true;
+					return true;
 				}
+				else
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						result = await client.PostAsync(Routes.Base + Routes.ProjectUpdate, GetStringContent(content));
+						if (result.StatusCode == System.Net.HttpStatusCode.OK)
+							return true;
+					}
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
 				return false;
 			}
 		}
@@ -420,20 +678,69 @@ namespace IVForum.App.Services
 			}
 			catch
 			{
+				Alert.Send("Error de connexió");
 				return false;
 			}
 		}
 
-		#endregion
-
-
-
-		public static async Task RequestUserProjects()
+		public static async Task<List<Bill>> RequestProjectBills(Guid forumId)
 		{
-			client.DefaultRequestHeaders.Add("Bearer", "");
-			HttpResponseMessage response = await client.GetAsync("");
-			Debug.WriteLine(response.Content);
+			try
+			{
+				string route = Routes.ProjectBills + forumId.ToString();
+				HttpResponseMessage response = await client.GetAsync(route);
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					string billsString = await response.Content.ReadAsStringAsync();
+					return JsonService.Deserialize<List<Bill>>(billsString);
+				}
+
+				return new List<Bill>();
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexió");
+				return new List<Bill>();
+			}
 		}
+
+		public static async Task<bool> VoteProject(VoteViewModel model)
+		{
+			try
+			{
+				EnsureTokenExists();
+				string route = Routes.ProjectVote;
+				string modelString = JsonService.Serialize(model);
+
+				HttpResponseMessage response = await client.PostAsync(route, GetStringContent(modelString));
+
+				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				{
+					return true;
+				}
+				else
+				{
+					string message = await response.Content.ReadAsStringAsync();
+					for (int i = 0; i < 3; i++)
+					{
+						response = await client.PostAsync(route, GetStringContent(modelString));
+						if (response.StatusCode == System.Net.HttpStatusCode.OK)
+						{
+							return true;
+						}
+					}
+
+					return false;
+				}
+			}
+			catch (Exception)
+			{
+				Alert.Send("Error de connexio");
+				return false;
+			}
+		}
+		#endregion
 
 		public static async Task PostProject(CreateProjectViewModel model)
 		{
@@ -483,7 +790,7 @@ namespace IVForum.App.Services
 					ForumId = f.Id
 				};
 
-				HttpResponseMessage response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+				HttpResponseMessage response = await client.PostAsync(Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
 
 				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{
@@ -511,7 +818,7 @@ namespace IVForum.App.Services
 					ProjectId = p.Id
 				};
 
-				HttpResponseMessage response = await client.PostAsync(Routes.Base + Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
+				HttpResponseMessage response = await client.PostAsync(Routes.ForumAddView, new StringContent(View.ToString(), Encoding.UTF8, MediaType));
 
 				if (response.StatusCode != System.Net.HttpStatusCode.OK)
 				{

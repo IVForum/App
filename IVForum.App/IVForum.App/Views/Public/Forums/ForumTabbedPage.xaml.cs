@@ -24,17 +24,9 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			Forums = await ApiService.RequestForums();
 
-			if (Forums != null)
-			{
-				Children.Add(new ForumPage(Forums.OrderBy(x => x.Views)) { Title = "Top", BackgroundColor = Color.GhostWhite });
-				Children.Add(new ForumPage(Forums.OrderBy(x => x.Projects.Count)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
-				Children.Add(new ForumPage(Forums.OrderByDescending(x => x.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
-			}
+			Children.Add(new ForumPage(Forums.OrderBy(x => x.Views)) { Title = "Top", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ForumPage(Forums.OrderBy(x => x.Projects.Count)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ForumPage(Forums.OrderByDescending(x => x.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
 		}
-
-		//private async void Search(object sender, EventArgs e)
-		//{
-		//	await Navigation.PushModalAsync(new SearchPage(), true);
-		//}
     }
 }

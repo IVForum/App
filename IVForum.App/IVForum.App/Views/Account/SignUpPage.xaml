@@ -71,7 +71,7 @@
                         <Label Text="Important" FontSize="Medium"></Label>
                     </StackLayout>
 
-                    <Label Text="Les dades personals recollides es faràn servir exclusivament per aquesta aplicació amb el propòsit de millor l'experiència d'usuari. Creant un compte en l'aplicació indica que estàs d'acord que s'emmagatzemin les dades personals del formulari de registre." FontAttributes="Bold"></Label>
+                    <Label Text="Les dades personals recollides es faran servir exclusivament per aquesta aplicació amb el propòsit de millor l'experiència d'usuari. Creant un compte en l'aplicació indica que estàs d'acord que s'emmagatzemin les dades personals del formulari de registre." FontAttributes="Bold"></Label>
                 </StackLayout>
 
             </Frame>

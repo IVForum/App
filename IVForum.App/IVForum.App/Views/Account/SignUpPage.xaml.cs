@@ -1,5 +1,4 @@
 ﻿using IVForum.App.Models;
-using IVForum.App.Properties;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
