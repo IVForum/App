@@ -2,7 +2,9 @@
 using Android.Content.PM;
 using Android.OS;
 
-namespace IVForum.App.Droid
+using IVForum.App.Android.Shared;
+
+namespace IVForum.App.Android
 {
 	[Activity(Label = "IVForum", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity

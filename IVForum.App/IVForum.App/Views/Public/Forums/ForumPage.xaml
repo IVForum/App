@@ -8,7 +8,11 @@
 
         <ListView x:Name="ForumsListView"
                   HasUnevenRows="True"
-                  SeparatorVisibility="None">
+                  SeparatorVisibility="None"
+                  ItemsSource="{Binding Models}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshCommand="{Binding RefreshCommand}">
 
             <ListView.ItemTemplate>
 

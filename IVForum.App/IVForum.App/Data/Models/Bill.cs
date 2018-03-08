@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IVForum.App.Models
+namespace IVForum.App.Data.Models
 {
 	public class Bill
     {

@@ -1,8 +1,5 @@
-﻿using IVForum.App.Models;
-using IVForum.App.Services;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using IVForum.App.Data.Enums;
+using IVForum.App.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,21 +9,13 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumTabbedPage : TabbedPage
     {
-		public List<Forum> Forums { get; set; } = new List<Forum>();
-
 		public ForumTabbedPage()
         {
             InitializeComponent();
-			Load();
-        }
 
-		private async void Load()
-		{
-			Forums = await ApiService.RequestForums();
-
-			Children.Add(new ForumPage(Forums.OrderBy(x => x.Views)) { Title = "Top", BackgroundColor = Color.GhostWhite });
-			Children.Add(new ForumPage(Forums.OrderBy(x => x.Projects.Count)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
-			Children.Add(new ForumPage(Forums.OrderByDescending(x => x.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.ProjectCount)) { Title = "Top", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.Views)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });
 		}
     }
 }

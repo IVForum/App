@@ -1,6 +1,5 @@
-﻿
+﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
-using IVForum.App.ViewModels;
 
 using System;
 
@@ -12,7 +11,7 @@ namespace IVForum.App.Views.Personal.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumCreatePage : ContentPage
 	{
-		private CreateNewViewModel Model = new CreateNewViewModel();
+		private Forum Model = new Forum();
 
 		public ForumCreatePage()
 		{
@@ -21,16 +20,17 @@ namespace IVForum.App.Views.Personal.Forums
 
 		private async void Add(object sender, EventArgs e)
 		{
-			Model = new CreateNewViewModel
+			Model = new Forum
 			{
-				Name = NameEntry.Text,
+				Id = Guid.NewGuid(),
 				Title = TitleEntry.Text,
-				Description = DescriptionEntry.Text
+				Description = DescriptionEntry.Text,
+				CreationDate = DateTime.Now
 			};
 
-			var result = await ApiService.CreateForum(Model);
+			var result = await ApiService.Forums.Create(Model);
 
-			if (result)
+			if (result.IsSuccess)
 			{
 				Alert.Send("Fòrum afegit correctament");
 				await Navigation.PopToRootAsync(true);

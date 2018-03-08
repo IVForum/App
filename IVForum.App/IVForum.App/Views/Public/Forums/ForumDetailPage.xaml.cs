@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Profile;
@@ -20,12 +20,12 @@ namespace IVForum.App.Views.Public.Forums
 		public ForumDetailPage(Forum model)
 		{
 			Model = model;
-			Load();
 		}
 
-		private async void Load()
+		protected override async void OnAppearing()
 		{
-			User owner = await ApiService.RequestUserDetails(Model.Owner.Id);
+			base.OnAppearing();
+			User owner = await ApiService.Account.Details(Model.Owner.Id);
 
 			if (owner != null)
 			{
@@ -35,7 +35,7 @@ namespace IVForum.App.Views.Public.Forums
 			InitializeComponent();
 			BindingContext = Model;
 			DetermineSubscription();
-			ApiService.AddView(Model);
+			ApiService.Forums.AddView(Model);
 		}
 
 		private void DetermineSubscription()
@@ -66,7 +66,7 @@ namespace IVForum.App.Views.Public.Forums
 
 		private async void Subscribe(object sender, EventArgs e)
 		{
-			var result = await ApiService.SubscribeToForum(Model);
+			var result = await ApiService.Subscriptions.SubscribeToForum(Model);
 
 			if (result)
 			{
@@ -81,7 +81,7 @@ namespace IVForum.App.Views.Public.Forums
 		private async void AddProject(object sender, EventArgs e)
 		{
 			Dictionary<string, Project> ProjectDictionary = new Dictionary<string, Project>();
-			List<Project> projects = await ApiService.RequestProjects(Model.Owner.Id);
+			List<Project> projects = await ApiService.Account.Projects();
 
 			foreach (Project p in projects)
 			{
@@ -123,7 +123,7 @@ namespace IVForum.App.Views.Public.Forums
 							ProjectId = projectSelected.Id.ToString()
 						};
 
-						bool result = await ApiService.AddProjectToForum(subscription);
+						bool result = await ApiService.Forums.AddProjectToForum(subscription);
 
 						if (result)
 						{

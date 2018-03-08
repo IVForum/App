@@ -1,7 +1,10 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Enums;
+using IVForum.App.Data.Models;
 using IVForum.App.Services;
+using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Projects;
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -28,17 +31,15 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			try
 			{
-				bool subbed = await ApiService.IsSubscribedToForum(Model.Id.ToString());
+				bool subbed = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id.ToString());
 				List<Bill> bills = await ApiService.RequestProjectBills(Model.Id);
 
-				var result = await ApiService.IsSubscribedToForum(Model.Id.ToString());
+				var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id.ToString());
 
 				Children.Add(new ForumDetailPage(Model) { Title = "Informació", Subscribed = subbed });
-
-				ModelProjects = await ApiService.RequestForumProjects(Model.Id);
-				Children.Add(new ProjectPage(ModelProjects) { Title = "Projectes", Subscribed = subbed, Bills = bills });
+				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title)) { Title = "Projectes", Subscribed = subbed, Bills = bills });
 			}
-			catch (System.Exception e)
+			catch (Exception e)
 			{
 				Debug.WriteLine(e);
 			}

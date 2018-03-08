@@ -1,13 +1,15 @@
-﻿using System;
+﻿using SQLite;
+
+using System;
 using System.Collections.Generic;
 
-namespace IVForum.App.Models
+namespace IVForum.App.Data.Models
 {
 	public class Project
     {
+		[PrimaryKey]
 		public Guid Id { get; set; }
 		
-		public string Name { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public int Views { get; set; }
@@ -19,8 +21,8 @@ namespace IVForum.App.Models
 
 		public int TotalMoney { get; set; }
 
-		public string WebsiteUrl { get; set; }
-		public string RepositoryUrl { get; set; }
+		public string Website { get; set; }
+		public string Repository { get; set; }
 
 		public virtual Forum Forum { get; set; } = null;
 		public virtual User Owner { get; set; }

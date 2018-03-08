@@ -1,5 +1,5 @@
-﻿using IVForum.App.Services;
-using IVForum.App.ViewModels;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Services;
 
 using System;
 
@@ -11,7 +11,7 @@ namespace IVForum.App.Views.Personal.Projects
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProjectCreatePage : ContentPage
 	{
-		private CreateNewViewModel Model;
+		private Project Model;
 
 		public ProjectCreatePage()
 		{
@@ -20,16 +20,19 @@ namespace IVForum.App.Views.Personal.Projects
 
 		private async void Add(object sender, EventArgs e)
 		{
-			Model = new CreateNewViewModel
+			Model = new Project
 			{
-				Name = NameEntry.Text,
+				Id = Guid.NewGuid(),
 				Title = TitleEntry.Text,
-				Description = DescriptionEntry.Text
+				Description = DescriptionEntry.Text,
+				CreationDate = DateTime.Now,
+				Website = WebsiteEntry.Text,
+				Repository = RepositoryEntry.Text
 			};
 
-			var result = await ApiService.CreateProject(Model);
+			var result = await ApiService.Projects.Create(Model);
 
-			if (result)
+			if (result.IsSuccess)
 			{
 				Alert.Send("Projecte afegit correctament");
 				await Navigation.PopToRootAsync(true);

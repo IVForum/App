@@ -1,10 +1,13 @@
-﻿using System;
+﻿using SQLite;
+
+using System;
 using System.Collections.Generic;
 
-namespace IVForum.App.Models
+namespace IVForum.App.Data.Models
 {
 	public class User
     {
+		[PrimaryKey]
 		public Guid Id { get; set; }
 
 		public string Name { get; set; }

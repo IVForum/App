@@ -7,9 +7,12 @@
     <ContentPage.Content>
 
         <ListView x:Name="ProjectsListView"
-                  SeparatorColor="Transparent"
+                  HasUnevenRows="True"
                   SeparatorVisibility="None"
-                  HasUnevenRows="True">
+                  ItemsSource="{Binding Models}"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshCommand="{Binding RefreshCommand}">
 
             <ListView.ItemTemplate>
 

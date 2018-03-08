@@ -8,18 +8,42 @@
         
         <StackLayout Padding="5">
 
+            <Frame HasShadow="True" Padding="0" BackgroundColor="DarkRed" HeightRequest="100">
+                
+            </Frame>
+
             <Frame HasShadow="True">
 
                 <StackLayout>
 
-                    <Label Text="Nom (Personal):"></Label>
-                    <Entry x:Name="NameEntry" Placeholder="{Binding Name}"></Entry>
+                    <!--<StackLayout Orientation="Horizontal">
+                        <Image Source="image.png"></Image>
+                        <Label Text="Imatge" FontSize="Medium"></Label>
+                    </StackLayout>-->
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="personal_projects.png"></Image>
+                        <Label Text="Títol" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="TitleEntry" Placeholder="Títol"></Entry>
 
-                    <Label Text="Títol (Públic): "></Label>
-                    <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="info.png"></Image>
+                        <Label Text="Descripció" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="DescriptionEntry" Placeholder="Descripció"></Entry>
 
-                    <Label Text="Descripció:"></Label>
-                    <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="web.png"></Image>
+                        <Label Text="Pàgina web" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="WebsiteEntry" Placeholder="Pàgina web"></Entry>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="repo.png"></Image>
+                        <Label Text="Repositori" FontSize="Medium"></Label>
+                    </StackLayout>
+                    <Entry x:Name="RepositoryEntry" Placeholder="Repositori"></Entry>
 
                 </StackLayout>
 

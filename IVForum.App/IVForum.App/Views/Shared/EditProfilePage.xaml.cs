@@ -1,4 +1,5 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Models;
 using IVForum.App.Services;
 
 using System;
@@ -76,9 +77,9 @@ namespace IVForum.App.Views.Shared
 			{
 				ValidateSavedModel();
 
-				var result = await ApiService.UpdateUser(Model);
+				var result = await ApiService.Account.Update(Model);
 
-				if (result)
+				if (result.IsSuccess)
 				{
 					DependencyService.Get<IMessage>().ShortAlert("Dades desades correctament");
 				}

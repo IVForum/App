@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
 using IVForum.App.Views.Shared;
 
@@ -29,7 +29,7 @@ namespace IVForum.App.Views.Public.Profile
 
 		private async void Load()
 		{
-			Model = await ApiService.RequestUserDetails(Settings.GetLoggedUser().Id.ToString());
+			Model = await ApiService.Account.RequestUserDetails(Settings.GetLoggedUser().Id.ToString());
 
 			BindingContext = Model;
 			Title = Model.Name + " " + Model.Surname;

@@ -1,4 +1,5 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Models;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
@@ -43,9 +44,9 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = await ApiService.RequestSignUp(model);
+				var result = await ApiService.Account.SignUp(model);
 
-				if (success)
+				if (result.IsSuccess)
 				{
 					Application.Current.MainPage = new Main.Main();
 					Settings.Save("loggedin", true);

@@ -1,10 +1,10 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Models;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
 
 using System;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -49,15 +49,13 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var success = await ApiService.RequestLogin(model);
+				var result = await ApiService.Account.Login(model);
 
-				await Task.Delay(1000);
-
-				if (success)
+				if (result.IsSuccess)
 				{
 					Application.Current.MainPage = new Main.Main();
 					Settings.Save("loggedin", true);
-					
+
 					User user = Settings.GetLoggedUser();
 
 					DependencyService.Get<IMessage>().LongAlert($"Benvingut {user.Name}");
@@ -68,10 +66,10 @@ namespace IVForum.App.Views.Account
 					await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
 				await Navigation.PopModalAsync();
-				await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
+				await DisplayAlert("Error", ex.Message, "Ok");
 			}
 		}
 	}

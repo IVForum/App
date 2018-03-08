@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Profile;
@@ -32,11 +32,11 @@ namespace IVForum.App.Views.Public.Projects
 
 		private async void Load()
 		{
-			User owner = await ApiService.RequestUserDetails(Model.Owner.Id.ToString());
+			User owner = await ApiService.Account.RequestUserDetails(Model.Owner.Id.ToString());
 			Model.Owner = owner;
 			BindingContext = Model;
 			Title = Model.Title;
-			ApiService.AddView(Model);
+			ApiService.Projects.AddView(Model);
 
 			if (Subscribed)
 			{

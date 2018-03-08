@@ -1,4 +1,5 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Models;
 
 using System;
 

@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,6 @@ namespace IVForum.App.Resources
 				new Forum
 				{
 					Id = Guid.NewGuid(),
-					Name = "Apps",
 					Title = "Xamarin Apps",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
@@ -65,13 +64,12 @@ namespace IVForum.App.Resources
 						new Project
 						{
 							Id = Guid.NewGuid(),
-							Name = "IVForum",
 							Title = "IVForum.cat",
 							Description = Properties.Res.Lorem,
 							CreationDate = DateTime.Now,
 							Owner = Hamza,
-							RepositoryUrl = "gitgub.com/Zerixter/ivforum",
-							WebsiteUrl = "www.ivforum.cat",
+							Repository = "gitgub.com/Zerixter/ivforum",
+							Website = "www.ivforum.cat",
 							Background = "banner1.jpg"
 						}
 					},
@@ -81,7 +79,6 @@ namespace IVForum.App.Resources
 				new Forum
 				{
 					Id = Guid.NewGuid(),
-					Name = "Discord Bots",
 					Title = "Discord Bots",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
@@ -90,13 +87,12 @@ namespace IVForum.App.Resources
 						new Project
 						{
 							Id = Guid.NewGuid(),
-							Name = "Inquisition",
 							Title = "Inquisition",
 							Description = Properties.Res.Lorem,
 							CreationDate = DateTime.Now,
 							Owner = Cristian,
-							RepositoryUrl = "github.com/Flysenberg/Inquisition",
-							WebsiteUrl = "www.inquisition-bot.com",
+							Repository = "github.com/Flysenberg/Inquisition",
+							Website = "www.inquisition-bot.com",
 							Background = "banner1.jpg"
 						}
 					},
@@ -106,7 +102,6 @@ namespace IVForum.App.Resources
 				new Forum
 				{
 					Id = Guid.NewGuid(),
-					Name = "Cendraforum",
 					Title = "Fòrum d'inversions Cendrassos",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
@@ -115,13 +110,12 @@ namespace IVForum.App.Resources
 						new Project
 						{
 							Id = Guid.NewGuid(),
-							Name = "Placeholder",
 							Title = "Placeholder.cat",
 							Description = Properties.Res.Lorem,
 							CreationDate = DateTime.Now,
 							Owner = Cristian,
-							RepositoryUrl = "github.com/Flysenberg/Placeholder",
-							WebsiteUrl = "www.placeholder.cat",
+							Repository = "github.com/Flysenberg/Placeholder",
+							Website = "www.placeholder.cat",
 							Background = "banner1.jpg"
 						}
 					},
@@ -138,37 +132,34 @@ namespace IVForum.App.Resources
 				new Project
 				{
 					Id = Guid.NewGuid(),
-					Name = "IVForum",
 					Title = "IVForum.cat",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Hamza,
-					RepositoryUrl = "gitgub.com/Zerixter/ivforum",
-					WebsiteUrl = "www.ivforum.cat",
+					Repository = "gitgub.com/Zerixter/ivforum",
+					Website = "www.ivforum.cat",
 					Background = "banner1.jpg"
 				},
 				new Project
 				{
 					Id = Guid.NewGuid(),
-					Name = "Inquisition",
 					Title = "Inquisition",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Cristian,
-					RepositoryUrl = "github.com/Flysenberg/Inquisition",
-					WebsiteUrl = "www.inquisition-bot.com",
+					Repository = "github.com/Flysenberg/Inquisition",
+					Website = "www.inquisition-bot.com",
 					Background = "banner1.jpg"
 				},
 				new Project
 				{
 					Id = Guid.NewGuid(),
-					Name = "Placeholder",
 					Title = "Placeholder.cat",
 					Description = Properties.Res.Lorem,
 					CreationDate = DateTime.Now,
 					Owner = Cristian,
-					RepositoryUrl = "github.com/Flysenberg/Placeholder",
-					WebsiteUrl = "www.placeholder.cat",
+					Repository = "github.com/Flysenberg/Placeholder",
+					Website = "www.placeholder.cat",
 					Background = "banner1.jpg"
 				}
 			};

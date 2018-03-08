@@ -12,9 +12,6 @@
 
                 <StackLayout>
 
-                    <Label Text="Nom (Personal):"></Label>
-                    <Entry x:Name="NameEntry" Placeholder="{Binding Name}"></Entry>
-
                     <Label Text="Títol (Públic): "></Label>
                     <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
 

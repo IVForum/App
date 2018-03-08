@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 
 namespace IVForum.App.ViewModels
 {

@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 
 using System;
 
@@ -23,7 +23,6 @@ namespace IVForum.App.ViewModels.Personal.Projects
 
 		public PersonalProjectViewModel(Project p)
 		{
-			Name = p.Name;
 			Title = p.Title;
 			Description = p.Description;
 
@@ -31,8 +30,8 @@ namespace IVForum.App.ViewModels.Personal.Projects
 			Background = "banner1.jpg";
 
 			CreationDate = p.CreationDate;
-			WebsiteUrl = p.WebsiteUrl;
-			RepositoryUrl = p.RepositoryUrl;
+			WebsiteUrl = p.Website;
+			RepositoryUrl = p.Repository;
 		}
 	}
 }

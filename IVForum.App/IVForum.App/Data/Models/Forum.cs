@@ -1,12 +1,15 @@
-﻿using System;
+﻿using SQLite;
+
+using System;
 using System.Collections.Generic;
 
-namespace IVForum.App.Models
+namespace IVForum.App.Data.Models
 {
 	public class Forum
 	{
+		[PrimaryKey]
 		public Guid Id { get; set; }
-		public string Name { get; set; }
+
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public string Icon { get; set; }

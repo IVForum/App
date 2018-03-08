@@ -1,4 +1,4 @@
-﻿namespace IVForum.App.Models
+﻿namespace IVForum.App.Data.Models
 {
 	public class Token
     {

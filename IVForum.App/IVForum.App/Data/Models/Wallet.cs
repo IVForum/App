@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IVForum.App.Models
+namespace IVForum.App.Data.Models
 {
 	public class Wallet
     {

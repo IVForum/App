@@ -1,4 +1,4 @@
-﻿using IVForum.App.Models;
+﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
 using IVForum.App.Views.Config;
 using IVForum.App.Views.Info;
