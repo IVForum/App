@@ -1,5 +1,5 @@
 ﻿using IVForum.App.Data.Shared;
-using IVForum.App.Android.Shared;
+using IVForum.App.Droid.Shared;
 
 using System;
 using System.IO;
@@ -7,7 +7,7 @@ using System.IO;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileHelper))]
-namespace IVForum.App.Android.Shared
+namespace IVForum.App.Droid.Shared
 {
 	public class FileHelper : IFileHelper
 	{

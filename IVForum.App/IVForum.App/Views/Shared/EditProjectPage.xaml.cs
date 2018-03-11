@@ -1,5 +1,5 @@
 ﻿using IVForum.App.Data.Models;
-using IVForum.App.Models;
+using IVForum.App.Services;
 
 using System;
 
@@ -25,11 +25,11 @@ namespace IVForum.App.Views.Shared
 
 			if (result)
 			{
-				DependencyService.Get<IMessage>().ShortAlert("Dades desades correctament");
+				Alert.Send("Dades desades");
 			}
 			else
 			{
-				await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
+				Alert.Send("Error al desar les dades");
 			}
 		}
 

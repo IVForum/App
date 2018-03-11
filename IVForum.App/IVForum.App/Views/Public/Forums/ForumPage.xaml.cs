@@ -9,13 +9,14 @@ namespace IVForum.App.Views.Public.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumPage : ContentPage
 	{
-		private BaseViewModel<Forum> Model;
+		private ForumViewModel Model;
 
-		public ForumPage(BaseViewModel<Forum> model)
+		public ForumPage(ForumViewModel model)
 		{
 			InitializeComponent();
 
 			Model = model;
+			Model.Load();
 
 			ForumsListView.BindingContext = Model;
 			ForumsListView.ItemTapped += async (ender, args) =>

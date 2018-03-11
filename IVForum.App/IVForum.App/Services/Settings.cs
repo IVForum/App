@@ -1,5 +1,4 @@
 ﻿using IVForum.App.Data.Models;
-using IVForum.App.Resources;
 using IVForum.App.Views.Main;
 
 using Xamarin.Forms;
@@ -58,7 +57,7 @@ namespace IVForum.App.Services
 
 		public static User GetLoggedUser()
 		{
-			User user = Content.Cristian;//JsonService.Deserialize<User>((string)GetValue("user"));
+			User user = JsonService.Deserialize<User>((string)GetValue("user"));
 			return user;
 		}
 

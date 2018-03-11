@@ -28,8 +28,8 @@ namespace IVForum.App.Views.Public.Profile
 			Title = $"{Model.Name} {Model.Surname}";
 
 			Children.Add(new ProfilePage(Model) { Title = "Informació" });
-			Children.Add(new ForumPage(new ForumViewModel(Origin.Personal, Order.Title)) { Title = "Fòrums" });
-			Children.Add(new ProjectPage(new ProjectViewModel(Origin.Personal, Order.Title)) { Title = "Projectes" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.User, Order.Title)) { Title = "Fòrums" });
+			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User, Order.Title)) { Title = "Projectes" });
 		}
     }
 }

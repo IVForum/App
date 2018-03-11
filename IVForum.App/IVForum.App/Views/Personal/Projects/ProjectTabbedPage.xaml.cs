@@ -1,4 +1,5 @@
 ﻿using IVForum.App.Data.Enums;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Projects;
 
@@ -16,7 +17,9 @@ namespace IVForum.App.Views.Personal.Projects
         {
             InitializeComponent();
 
-			Children.Add(new ProjectPage(new ProjectViewModel(Origin.Personal, Order.Title)) { Title = "Personals" });
+			Guid userId = Settings.GetLoggedUser().Id;
+
+			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User, Order.Title) { UserId = userId }) { Title = "Personals" });
 			Children.Add(new ProjectPage(new ProjectViewModel(Origin.Subscription, Order.Title)) { Title = "Participants" });
 		}
 

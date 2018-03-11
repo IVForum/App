@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Shared.EditForumPage"
+             BackgroundColor="GhostWhite">
+
+    <ContentPage.Content>
+
+        <StackLayout Padding="5">
+
+            <Frame HasShadow="True">
+
+                <StackLayout>
+
+                    <Label Text="Títol"></Label>
+                    <Entry x:Name="TitleEntry" Placeholder="Títol" Text="{Binding Title}"></Entry>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="info.png"></Image>
+                        <Label Text="Descripció"></Label>
+                    </StackLayout>
+                    <Entry x:Name="DescriptionEntry" Placeholder="Descripció" Text="{Binding Description}"></Entry>
+
+                </StackLayout>
+                
+            </Frame>
+
+            <Button Image="save_b.png" Text="Desa" Clicked="SaveChanges"></Button>
+            <Button Image="cross.png" Text="Cancel·lar" Clicked="Discard"></Button>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+
+</ContentPage>

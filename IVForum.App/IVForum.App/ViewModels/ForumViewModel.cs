@@ -2,9 +2,9 @@
 using IVForum.App.Data.Models;
 using IVForum.App.Services;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -13,54 +13,71 @@ namespace IVForum.App.ViewModels
 {
 	public class ForumViewModel : BaseViewModel<Forum>
     {
-		private Order order;
-		private Origin origin;
+		public Guid UserId { get; set; }
 
-		public ForumViewModel(Origin origin = Origin.Public, Order order = Order.Title)
+		/// <param name="origin">If set to User, must supply a user Guid to the class UserId property</param>
+		/// <param name="order">Defaults to Title if none specified</param>
+		public ForumViewModel(Origin origin, Order order = Order.Title)
 		{
-			this.origin = origin;
-			this.order = order;
+			Origin = origin;
+			Order = order;
 		}
 
-		public override async Task Load()
+		public override async void Load()
 		{
-			List<Forum> list = await ApiService.Forums.Get();
-
-			switch (order)
+			switch (Origin)
 			{
-				case Order.ProjectCount:
-
-					foreach (Forum f in list.OrderBy(x => x.Views))
-						Models.Add(f);
-
+				case Origin.Public:
+					OrderBy(await ApiService.Forums.Get());
 					break;
-				case Order.Views:
-
-					foreach (Forum f in list.OrderBy(x => x.Projects.Count))
-						Models.Add(f);
-
+				case Origin.User:
+					OrderBy(await ApiService.Forums.Get(UserId));
 					break;
-				case Order.CreationDate:
-
-					foreach (Forum f in list.OrderBy(x => x.CreationDate))
-						Models.Add(f);
-
+				case Origin.Subscription:
+					OrderBy(await ApiService.Subscriptions.Forums());
 					break;
-
+				case Origin.Forum:
+					break;
 				default:
 					break;
 			}
+		}
+
+		private void OrderBy(List<Forum> list)
+		{
+			switch (Order)
+			{
+				case Order.Title:
+					OrderedModels = list.OrderBy(x => x.Title);
+					break;
+				case Order.Views:
+					OrderedModels = list.OrderBy(x => x.Views);
+					break;
+				case Order.ProjectCount:
+					OrderedModels = list.OrderBy(x => x.Projects.Count);
+					break;
+				case Order.CreationDate:
+					OrderedModels = list.OrderByDescending(x => x.CreationDate);
+					break;
+				default:
+					OrderedModels = list.OrderBy(x => x.Title);
+					break;
+			}
+
+			Models.Clear();
+			foreach (Forum forum in OrderedModels)
+				Models.Add(forum);
 		}
 		
 		public override ICommand RefreshCommand
 		{
 			get
 			{
-				return new Command(async () =>
+				return new Command(() =>
 				{
 					IsRefreshing = true;
 
-					await Load();
+					Load();
 
 					IsRefreshing = false;
 				});

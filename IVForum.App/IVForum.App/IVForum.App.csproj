@@ -82,7 +82,10 @@
     <EmbeddedResource Update="Views\Shared\ContributionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Shared\EditProfilePage.xaml">
+    <EmbeddedResource Update="Views\Personal\Profile\EditProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\EditForumPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Shared\EditProjectPage.xaml">
@@ -92,12 +95,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Shared\ProgressView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Shared\SearchPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Shared\UserProfileView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -131,13 +128,9 @@
     <Compile Update="Views\Public\Projects\ProjectTabbedPage.xaml.cs">
       <DependentUpon>ProjectTabbedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Shared\EditProfilePage.xaml.cs">
+    <Compile Update="Views\Personal\Profile\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Personal\Forums\" />
   </ItemGroup>
 
 </Project>

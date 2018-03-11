@@ -1,11 +1,11 @@
 ﻿using Android.App;
 using Android.Widget;
 
-using IVForum.App.Android.Shared;
+using IVForum.App.Droid.Shared;
 using IVForum.App.Models;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MessageAndroid))]
-namespace IVForum.App.Android.Shared
+namespace IVForum.App.Droid.Shared
 {
 	public class MessageAndroid : IMessage
 	{

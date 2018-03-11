@@ -78,7 +78,7 @@
 
             <Button Text="Registrar" Clicked="SignUp">
                 <Button.Image>
-                    <FileImageSource File="signup.png"/>
+                    <FileImageSource File="user_plus_b.png"/>
                 </Button.Image>
 
                 <Button.Triggers>

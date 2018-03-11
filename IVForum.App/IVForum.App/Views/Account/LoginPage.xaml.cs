@@ -1,10 +1,9 @@
-﻿using IVForum.App.Data.Models;
-using IVForum.App.Models;
-using IVForum.App.Services;
+﻿using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
 
 using System;
+using System.Diagnostics;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,10 +35,13 @@ namespace IVForum.App.Views.Account
 			};
 		}
 
-		async void Login(object sender, EventArgs e)
+		async void Login(object sender, EventArgs args)
 		{
+			Button btn = sender as Button;
+
 			try
 			{
+				btn.IsEnabled = false;
 				await Navigation.PushModalAsync(new LoadingPage(), false);
 
 				// TODO: Regex
@@ -49,27 +51,32 @@ namespace IVForum.App.Views.Account
 					Password = EntryPassword.Text
 				};
 
-				var result = await ApiService.Account.Login(model);
+				var result = await AccountService.Login(model);
 
 				if (result.IsSuccess)
 				{
 					Application.Current.MainPage = new Main.Main();
 					Settings.Save("loggedin", true);
 
-					User user = Settings.GetLoggedUser();
+					//User user = Settings.GetLoggedUser();
 
-					DependencyService.Get<IMessage>().LongAlert($"Benvingut {user.Name}");
+					//Alert.Send($"Benvingut {user.Name}");
 				}
 				else
 				{
-					await Navigation.PopModalAsync();
-					await DisplayAlert("Error", "Error al iniciar sessió", "Ok");
+					await Navigation.PopModalAsync(false);
+					Alert.Send(result.Message);
 				}
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				await Navigation.PopModalAsync();
-				await DisplayAlert("Error", ex.Message, "Ok");
+				Debug.WriteLine(e);
+				await Navigation.PopModalAsync(false);
+				Alert.Send("Error al iniciar sessió");
+			}
+			finally
+			{
+				btn.IsEnabled = true;
 			}
 		}
 	}

@@ -7,7 +7,7 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace IVForum.App.Views.Shared
+namespace IVForum.App.Views.Personal.Profile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditProfilePage : ContentPage

@@ -4,23 +4,35 @@
              x:Class="IVForum.App.Views.Config.SettingsPage"
              Title="Configuració"
              BackgroundColor="GhostWhite">
-    
+
     <ContentPage.Content>
-        
+
         <StackLayout Padding="5">
 
-            <Frame HasShadow="True">
+            <Frame HasShadow="True" Padding="0">
 
-                <StackLayout>
+                <ListView x:Name="SettingsListView"
+                          HasUnevenRows="True"
+                          RowHeight="50">
 
-                </StackLayout>
-                
+                    <ListView.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <ImageCell ImageSource="book_b.png" Text="{Binding Title}" Detail="Detail text"></ImageCell>
+
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
             </Frame>
 
-            <Button Image="save.png" Text="Desa" Clicked="SaveChanges"></Button>
+            <Button Image="save_b.png" Text="Desa" Clicked="SaveChanges"></Button>
 
         </StackLayout>
-        
+
     </ContentPage.Content>
     
 </ContentPage>

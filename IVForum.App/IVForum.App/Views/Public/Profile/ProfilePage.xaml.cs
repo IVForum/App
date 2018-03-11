@@ -1,6 +1,6 @@
 ﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
-using IVForum.App.Views.Shared;
+using IVForum.App.Views.Personal.Profile;
 
 using System;
 
@@ -12,7 +12,7 @@ namespace IVForum.App.Views.Public.Profile
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProfilePage : ContentPage
 	{
-		private User Model { get; set; }
+		private User Model { get; set; } = new User();
 
 		public ProfilePage(User model)
 		{

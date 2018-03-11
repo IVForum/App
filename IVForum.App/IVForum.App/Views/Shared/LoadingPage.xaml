@@ -7,10 +7,14 @@
         
         <StackLayout>
 
-            <ActivityIndicator x:Name="Activity"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand">
-            </ActivityIndicator>
+            <StackLayout VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand">
+
+                <Label Text="Validant..." FontSize="Medium"></Label>
+
+                <ActivityIndicator x:Name="Activity"></ActivityIndicator>
+
+            </StackLayout>
 
         </StackLayout>
         

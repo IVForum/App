@@ -14,13 +14,14 @@ namespace IVForum.App.Views.Public.Projects
 		public List<Bill> Bills { get; set; } = new List<Bill>();
 		public bool Subscribed { get; set; } = false;
 
-		private BaseViewModel<Project> Model;
+		private ProjectViewModel Model;
 
-		public ProjectPage(BaseViewModel<Project> model)
+		public ProjectPage(ProjectViewModel model)
 		{
 			InitializeComponent();
 
 			Model = model;
+			Model.Load();
 
 			ProjectsListView.BindingContext = Model;
 			ProjectsListView.ItemTapped += async (sender, args) => 

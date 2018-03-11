@@ -3,7 +3,7 @@
 	public enum Origin
     {
 		Public,
-		Personal,
+		User,
 		Subscription,
 		Forum
     }

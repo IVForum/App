@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace IVForum.App.ViewModels.Personal.Projects
+namespace IVForum.App.ViewModels
 {
 	public class CreateProjectViewModel
     {
-		public string Name { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 

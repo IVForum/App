@@ -35,7 +35,7 @@ namespace IVForum.App.Views.Public.Forums
 			InitializeComponent();
 			BindingContext = Model;
 			DetermineSubscription();
-			ApiService.Forums.AddView(Model);
+			await ApiService.Forums.AddView(Model);
 		}
 
 		private void DetermineSubscription()
@@ -123,9 +123,9 @@ namespace IVForum.App.Views.Public.Forums
 							ProjectId = projectSelected.Id.ToString()
 						};
 
-						bool result = await ApiService.Forums.AddProjectToForum(subscription);
+						var result = await ApiService.Forums.AddProjectToForum(subscription);
 
-						if (result)
+						if (result.IsSuccess)
 						{
 							Alert.Send("Projecte afegit correctament");
 						}

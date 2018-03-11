@@ -16,7 +16,7 @@ namespace IVForum.App.Views.Personal.Forums
         {
             InitializeComponent();
 
-			Children.Add(new ForumPage(new ForumViewModel(Origin.Personal)) { Title = "Personals" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.User)) { Title = "Personals" });
 			Children.Add(new ForumPage(new ForumViewModel(Origin.Subscription)) { Title = "Participants" });
 		}
 

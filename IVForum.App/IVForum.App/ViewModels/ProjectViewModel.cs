@@ -5,7 +5,6 @@ using IVForum.App.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -14,30 +13,30 @@ namespace IVForum.App.ViewModels
 {
 	public class ProjectViewModel : BaseViewModel<Project>
     {
-		private Order order;
-		private Origin origin;
 		public Guid ForumId { get; set; }
+		public Guid UserId { get; set; }
 
 		public ProjectViewModel(Origin origin = Origin.Public, Order order = Order.Title)
 		{
-			this.origin = origin;
-			this.order = order;
+			Origin = origin;
+			Order = order;
 		}
 
-		public override async Task Load()
+		public override async void Load()
 		{
-			List<Project> list = new List<Project>();
-
-			switch (origin)
+			switch (Origin)
 			{
 				case Origin.Public:
 					OrderBy(await ApiService.Projects.Get());
 					break;
-				case Origin.Personal:
-					OrderBy(await ApiService.Account.Projects());
+				case Origin.User:
+					OrderBy(await ApiService.Projects.Get(UserId));
 					break;
 				case Origin.Forum:
 					OrderBy(await ApiService.Forums.Projects(ForumId));
+					break;
+				case Origin.Subscription:
+					OrderBy(await ApiService.Projects.Get());
 					break;
 				default:
 					break;
@@ -46,36 +45,36 @@ namespace IVForum.App.ViewModels
 
 		private void OrderBy(List<Project> list)
 		{
-			switch (order)
+			switch (Order)
 			{
 				case Order.Title:
-					foreach (Project p in list.OrderBy(x => x.Title))
-						Models.Add(p);
+					OrderedModels = list.OrderBy(x => x.Title);
 					break;
 				case Order.Views:
-					foreach (Project p in list.OrderBy(x => x.Views))
-						Models.Add(p);
+					OrderedModels = list.OrderBy(x => x.Views);
 					break;
 				case Order.CreationDate:
-					foreach (Project p in list.OrderBy(x => x.CreationDate))
-						Models.Add(p);
+					OrderedModels = list.OrderBy(x => x.CreationDate);
 					break;
 				default:
-					foreach (Project p in list)
-						Models.Add(p);
+					OrderedModels = list.OrderBy(x => x.Title);
 					break;
 			}
+
+			Models.Clear();
+			foreach (Project project in OrderedModels)
+				Models.Add(project);
 		}
 
 		public override ICommand RefreshCommand
 		{
 			get
 			{
-				return new Command(async () =>
+				return new Command(() =>
 				{
 					IsRefreshing = true;
 
-					await Load();
+					Load();
 
 					IsRefreshing = false;
 				});

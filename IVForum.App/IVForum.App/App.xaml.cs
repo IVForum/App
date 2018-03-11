@@ -1,7 +1,6 @@
 ﻿using IVForum.App.Data;
 using IVForum.App.Data.Shared;
 using IVForum.App.Services;
-using IVForum.App.Views.Main;
 
 using Xamarin.Forms;
 
