@@ -1,4 +1,5 @@
-﻿using IVForum.App.Services;
+﻿using IVForum.App.Data.Models;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Shared;
 
@@ -58,9 +59,9 @@ namespace IVForum.App.Views.Account
 					Application.Current.MainPage = new Main.Main();
 					Settings.Save("loggedin", true);
 
-					//User user = Settings.GetLoggedUser();
+					User user = Settings.GetLoggedUser();
 
-					//Alert.Send($"Benvingut {user.Name}");
+					Alert.Send($"Benvingut {user.Name}");
 				}
 				else
 				{

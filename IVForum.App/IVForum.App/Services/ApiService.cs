@@ -101,8 +101,8 @@ namespace IVForum.App.Services
 			{
 				return new HttpResult(true, response.StatusCode);
 			}
-
-			return new HttpResult(false, response.StatusCode, await response.Content.ReadAsStringAsync());
+			string message = await response.Content.ReadAsStringAsync();
+			return new HttpResult(false, response.StatusCode, message);
 		}
 		private static async Task<List<Project>> CheckProjectListResponse(HttpResponseMessage response)
 		{
@@ -121,6 +121,17 @@ namespace IVForum.App.Services
 				return JsonService.Deserialize<List<Forum>>(forumsString);
 			}
 			return new List<Forum>();
+		}
+		private static async Task<User> CheckUserResponse(HttpResponseMessage response)
+		{
+			if (response.StatusCode == HttpStatusCode.OK)
+			{
+				string userString = await response.Content.ReadAsStringAsync();
+				User user = JsonService.Deserialize<User>(userString);
+				return user;
+			}
+
+			return null;
 		}
 
 		internal class Account
@@ -219,31 +230,13 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					EnsureTokenExists();
-					string route = Routes.AccountGet + userId.ToString();
-					HttpResponseMessage response = await client.GetAsync(route);
+					string route = Routes.AccountGetUserById + userId.ToString();
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						string userString = await response.Content.ReadAsStringAsync();
-						User user = JsonService.Deserialize<User>(userString);
-						return user;
-					}
-					else
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							response = await client.GetAsync(Routes.AccountGet);
-							if (response.StatusCode == System.Net.HttpStatusCode.OK)
-							{
-								string userString = await response.Content.ReadAsStringAsync();
-								User user = JsonService.Deserialize<User>(userString);
-								Settings.Save("user", userString);
-								return user;
-							}
-						}
-						return null;
-					}
+					var response = await client.GetAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
+
+					return await CheckUserResponse(response);
 				}
 				catch (Exception)
 				{
@@ -280,17 +273,12 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					EnsureTokenExists();
-
 					string modelString = JsonService.Serialize(model);
+					string route = Routes.AccountUpdate;
 
-					HttpResponseMessage response = await client.PostAsync(Routes.AccountUpdate, GetStringContent(modelString));
+					var response = await client.PutAsync(route, GetStringContent(modelString));
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						return new HttpResult(true, response.StatusCode);
-					}
-					return new HttpResult(false, response.StatusCode, response.Content.ToString());
+					return await CheckHttpResultResponse(response);
 				}
 				catch (Exception e)
 				{
@@ -334,11 +322,11 @@ namespace IVForum.App.Services
 					EnsureTokenExists();
 
 					User user = Settings.GetLoggedUser();
-					string route = Routes.ProjectByUserId + user.Id.ToString();
+					string route = Routes.ProjectGetByUserId + user.Id.ToString();
 
 					HttpResponseMessage response = await client.GetAsync(route);
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
+					if (response.StatusCode == HttpStatusCode.OK)
 					{
 						string forumsString = await response.Content.ReadAsStringAsync();
 						return JsonService.Deserialize<List<Project>>(forumsString);
@@ -402,9 +390,12 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.AccountPersonalForums + userId.ToString();
+					string route = Routes.ForumGetByUserId + userId.ToString();
 					
 					var response = await client.GetAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
+
 					return await CheckForumListResponse(response);
 				}
 				catch (Exception e)
@@ -463,10 +454,9 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.ForumView;
-					string modelString = model.Id.ToString();
+					string route = Routes.ForumView + model.Id.ToString();
 
-					var response = await client.PutAsync(route, GetStringContent(modelString));
+					var response = await client.PutAsync(route, null);
 					return await CheckHttpResultResponse(response);
 				}
 				catch (Exception e)
@@ -501,7 +491,7 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.ProjectByUserId + userId.ToString();
+					string route = Routes.ProjectGetByUserId + userId.ToString();
 					var response = await client.GetAsync(route);
 
 					return await CheckProjectListResponse(response);
@@ -561,10 +551,9 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.ProjectView;
-					string modelString = model.Id.ToString();
+					string route = Routes.ProjectView + model.Id.ToString();
 
-					var response = await client.PutAsync(route, GetStringContent(modelString));
+					var response = await client.PutAsync(route, null);
 					return await CheckHttpResultResponse(response);
 				}
 				catch (Exception e)
@@ -577,6 +566,8 @@ namespace IVForum.App.Services
 
 		internal class Subscriptions
 		{
+			static Subscriptions() => EnsureTokenExists();
+
 			public static async Task<bool> IsSubscribedToForum(string forumId)
 			{
 				try
@@ -591,35 +582,36 @@ namespace IVForum.App.Services
 					return false;
 				}
 			}
-			public static async Task<bool> SubscribeToForum(Forum model)
+			public static async Task<HttpResult> IsSubscribedToForum(Guid forumId)
 			{
 				try
 				{
-					EnsureTokenExists();
+					string route = Routes.AccountIsSubscribedToForum + forumId.ToString();
 
-					string modelString = JsonService.Serialize(model);
-					HttpResponseMessage response = await client.PostAsync(Routes.AccountSubscribeToForum, GetStringContent(modelString));
+					var response = await client.GetAsync(route);
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						return true;
-					}
-					else
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							response = await client.PostAsync(Routes.AccountSubscribeToForum, GetStringContent(modelString));
-							if (response.StatusCode == System.Net.HttpStatusCode.OK)
-								return true;
-						}
+					string message = await response.Content.ReadAsStringAsync();
 
-						return false;
-					}
+					return await CheckHttpResultResponse(response);
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
-					Alert.Send("Error de connexió");
-					return false;
+					return new HttpResult(false, e.Message);
+				}
+			}
+			public static async Task<HttpResult> SubscribeToForum(Forum model)
+			{
+				try
+				{
+					string modelString = JsonService.Serialize(model);
+					string route = Routes.AccountSubscribeToForum;
+
+					var response = await client.PostAsync(route, GetStringContent(modelString));
+					return await CheckHttpResultResponse(response);
+				}
+				catch (Exception e)
+				{
+					return new HttpResult(false, e.Message);
 				}
 			}
 			public static async Task<List<Forum>> Forums()

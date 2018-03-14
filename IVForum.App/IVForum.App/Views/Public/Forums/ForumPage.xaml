@@ -27,7 +27,7 @@
                                 <StackLayout>
 
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Source="public_forums.png"></Image>
+                                        <Image Source="book_w.png" MinimumHeightRequest="24" MinimumWidthRequest="24"></Image>
                                         <Label Text="{Binding Title}" FontSize="Medium"></Label>
                                     </StackLayout>
 

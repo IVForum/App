@@ -12,7 +12,7 @@ namespace IVForum.App.Views.Public.Forums
 		public ForumTabbedPage()
         {
             InitializeComponent();
-
+			
 			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.ProjectCount)) { Title = "Top", BackgroundColor = Color.GhostWhite });
 			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.Views)) { Title = "Popular", BackgroundColor = Color.GhostWhite });
 			Children.Add(new ForumPage(new ForumViewModel(Origin.Public, Order.CreationDate)) { Title = "Nous", BackgroundColor = Color.GhostWhite });

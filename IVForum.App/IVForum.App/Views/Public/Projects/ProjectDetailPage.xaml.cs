@@ -24,19 +24,24 @@ namespace IVForum.App.Views.Public.Projects
 
 		public ProjectDetailPage(Project model)
 		{
-			model.Owner = new User();
 			InitializeComponent();
-			Model = model;
+			BindingContext = Model = model;
 			Load();
 		}
 
 		private async void Load()
 		{
-			User owner = await ApiService.Account.RequestUserDetails(Model.Owner.Id.ToString());
-			Model.Owner = owner;
-			BindingContext = Model;
 			Title = Model.Title;
-			ApiService.Projects.AddView(Model);
+			var result = await ApiService.Projects.AddView(Model);
+
+			if (result.IsSuccess)
+			{
+				Alert.Send("Afegit visualització");
+			}
+			else
+			{
+				Alert.Send("No s'ha afegit visualització");
+			}
 
 			if (Subscribed)
 			{

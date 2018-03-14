@@ -32,17 +32,17 @@ namespace IVForum.App.Services
 			{
 				string tokenString = await response.Content.ReadAsStringAsync();
 				Settings.Save("token", tokenString);
-				return new HttpResult(true, response.StatusCode);
-				//Token token = JsonService.Deserialize<Token>(tokenString);
-				//Authorize(token);
-				//var result = true;// await GetUserDetails(token.Id);
 
-				//if (result)
-				//{
-				//	return new HttpResult(true, response.StatusCode);
-				//}
+				Token token = JsonService.Deserialize<Token>(tokenString);
+				Authorize(token);
+				var result = await GetUserDetails(token.Id);
 
-				//return new HttpResult(false, "Failed to retrieve user details");
+				if (result.IsSuccess)
+				{
+					return new HttpResult(true, response.StatusCode);
+				}
+
+				return new HttpResult(false, "Failed to retrieve user details");
 			}
 
 			return new HttpResult(false, response.StatusCode, await response.Content.ReadAsStringAsync());
@@ -74,6 +74,8 @@ namespace IVForum.App.Services
 					Settings.Save("user", userString);
 					return new HttpResult(true, response.StatusCode);
 				}
+
+				string message = await response.Content.ReadAsStringAsync();
 
 				return new HttpResult(false, response.StatusCode, await response.Content.ReadAsStringAsync());
 			}

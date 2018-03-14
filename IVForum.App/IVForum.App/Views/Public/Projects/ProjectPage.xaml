@@ -28,7 +28,7 @@
 
                                     <StackLayout Orientation="Horizontal">
 
-                                        <Image Source="public_projects.png"></Image>
+                                        <Image Source="document_w.png"></Image>
                                         <Label Text="{Binding Title}" FontSize="Medium"></Label>
                                         
                                     </StackLayout>

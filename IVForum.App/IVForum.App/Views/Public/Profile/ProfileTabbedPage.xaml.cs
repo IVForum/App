@@ -1,6 +1,5 @@
 ﻿using IVForum.App.Data.Enums;
 using IVForum.App.Data.Models;
-using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Forums;
 using IVForum.App.Views.Public.Projects;
@@ -19,17 +18,11 @@ namespace IVForum.App.Views.Public.Profile
         {
             InitializeComponent();
 			Model = model;
-			Load();
-        }
-
-		private async void Load()
-		{
-			Model = await ApiService.Account.Details(Model.Id);
 			Title = $"{Model.Name} {Model.Surname}";
 
-			Children.Add(new ProfilePage(Model) { Title = "Informació" });
-			Children.Add(new ForumPage(new ForumViewModel(Origin.User, Order.Title)) { Title = "Fòrums" });
-			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User, Order.Title)) { Title = "Projectes" });
+			Children.Add(new ProfileDetailPage(Model) { Title = "Informació" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.User, Order.Title) { UserId = Model.Id }) { Title = "Fòrums" });
+			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User, Order.Title) { UserId = Model.Id }) { Title = "Projectes" });
 		}
     }
 }

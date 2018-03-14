@@ -64,7 +64,7 @@
     <EmbeddedResource Update="Views\Public\Forums\ForumTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Public\Profile\ProfilePage.xaml">
+    <EmbeddedResource Update="Views\Public\Profile\ProfileDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Public\Profile\ProfileTabbedPage.xaml">
@@ -77,6 +77,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Public\Projects\ProjectPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Public\User\UserDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Public\User\UserTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Shared\ContributionsView.xaml">
@@ -95,6 +101,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Shared\ProgressView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\UserDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -125,11 +134,17 @@
     <Compile Update="Views\Public\Forums\ForumTabbedPage.xaml.cs">
       <DependentUpon>ForumTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Public\Profile\ProfileDetailPage.xaml.cs">
+      <DependentUpon>ProfileDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Public\Projects\ProjectTabbedPage.xaml.cs">
       <DependentUpon>ProjectTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Personal\Profile\EditProfilePage.xaml.cs">
       <DependentUpon>EditProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Shared\UserDetailView.xaml.cs">
+      <DependentUpon>UserDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

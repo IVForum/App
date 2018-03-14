@@ -18,16 +18,16 @@
 
                 <Frame HasShadow="True">
 
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
 
-                            <Image Source="public_projects.png"></Image>
+                            <Image Source="document_w.png"></Image>
                             <Label Text="{Binding Title}" FontSize="Medium"></Label>
 
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                             <Image Source="view.png"></Image>
                             <Label Text="{Binding Views}"></Label>
                         </StackLayout>
@@ -46,7 +46,7 @@
 
                         <StackLayout Orientation="Horizontal">
 
-                            <Image Source="user_w.png"></Image>
+                            <Image Source="user_b.png"></Image>
                             <Label Text="Creador"></Label>
 
                         </StackLayout>

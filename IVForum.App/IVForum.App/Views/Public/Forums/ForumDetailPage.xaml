@@ -18,16 +18,34 @@
 
                 <Frame HasShadow="True">
 
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
-                            <Image Source="public_forums.png"></Image>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                            <Image Source="book_w.png"></Image>
                             <Label Text="{Binding Title}" FontSize="Medium"></Label>
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                             <Image Source="view.png"></Image>
                             <Label Text="{Binding Views}"></Label>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Data inici votacions"></Label>
+                            <Label Text="{Binding DateBeginsVote}"></Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Data final votacions"></Label>
+                            <Label Text="{Binding DateEndsVote}"></Label>
                         </StackLayout>
 
                     </StackLayout>
@@ -43,7 +61,7 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="user_w.png"></Image>
+                            <Image Source="user_b.png"></Image>
                             <Label Text="Creador" FontSize="Medium"></Label>
                         </StackLayout>
 

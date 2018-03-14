@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="IVForum.App.Views.Personal.Forums.ForumCreatePage"
              BackgroundColor="GhostWhite">
     
@@ -12,11 +13,49 @@
 
                 <StackLayout>
 
-                    <Label Text="Títol (Públic): "></Label>
+                    <Label Text="Títol: "></Label>
                     <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
 
                     <Label Text="Descripció:"></Label>
                     <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
+
+                    <Label Text="Data inici votacions"></Label>
+                    <DatePicker x:Name="StartDatePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                        <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Jan 1 2000</x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MinimumDate>
+                        <DatePicker.MaximumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Dec 31 2050</x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MaximumDate>
+                    </DatePicker>
+
+                    <Label Text="Data final votacions"></Label>
+                    <DatePicker x:Name="FinalDatePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                        <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                        <DatePicker.MinimumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Jan 1 2000</x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MinimumDate>
+                        <DatePicker.MaximumDate>
+                            <sys:DateTime x:FactoryMethod="Parse">
+                                <x:Arguments>
+                                    <x:String>Dec 31 2050</x:String>
+                                </x:Arguments>
+                            </sys:DateTime>
+                        </DatePicker.MaximumDate>
+                    </DatePicker>
 
                 </StackLayout>
 

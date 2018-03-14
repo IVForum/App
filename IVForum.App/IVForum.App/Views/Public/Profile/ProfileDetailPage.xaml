@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Public.Profile.ProfileDetailPage"
+             BackgroundColor="GhostWhite">
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <StackLayout>
+
+                <Frame HasShadow="True" BackgroundColor="{StaticResource Primary}">
+
+                    <StackLayout>
+
+                        <Image Source="avatar_w.png" HorizontalOptions="Center"></Image>
+
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="{Binding Name}" FontSize="Medium" TextColor="White"></Label>
+                                <Label Text="{Binding Surname}" FontSize="Medium" TextColor="White"></Label>
+                            </StackLayout>
+
+                            <Label Text="{Binding Email}" TextColor="White"></Label>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+
+            </StackLayout>
+
+            <ScrollView>
+
+                <StackLayout x:Name="ProfileLayout" Padding="5">
+
+                    <Frame HasShadow="True">
+
+                        <StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+
+                                <Image Source="info.png"></Image>
+                                <Label Text="Descripció" FontSize="Medium"></Label>
+
+                            </StackLayout>
+
+                            <Label Text="{Binding Description}"></Label>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame HasShadow="True">
+
+                        <StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+
+                                <Image Source="repo.png"></Image>
+                                <Label Text="Repositori" FontSize="Medium"></Label>
+
+                            </StackLayout>
+
+                            <Label Text="{Binding RepositoryUrl}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LabelTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame HasShadow="True">
+
+                        <StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+
+                                <Image Source="web.png"></Image>
+                                <Label Text="Pàgina web" FontSize="Medium"></Label>
+
+                            </StackLayout>
+
+                            <Label Text="{Binding WebsiteUrl}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LabelTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame HasShadow="True">
+
+                        <StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="facebook.png"></Image>
+                                <Label Text="Facebook" FontSize="Medium"></Label>
+                            </StackLayout>
+
+                            <Label Text="{Binding FacebookUrl}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LabelTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                    <Frame HasShadow="True">
+
+                        <StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="twitter.png"></Image>
+                                <Label Text="Twitter" FontSize="Medium"></Label>
+                            </StackLayout>
+
+                            <Label Text="{Binding TwitterUrl}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="LabelTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+
+                    </Frame>
+
+                </StackLayout>
+
+            </ScrollView>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+    
+</ContentPage>

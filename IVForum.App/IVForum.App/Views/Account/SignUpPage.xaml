@@ -13,7 +13,7 @@
             <Frame HasShadow="True">
 
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="signup.png"></Image>
+                    <Image Source="user_plus_b.png"></Image>
                     <Label Text="Formulari de registre" FontSize="Medium"></Label>
                 </StackLayout>
 
@@ -76,10 +76,7 @@
 
             </Frame>
 
-            <Button Text="Registrar" Clicked="SignUp">
-                <Button.Image>
-                    <FileImageSource File="user_plus_b.png"/>
-                </Button.Image>
+            <Button Image="user_plus_b.png" Text="Registrar" Clicked="SignUp">
 
                 <Button.Triggers>
 

@@ -1,4 +1,6 @@
 ﻿using IVForum.App.Data.Enums;
+using IVForum.App.Data.Models;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Forums;
 
@@ -12,12 +14,16 @@ namespace IVForum.App.Views.Personal.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumTabbedPage : TabbedPage
     {
+		private User Model;
+
         public ForumTabbedPage()
         {
             InitializeComponent();
 
-			Children.Add(new ForumPage(new ForumViewModel(Origin.User)) { Title = "Personals" });
-			Children.Add(new ForumPage(new ForumViewModel(Origin.Subscription)) { Title = "Participants" });
+			Model = Settings.GetLoggedUser();
+
+			Children.Add(new ForumPage(new ForumViewModel(Origin.User) { UserId = Model.Id }) { Title = "Personals" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.Subscription) { UserId = Model.Id }) { Title = "Participants" });
 		}
 
 		public async void AddNew(object sender, EventArgs e)

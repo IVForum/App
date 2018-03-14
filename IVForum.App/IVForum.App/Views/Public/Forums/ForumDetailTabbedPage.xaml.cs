@@ -17,7 +17,6 @@ namespace IVForum.App.Views.Public.Forums
     public partial class ForumDetailTabbedPage : TabbedPage
     {
 		private Forum Model;
-		private List<Project> ModelProjects = new List<Project>();
 
         public ForumDetailTabbedPage(Forum model)
         {
@@ -37,7 +36,7 @@ namespace IVForum.App.Views.Public.Forums
 				var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id.ToString());
 
 				Children.Add(new ForumDetailPage(Model) { Title = "Informació", Subscribed = subbed });
-				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title)) { Title = "Projectes", Subscribed = subbed, Bills = bills });
+				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed, Bills = bills });
 			}
 			catch (Exception e)
 			{

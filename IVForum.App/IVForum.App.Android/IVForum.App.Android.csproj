@@ -168,12 +168,6 @@
     <AndroidResource Include="Resources\drawable\image.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IVForum.App\IVForum.App.csproj">
-      <Project>{e340274e-7431-4716-ba6d-b1a9dc09972c}</Project>
-      <Name>IVForum.App</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\facebook_b.png" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +286,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\settings_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\avatar_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\avatar_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IVForum.App\IVForum.App.csproj">
+      <Project>{e340274e-7431-4716-ba6d-b1a9dc09972c}</Project>
+      <Name>IVForum.App</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

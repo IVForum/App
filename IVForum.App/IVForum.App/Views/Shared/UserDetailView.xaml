@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IVForum.App.Views.Shared.UserDetailView">
+
+    <ContentView.Content>
+
+        <Frame HasShadow="True">
+
+            <StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="user_b.png"></Image>
+                    <Label Text="Creador" FontSize="Medium"></Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Name}"></Label>
+                    <Label Text="{Binding Surname}"></Label>
+                </StackLayout>
+
+            </StackLayout>
+
+        </Frame>
+
+    </ContentView.Content>
+    
+</ContentView>

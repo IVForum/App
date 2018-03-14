@@ -19,23 +19,20 @@ namespace IVForum.App.Views.Public.Forums
 
 		public ForumDetailPage(Forum model)
 		{
-			Model = model;
+			InitializeComponent();
+			BindingContext = Model = model;
+			Load();
 		}
 
-		protected override async void OnAppearing()
+		private async void Load()
 		{
-			base.OnAppearing();
-			User owner = await ApiService.Account.Details(Model.Owner.Id);
+			var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
 
-			if (owner != null)
+			if (result.IsSuccess)
 			{
-				Model.Owner = owner;
+				Subscribed = true;
+				DetermineSubscription();
 			}
-
-			InitializeComponent();
-			BindingContext = Model;
-			DetermineSubscription();
-			await ApiService.Forums.AddView(Model);
 		}
 
 		private void DetermineSubscription()
@@ -66,15 +63,21 @@ namespace IVForum.App.Views.Public.Forums
 
 		private async void Subscribe(object sender, EventArgs e)
 		{
+			Button btn = sender as Button;
+
+			btn.IsEnabled = false;
+
 			var result = await ApiService.Subscriptions.SubscribeToForum(Model);
 
-			if (result)
+			if (result.IsSuccess)
 			{
 				Alert.Send("T'has suscrit correctament");
+				btn.IsEnabled = true;
+				ForumStackLayout.Children.Remove(btn);
 			}
 			else
 			{
-				Alert.Send("Error al suscriure al fòrum");
+				Alert.Send("Nope");
 			}
 		}
 

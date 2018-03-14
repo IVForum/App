@@ -16,7 +16,7 @@
 
                 <StackLayout Padding="10" BackgroundColor="#2196F3" Orientation="Horizontal">
                     
-                    <Image Source="{Binding User.Avatar}"></Image>
+                    <Image Source="avatar_w.png"></Image>
                     
                     <StackLayout VerticalOptions="CenterAndExpand">
 

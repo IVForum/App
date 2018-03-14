@@ -10,26 +10,26 @@ using Xamarin.Forms.Xaml;
 namespace IVForum.App.Views.Public.Profile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfilePage : ContentPage
+	public partial class ProfileDetailPage : ContentPage
 	{
-		private User Model { get; set; } = new User();
+		private User Model { get; set; }
 
-		public ProfilePage(User model)
+		public ProfileDetailPage()
+		{
+			InitializeComponent();
+			Load();
+		}
+
+		public ProfileDetailPage(User model)
 		{
 			InitializeComponent();
 			BindingContext = Model = model;
 			Title = model.Name + " " + model.Surname;
 		}
 
-		public ProfilePage()
-		{
-			InitializeComponent();
-			Load();
-		}
-
 		private async void Load()
 		{
-			Model = await ApiService.Account.RequestUserDetails(Settings.GetLoggedUser().Id.ToString());
+			Model = Settings.GetLoggedUser();
 
 			BindingContext = Model;
 			Title = Model.Name + " " + Model.Surname;
@@ -48,6 +48,11 @@ namespace IVForum.App.Views.Public.Profile
 		private async void Edit_Clicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new EditProfilePage(Model), true);
+		}
+
+		private async void LabelTapped(object sender, EventArgs args)
+		{
+
 		}
 	}
 }

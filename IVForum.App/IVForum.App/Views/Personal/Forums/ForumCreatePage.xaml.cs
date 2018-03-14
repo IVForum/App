@@ -25,7 +25,9 @@ namespace IVForum.App.Views.Personal.Forums
 				Id = Guid.NewGuid(),
 				Title = TitleEntry.Text,
 				Description = DescriptionEntry.Text,
-				CreationDate = DateTime.Now
+				CreationDate = DateTime.Now,
+				DateBeginsVote = StartDatePicker.Date,
+				DateEndsVote = FinalDatePicker.Date
 			};
 
 			var result = await ApiService.Forums.Create(Model);

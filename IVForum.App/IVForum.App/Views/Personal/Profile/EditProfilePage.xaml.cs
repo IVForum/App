@@ -1,5 +1,4 @@
 ﻿using IVForum.App.Data.Models;
-using IVForum.App.Models;
 using IVForum.App.Services;
 
 using System;
@@ -71,7 +70,7 @@ namespace IVForum.App.Views.Personal.Profile
 			}
 		}
 
-		private async void SaveChanges(object sender, EventArgs e)
+		private async void SaveChanges(object sender, EventArgs args)
 		{
 			try
 			{
@@ -81,20 +80,22 @@ namespace IVForum.App.Views.Personal.Profile
 
 				if (result.IsSuccess)
 				{
-					DependencyService.Get<IMessage>().ShortAlert("Dades desades correctament");
+					Alert.Send("Dades desades");
+					string modelString = JsonService.Serialize(Model);
+					Settings.Save("user", modelString);
 				}
 				else
 				{
-					await DisplayAlert("Error", "Hi ha hagut un error a l'hora de desar les dades", "Ok");
+					Alert.Send("Error al desar les dades");
 				}
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				await DisplayAlert("Error", ex.Message, "Ok");
+				Alert.Send("Error al desar les dades");
 			}
 		}
 
-		private async void Discard(object sender, EventArgs e)
+		private async void Discard(object sender, EventArgs args)
 		{
 			var response = await DisplayAlert("Avís", "Descartar els canvis fets?", "Si", "No");
 
