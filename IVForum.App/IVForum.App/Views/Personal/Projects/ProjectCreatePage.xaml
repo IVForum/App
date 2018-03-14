@@ -5,12 +5,8 @@
              BackgroundColor="GhostWhite">
     
     <ContentPage.Content>
-        
-        <StackLayout Padding="5">
 
-            <Frame HasShadow="True" Padding="0" BackgroundColor="DarkRed" HeightRequest="100">
-                
-            </Frame>
+        <StackLayout Padding="5">
 
             <Frame HasShadow="True">
 

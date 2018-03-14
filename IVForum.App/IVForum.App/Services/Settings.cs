@@ -70,6 +70,12 @@ namespace IVForum.App.Services
 			return new StartupTabbedPage();
 		}
 
+		public static async void LoginWithExistingUser()
+		{
+			User model = GetLoggedUser();
+			var result = await AccountService.Login(model);
+		}
+
 		public static void Logout()
 		{
 			Application.Current.Properties.Clear();

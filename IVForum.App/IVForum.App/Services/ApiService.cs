@@ -419,6 +419,25 @@ namespace IVForum.App.Services
 					return new HttpResult(false, e.Message);
 				}
 			}
+			public static async Task<HttpResult> Delete(Forum model)
+			{
+				try
+				{
+					string modelString = JsonService.Serialize(model);
+					string route = Routes.ForumDelete + model.Id.ToString();
+
+					var response = await client.DeleteAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
+
+					return await CheckHttpResultResponse(response);
+				}
+				catch (Exception e)
+				{
+					return new HttpResult(false, e.Message);
+					throw;
+				}
+			}
 			public static async Task<HttpResult> AddProjectToForum(SubscriptionViewModel model)
 			{
 				try
@@ -494,6 +513,8 @@ namespace IVForum.App.Services
 					string route = Routes.ProjectGetByUserId + userId.ToString();
 					var response = await client.GetAsync(route);
 
+					string message = await response.Content.ReadAsStringAsync();
+
 					return await CheckProjectListResponse(response);
 				}
 				catch (Exception e)
@@ -537,9 +558,12 @@ namespace IVForum.App.Services
 				try
 				{
 					string modelString = JsonService.Serialize(model);
-					string route = Routes.ProjectDelete;
+					string route = Routes.ProjectDelete + model.Id.ToString();
 
-					var response = await client.PostAsync(route, GetStringContent(modelString));
+					var response = await client.DeleteAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
+
 					return await CheckHttpResultResponse(response);
 				}
 				catch (Exception e)
@@ -604,7 +628,7 @@ namespace IVForum.App.Services
 				try
 				{
 					string modelString = JsonService.Serialize(model);
-					string route = Routes.AccountSubscribeToForum;
+					string route = Routes.SubscriptionSubscribeToForum;
 
 					var response = await client.PostAsync(route, GetStringContent(modelString));
 					return await CheckHttpResultResponse(response);

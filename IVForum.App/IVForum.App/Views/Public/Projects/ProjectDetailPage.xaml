@@ -10,12 +10,6 @@
 
             <StackLayout x:Name="ProjectStackLayout" Padding="5">
 
-                <Frame HasShadow="True" Padding="0">
-
-                    <Image Source="{Binding Background}"></Image>
-
-                </Frame>
-
                 <Frame HasShadow="True">
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">

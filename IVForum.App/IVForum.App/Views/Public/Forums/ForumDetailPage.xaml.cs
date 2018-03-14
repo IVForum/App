@@ -26,13 +26,47 @@ namespace IVForum.App.Views.Public.Forums
 
 		private async void Load()
 		{
-			var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
-
-			if (result.IsSuccess)
+			if (Model.Owner.Id != Settings.GetLoggedUser().Id)
 			{
-				Subscribed = true;
-				DetermineSubscription();
+				var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
+
+				if (result.IsSuccess)
+				{
+					Subscribed = true;
+				}
 			}
+			else
+			{
+				ToolbarItem delete = new ToolbarItem()
+				{
+					Text = "Eliminar",
+					Icon = "cross_b.png"
+				};
+
+				ToolbarItems.Add(delete);
+
+				delete.Clicked += async (sender, args) => {
+					var response = await DisplayAlert("Avís", "Segur vols esborrar el fòrum?", "Si", "No");
+
+					if (!response)
+					{
+						return;
+					}
+
+					var result = await ApiService.Forums.Delete(Model);
+
+					if (result.IsSuccess)
+					{
+						Alert.Send("Fòrum esborrat amb èxit");
+					}
+					else
+					{
+						Alert.Send(result.Message);
+					}
+				};
+			}
+
+			DetermineSubscription();
 		}
 
 		private void DetermineSubscription()
@@ -53,7 +87,8 @@ namespace IVForum.App.Views.Public.Forums
 				Button addProjectButton = new Button
 				{
 					Image = "plus.png",
-					Text = "Afegir Projecte"
+					Text = "Afegir Projecte",
+					BackgroundColor = Color.ForestGreen
 				};
 				addProjectButton.Clicked += AddProject;
 
@@ -74,10 +109,20 @@ namespace IVForum.App.Views.Public.Forums
 				Alert.Send("T'has suscrit correctament");
 				btn.IsEnabled = true;
 				ForumStackLayout.Children.Remove(btn);
+
+				Button addProjectButton = new Button
+				{
+					Image = "plus.png",
+					Text = "Afegir Projecte",
+					BackgroundColor = Color.ForestGreen
+				};
+				addProjectButton.Clicked += AddProject;
+
+				ForumStackLayout.Children.Add(addProjectButton);
 			}
 			else
 			{
-				Alert.Send("Nope");
+				Alert.Send("Error al processar la suscripció");
 			}
 		}
 

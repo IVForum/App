@@ -34,22 +34,13 @@ namespace IVForum.App.Views.Public.Projects
 			Title = Model.Title;
 			var result = await ApiService.Projects.AddView(Model);
 
-			if (result.IsSuccess)
-			{
-				Alert.Send("Afegit visualització");
-			}
-			else
-			{
-				Alert.Send("No s'ha afegit visualització");
-			}
-
 			if (Subscribed)
 			{
 				GenerateContributions();
 			}
 		}
 		
-		private async void GenerateContributions()
+		private void GenerateContributions()
 		{
 			ObservableCollection<Button> contributions = new ObservableCollection<Button>();
 

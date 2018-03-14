@@ -5,6 +5,7 @@ using IVForum.App.Views.Shared;
 
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -45,6 +46,14 @@ namespace IVForum.App.Views.Account
 				btn.IsEnabled = false;
 				await Navigation.PushModalAsync(new LoadingPage(), false);
 
+				Regex email = new Regex("^[a-z0-9._%+-]+@[a-z0-9.-]+[^\\.]\\.[a-z]{2,3}$");
+
+				if (!email.IsMatch(EntryEmail.Text))
+				{
+					Alert.Send("Direcció de correu invàlida");
+					return;
+				}
+
 				// TODO: Regex
 				model = new LoginViewModel
 				{
@@ -66,7 +75,7 @@ namespace IVForum.App.Views.Account
 				else
 				{
 					await Navigation.PopModalAsync(false);
-					Alert.Send(result.Message);
+					Alert.Send("Error al iniciar sessió");
 				}
 			}
 			catch (Exception e)
