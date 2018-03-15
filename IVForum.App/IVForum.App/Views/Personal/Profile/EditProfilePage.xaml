@@ -64,8 +64,8 @@
 
                 </Frame>
 
-                <Button Image="save.png" Text="Desar" Clicked="SaveChanges"></Button>
-                <Button Image="cross.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Discard"></Button>
+                <Button Image="save_w.png" Text="Desar" Clicked="SaveChanges"></Button>
+                <Button Image="cross_w.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Discard"></Button>
 
             </StackLayout>
 

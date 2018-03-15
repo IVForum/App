@@ -21,9 +21,9 @@
 
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                            <Image Source="view.png"></Image>
-                            <Label Text="{Binding Views}"></Label>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                            <Image Source="view.png" VerticalOptions="Center"></Image>
+                            <Label Text="{Binding Views}" VerticalOptions="Center"></Label>
                         </StackLayout>
 
                     </StackLayout>

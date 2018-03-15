@@ -9,7 +9,8 @@
         <ListView x:Name="MenuItemsListView"
                   SeparatorVisibility="Default"
                   SeparatorColor="DarkGray"
-                  HasUnevenRows="true"
+                  HasUnevenRows="True"
+                  BackgroundColor="White"
                   ItemsSource="{Binding MenuItems}">
             
             <ListView.Header>
@@ -45,7 +46,7 @@
 
                                 <StackLayout Orientation="Horizontal">
 
-                                    <Image Source="{Binding Icon}"></Image>
+                                    <Image Source="{Binding Icon}" VerticalOptions="Center"></Image>
                                     
                                     <Label VerticalOptions="FillAndExpand" 
                                            VerticalTextAlignment="Center"
@@ -66,11 +67,7 @@
 
         </ListView>
 
-        <Button Text="Tanca sessió" Clicked="Logout">
-            <Button.Image>
-                <FileImageSource File="logout.png"/>
-            </Button.Image>
-        </Button>
+        <Button Image="logout_w.png" Text="Tanca sessió" Clicked="Logout"></Button>
 
     </StackLayout>
     

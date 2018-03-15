@@ -12,7 +12,7 @@
             <Frame HasShadow="True">
 
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="login.png"></Image>
+                    <Image Source="login_b.png"></Image>
                     <Label Text="Formulari d'inici de sessió" FontSize="Medium"></Label>
                 </StackLayout>
 
@@ -29,11 +29,7 @@
                 
             </Frame>
 
-            <Button Text="Iniciar sessió" Clicked="Login">
-
-                <Button.Image>
-                    <FileImageSource File="login.png"/>
-                </Button.Image>
+            <Button Image="login_w.png" Text="Iniciar sessió" Clicked="Login">
 
                 <Button.Triggers>
 

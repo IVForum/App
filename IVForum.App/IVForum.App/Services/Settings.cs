@@ -65,6 +65,7 @@ namespace IVForum.App.Services
 		{
 			if (Contains("loggedin"))
 			{
+				LoginWithExistingUser();
 				return new Main();
 			}
 			return new StartupTabbedPage();
@@ -72,8 +73,11 @@ namespace IVForum.App.Services
 
 		public static async void LoginWithExistingUser()
 		{
-			User model = GetLoggedUser();
-			var result = await AccountService.Login(model);
+			if (Contains("loggedin"))
+			{
+				User model = GetLoggedUser();
+				var result = await AccountService.Login(model);
+			}
 		}
 
 		public static void Logout()

@@ -23,7 +23,7 @@
                                 <Label Text="{Binding Surname}" FontSize="Medium" TextColor="White"></Label>
                             </StackLayout>
 
-                            <Label Text="{Binding Email}" TextColor="White"></Label>
+                            <Label Text="{Binding Email}" TextColor="White" HorizontalOptions="Center"></Label>
                         </StackLayout>
 
                     </StackLayout>

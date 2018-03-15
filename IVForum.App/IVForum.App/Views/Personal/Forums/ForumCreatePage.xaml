@@ -61,9 +61,9 @@
 
             </Frame>
 
-            <Button Image="plus.png" Text="Afegir" Clicked="Add"></Button>
+            <Button Image="plus_w.png" Text="Afegir" Clicked="Add"></Button>
 
-            <Button Image="cross.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
+            <Button Image="cross_w.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
 
         </StackLayout>
         

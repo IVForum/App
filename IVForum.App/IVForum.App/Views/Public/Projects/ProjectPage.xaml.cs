@@ -26,7 +26,7 @@ namespace IVForum.App.Views.Public.Projects
 			ProjectsListView.BindingContext = Model;
 			ProjectsListView.ItemTapped += async (sender, args) => 
 			{
-				await Navigation.PushAsync(new ProjectDetailPage((Project)args.Item), true);
+				await Navigation.PushAsync(new ProjectDetailPage((Project)args.Item) { Bills = Bills, Subscribed = Subscribed }, true);
 			};
 		}
 	}

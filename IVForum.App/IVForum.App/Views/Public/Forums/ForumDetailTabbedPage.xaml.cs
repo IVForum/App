@@ -30,13 +30,18 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			try
 			{
-				bool subbed = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id.ToString());
-				List<Bill> bills = await ApiService.RequestProjectBills(Model.Id);
+				var subbed = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
+				List<Bill> bills = new List<Bill>();
 
-				var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id.ToString());
+				bool sub = false;
+				if (subbed.IsSuccess)
+				{
+					//bills = await ApiService.Subscriptions.Bills(Model.Id);
+					sub = true;
+				}
 
-				Children.Add(new ForumDetailPage(Model) { Title = "Informació", Subscribed = subbed });
-				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed, Bills = bills });
+				Children.Add(new ForumDetailPage(Model, sub) { Title = "Informació", Subscribed = true });
+				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed.IsSuccess, Bills = bills });
 			}
 			catch (Exception e)
 			{

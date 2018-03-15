@@ -91,10 +91,10 @@
     <AndroidResource Include="Resources\drawable\avatar.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\login.png" />
+    <AndroidResource Include="Resources\drawable\login_b.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logout.png" />
+    <AndroidResource Include="Resources\drawable\logout_b.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\profile.png" />
@@ -124,7 +124,7 @@
     <AndroidResource Include="Resources\drawable\web.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\cross.png" />
+    <AndroidResource Include="Resources\drawable\cross_b.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\banknote.png" />
@@ -295,13 +295,25 @@
     <AndroidResource Include="Resources\drawable\avatar_w.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splashscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\IVForum.App\IVForum.App.csproj">
       <Project>{e340274e-7431-4716-ba6d-b1a9dc09972c}</Project>
       <Name>IVForum.App</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splashscreen.png" />
+    <AndroidResource Include="Resources\drawable\cross_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\save_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\login_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logout_w.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -9,28 +9,14 @@
 
         <StackLayout Padding="5">
 
-            <Frame HasShadow="True" Padding="0">
+            <Frame HasShadow="True">
 
-                <ListView x:Name="SettingsListView"
-                          HasUnevenRows="True"
-                          RowHeight="50">
-
-                    <ListView.ItemTemplate>
-
-                        <DataTemplate>
-
-                            <ImageCell ImageSource="book_b.png" Text="{Binding Title}" Detail="Detail text"></ImageCell>
-
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-
-                </ListView>
-
+                <Label Text="Settings go here"></Label>
+                
             </Frame>
 
             <Button Image="save_b.png" Text="Desa" Clicked="SaveChanges"></Button>
-
+            
         </StackLayout>
 
     </ContentPage.Content>

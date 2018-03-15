@@ -133,6 +133,15 @@ namespace IVForum.App.Services
 
 			return null;
 		}
+		private static async Task<List<Bill>> CheckBillListResponse(HttpResponseMessage response)
+		{
+			if (response.StatusCode == HttpStatusCode.OK)
+			{
+				string forumsString = await response.Content.ReadAsStringAsync();
+				return JsonService.Deserialize<List<Bill>>(forumsString);
+			}
+			return new List<Bill>();
+		}
 
 		internal class Account
 		{
@@ -631,6 +640,8 @@ namespace IVForum.App.Services
 					string route = Routes.SubscriptionSubscribeToForum;
 
 					var response = await client.PostAsync(route, GetStringContent(modelString));
+					string message = await response.Content.ReadAsStringAsync();
+
 					return await CheckHttpResultResponse(response);
 				}
 				catch (Exception e)
@@ -711,6 +722,21 @@ namespace IVForum.App.Services
 				{
 					Alert.Send("Error de connexió");
 					return new List<Forum>();
+				}
+			}
+			public static async Task<List<Bill>> Bills(Guid forumId)
+			{
+				try
+				{
+					string route = Routes.SubscriptionBills + forumId.ToString();
+
+					var response = await client.GetAsync(route);
+
+					return await CheckBillListResponse(response);
+				}
+				catch (Exception e)
+				{
+					return new List<Bill>();
 				}
 			}
 		}

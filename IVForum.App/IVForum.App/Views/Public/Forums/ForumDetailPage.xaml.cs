@@ -15,7 +15,7 @@ namespace IVForum.App.Views.Public.Forums
 	public partial class ForumDetailPage : ContentPage
 	{
 		private Forum Model = new Forum();
-		public bool Subscribed { get; set; } = false;
+		public bool Subscribed { get; set; }
 
 		public ForumDetailPage(Forum model)
 		{
@@ -24,23 +24,22 @@ namespace IVForum.App.Views.Public.Forums
 			Load();
 		}
 
+		public ForumDetailPage(Forum model, bool subbed)
+		{
+			InitializeComponent();
+			BindingContext = Model = model;
+			Subscribed = subbed;
+			Load();
+		}
+
 		private async void Load()
 		{
-			if (Model.Owner.Id != Settings.GetLoggedUser().Id)
-			{
-				var result = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
-
-				if (result.IsSuccess)
-				{
-					Subscribed = true;
-				}
-			}
-			else
+			if (Model.Owner.Id == Settings.GetLoggedUser().Id)
 			{
 				ToolbarItem delete = new ToolbarItem()
 				{
 					Text = "Eliminar",
-					Icon = "cross_b.png"
+					Icon = "cross_w.png"
 				};
 
 				ToolbarItems.Add(delete);
@@ -58,15 +57,17 @@ namespace IVForum.App.Views.Public.Forums
 					if (result.IsSuccess)
 					{
 						Alert.Send("Fòrum esborrat amb èxit");
+						await Navigation.PopToRootAsync();
 					}
 					else
 					{
 						Alert.Send(result.Message);
 					}
 				};
+			} else
+			{
+				DetermineSubscription();
 			}
-
-			DetermineSubscription();
 		}
 
 		private void DetermineSubscription()
