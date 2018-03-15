@@ -4,6 +4,8 @@ using IVForum.App.Services;
 using SQLite;
 
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace IVForum.App.Data
 {
@@ -27,12 +29,46 @@ namespace IVForum.App.Data
 
 		public async void Sync()
 		{
-			List<Forum> forums = await ApiService.Forums.Get();
-
-			foreach (Forum f in forums)
+			try
 			{
-				await db.InsertOrReplaceAsync(f);
+				#region Public forums
+				var forumList = await ApiService.Forums.Get();
+				foreach (Forum f in forumList)
+					await db.InsertOrReplaceAsync(f);
+				#endregion
+
+				#region Public Projects
+				var projectList = await ApiService.Projects.Get();
+				foreach (Project p in projectList)
+					await db.InsertOrReplaceAsync(p);
+				#endregion
 			}
+			catch (System.Exception e)
+			{
+				Debug.WriteLine(e);
+			}
+		}
+
+		public async Task<List<Forum>> GetPublicForums()
+		{
+			return await db.Table<Forum>().ToListAsync();
+		}
+
+		public async Task<List<Forum>> GetPersonalForums()
+		{
+			User user = Settings.GetLoggedUser();
+			return await db.Table<Forum>().Where(x => x.Owner.Id == user.Id).ToListAsync();
+		}
+
+		public async Task<List<Project>> GetPublicProjects()
+		{
+			return await db.Table<Project>().ToListAsync();
+		}
+
+		public async Task<List<Project>> GetPersonalProjects()
+		{
+			User user = Settings.GetLoggedUser();
+			return await db.Table<Project>().Where(x => x.Owner.Id == user.Id).ToListAsync();
 		}
 	}
 }

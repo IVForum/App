@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:forums="clr-namespace:IVForum.App.Views.Public.Forums"
             x:Class="IVForum.App.Views.Public.Forums.ForumDetailTabbedPage"
-            BackgroundColor="GhostWhite"
+            BackgroundColor="{StaticResource LightBackgroundColor}"
             Title="{Binding Title}">
 
 </TabbedPage>

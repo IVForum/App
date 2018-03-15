@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="IVForum.App.Views.Public.Forums.ForumTabbedPage"
             Title="Fòrums públics"
-            BackgroundColor="GhostWhite">
+            BackgroundColor="{StaticResource LightBackgroundColor}">
 
     <!--<TabbedPage.ToolbarItems>
         <ToolbarItem Icon="magnifier_w.png" Text="Cerca" Clicked="Search"/>

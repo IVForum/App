@@ -22,8 +22,7 @@ namespace IVForum.App.Data.Models
 		public string FacebookUrl { get; set; }
 		public string TwitterUrl { get; set; }
 		public string RepositoryUrl { get; set; }
-
-		public virtual Token Token { get; set; }
+		
 		public virtual List<Forum> Forums { get; set; } = new List<Forum>();
 		public virtual List<Project> Projects { get; set; } = new List<Project>();
 		public virtual List<Wallet> Wallets { get; set; } = new List<Wallet>();

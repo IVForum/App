@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IVForum.App.Views.Personal.Projects.ProjectCreatePage"
-             BackgroundColor="GhostWhite">
+             BackgroundColor="{StaticResource LightBackgroundColor}">
     
     <ContentPage.Content>
 
@@ -12,11 +12,6 @@
 
                 <StackLayout>
 
-                    <!--<StackLayout Orientation="Horizontal">
-                        <Image Source="image.png"></Image>
-                        <Label Text="Imatge" FontSize="Medium"></Label>
-                    </StackLayout>-->
-                    
                     <StackLayout Orientation="Horizontal">
                         <Image Source="personal_projects.png"></Image>
                         <Label Text="Títol" FontSize="Medium"></Label>
@@ -45,9 +40,9 @@
 
             </Frame>
 
-            <Button Image="plus.png" Text="Afegir" Clicked="Add"></Button>
+            <Button Image="plus_w.png" Text="Crear" Clicked="Add"></Button>
 
-            <Button Image="cross.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
+            <Button Image="cross_w.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
 
         </StackLayout>
         

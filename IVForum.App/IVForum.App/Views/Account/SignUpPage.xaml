@@ -4,7 +4,7 @@
              xmlns:service="clr-namespace:IVForum.App.Services"
              x:Class="IVForum.App.Views.Account.SignUpPage"
              Title="Registrar"
-             BackgroundColor="GhostWhite">
+             BackgroundColor="{StaticResource LightBackgroundColor}">
     
     <ContentPage.Content>
         

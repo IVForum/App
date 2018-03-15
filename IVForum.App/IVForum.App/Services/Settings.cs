@@ -1,6 +1,8 @@
 ﻿using IVForum.App.Data.Models;
 using IVForum.App.Views.Main;
 
+using System;
+
 using Xamarin.Forms;
 
 namespace IVForum.App.Services
@@ -19,7 +21,7 @@ namespace IVForum.App.Services
 			{
 				return Application.Current.Properties.ContainsKey(key);
 			}
-			catch (System.Exception)
+			catch (Exception)
 			{
 				return false;
 			}

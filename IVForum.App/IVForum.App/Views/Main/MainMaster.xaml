@@ -15,7 +15,7 @@
             
             <ListView.Header>
 
-                <StackLayout Padding="10" BackgroundColor="#2196F3" Orientation="Horizontal">
+                <StackLayout Padding="10" BackgroundColor="{StaticResource Primary}" Orientation="Horizontal">
                     
                     <Image Source="avatar_w.png"></Image>
                     
