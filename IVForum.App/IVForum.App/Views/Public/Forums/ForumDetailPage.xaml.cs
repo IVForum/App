@@ -36,37 +36,53 @@ namespace IVForum.App.Views.Public.Forums
 		{
 			if (Model.Owner.Id == Settings.GetLoggedUser().Id)
 			{
+				ToolbarItem edit = new ToolbarItem()
+				{
+					Text = "Editar",
+					Icon = "edit_w.png"
+				};
+				ToolbarItems.Add(edit);
+				edit.Clicked += Edit_Clicked;
+
 				ToolbarItem delete = new ToolbarItem()
 				{
 					Text = "Eliminar",
 					Icon = "cross_w.png"
 				};
-
 				ToolbarItems.Add(delete);
+				delete.Clicked += Delete_Clicked;
 
-				delete.Clicked += async (sender, args) => {
-					var response = await DisplayAlert("Avís", "Segur vols esborrar el fòrum?", "Si", "No");
-
-					if (!response)
-					{
-						return;
-					}
-
-					var result = await ApiService.Forums.Delete(Model);
-
-					if (result.IsSuccess)
-					{
-						Alert.Send("Fòrum esborrat amb èxit");
-						await Navigation.PopToRootAsync();
-					}
-					else
-					{
-						Alert.Send(result.Message);
-					}
-				};
 			} else
 			{
+				await ApiService.Forums.AddView(Model.Id);
 				DetermineSubscription();
+			}
+		}
+
+		private void Edit_Clicked(object sender, EventArgs e)
+		{
+			Alert.Send("Edit goes here");
+		}
+
+		private async void Delete_Clicked(object sender, EventArgs e)
+		{
+			var response = await DisplayAlert("Avís", "Segur vols esborrar el fòrum?", "Si", "No");
+
+			if (!response)
+			{
+				return;
+			}
+
+			var result = await ApiService.Forums.Delete(Model.Id);
+
+			if (result.IsSuccess)
+			{
+				Alert.Send("Fòrum esborrat amb èxit");
+				await Navigation.PopToRootAsync();
+			}
+			else
+			{
+				Alert.Send(result.Message);
 			}
 		}
 
@@ -76,31 +92,22 @@ namespace IVForum.App.Views.Public.Forums
 			{
 				Button button = new Button
 				{
-					Image = "plus.png",
-					Text = "Suscriure"
+					Image = "plus_w.png",
+					Text = "Suscriure",
+					BackgroundColor = Color.Accent
 				};
 				button.Clicked += Subscribe;
-
 				ForumStackLayout.Children.Add(button);
 			}
 			else
 			{
-				Button addProjectButton = new Button
-				{
-					Image = "plus.png",
-					Text = "Afegir Projecte",
-					BackgroundColor = Color.ForestGreen
-				};
-				addProjectButton.Clicked += AddProject;
-
-				ForumStackLayout.Children.Add(addProjectButton);
+				CreateAddProjectButton();
 			}
 		}
 
-		private async void Subscribe(object sender, EventArgs e)
+		private async void Subscribe(object sender, EventArgs args)
 		{
 			Button btn = sender as Button;
-
 			btn.IsEnabled = false;
 
 			var result = await ApiService.Subscriptions.SubscribeToForum(Model);
@@ -108,27 +115,33 @@ namespace IVForum.App.Views.Public.Forums
 			if (result.IsSuccess)
 			{
 				Alert.Send("T'has suscrit correctament");
-				btn.IsEnabled = true;
 				ForumStackLayout.Children.Remove(btn);
-
-				Button addProjectButton = new Button
-				{
-					Image = "plus.png",
-					Text = "Afegir Projecte",
-					BackgroundColor = Color.ForestGreen
-				};
-				addProjectButton.Clicked += AddProject;
-
-				ForumStackLayout.Children.Add(addProjectButton);
+				CreateAddProjectButton();
 			}
 			else
 			{
 				Alert.Send("Error al processar la suscripció");
+				btn.IsEnabled = true;
 			}
+		}
+
+		private void CreateAddProjectButton()
+		{
+			Button addProjectButton = new Button
+			{
+				Image = "plus_w.png",
+				Text = "Afegir Projecte",
+				BackgroundColor = Color.Accent
+			};
+			addProjectButton.Clicked += AddProject;
+
+			ForumStackLayout.Children.Add(addProjectButton);
 		}
 
 		private async void AddProject(object sender, EventArgs e)
 		{
+			Button btn = sender as Button;
+			btn.IsEnabled = false;
 			Dictionary<string, Project> ProjectDictionary = new Dictionary<string, Project>();
 			List<Project> projects = await ApiService.Account.Projects();
 
@@ -138,8 +151,7 @@ namespace IVForum.App.Views.Public.Forums
 			}
 
 			Picker picker = new Picker() {
-				Title = "Projectes personals",
-				VerticalOptions = LayoutOptions.CenterAndExpand
+				Title = "Projectes personals"
 			};
 
 			foreach (string key in ProjectDictionary.Keys)
@@ -148,6 +160,10 @@ namespace IVForum.App.Views.Public.Forums
 			}
 
 			ForumStackLayout.Children.Add(picker);
+
+			picker.Focus();
+
+			picker.Unfocused += (snd, arg) => { btn.IsEnabled = true; };
 
 			picker.SelectedIndexChanged += (send, args) =>
 			{
@@ -165,9 +181,11 @@ namespace IVForum.App.Views.Public.Forums
 						BackgroundColor = Color.ForestGreen
 					};
 
-					confirm.Clicked += async (btn, arg) =>
-					{
-						SubscriptionViewModel subscription = new SubscriptionViewModel() {
+					ForumStackLayout.Children.Add(confirm);
+
+					confirm.Clicked += async (s, a) => {
+						SubscriptionViewModel subscription = new SubscriptionViewModel()
+						{
 							ForumId = Model.Id.ToString(),
 							ProjectId = projectSelected.Id.ToString()
 						};
@@ -177,14 +195,16 @@ namespace IVForum.App.Views.Public.Forums
 						if (result.IsSuccess)
 						{
 							Alert.Send("Projecte afegit correctament");
+							ForumStackLayout.Children.Remove(confirm);
+							ForumStackLayout.Children.Remove(picker);
+							btn.IsEnabled = true;
 						}
 						else
 						{
 							Alert.Send("Error al afegir projecte al fòrum");
+							btn.IsEnabled = true;
 						}
 					};
-
-					ForumStackLayout.Children.Add(confirm);
 				}
 			};
 		}

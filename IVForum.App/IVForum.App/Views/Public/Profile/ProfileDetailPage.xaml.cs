@@ -1,5 +1,6 @@
 ﻿using IVForum.App.Data.Models;
 using IVForum.App.Services;
+using IVForum.App.ViewModels.Static;
 using IVForum.App.Views.Personal.Profile;
 
 using System;
@@ -17,7 +18,11 @@ namespace IVForum.App.Views.Public.Profile
 		public ProfileDetailPage()
 		{
 			InitializeComponent();
+			Model = Settings.GetLoggedUser();
+			BindingContext = Model;
+			Title = Model.Name + " " + Model.Surname;
 			Load();
+			Load(Model);
 		}
 
 		public ProfileDetailPage(User model)
@@ -25,15 +30,11 @@ namespace IVForum.App.Views.Public.Profile
 			InitializeComponent();
 			BindingContext = Model = model;
 			Title = model.Name + " " + model.Surname;
+			Load(model);
 		}
 
 		private async void Load()
 		{
-			Model = Settings.GetLoggedUser();
-
-			BindingContext = Model;
-			Title = Model.Name + " " + Model.Surname;
-
 			ToolbarItem edit = new ToolbarItem
 			{
 				Text = "Editar",
@@ -41,8 +42,35 @@ namespace IVForum.App.Views.Public.Profile
 			};
 
 			edit.Clicked += Edit_Clicked;
-
 			ToolbarItems.Add(edit);
+		}
+
+		private async void Load(User model)
+		{
+			if (model.Description != null)
+			{
+				ProfileLayout.Children.Add(InfoFrame.Create("info.png", "Descripció", model.Description));
+			}
+
+			if (model.RepositoryUrl != null)
+			{
+				ProfileLayout.Children.Add(InfoFrame.Create("repo.png", "Repositori", model.RepositoryUrl));
+			}
+
+			if (model.WebsiteUrl != null)
+			{
+				ProfileLayout.Children.Add(InfoFrame.Create("web.png", "Pàgina web", model.WebsiteUrl));
+			}
+
+			if (model.FacebookUrl != null)
+			{
+				ProfileLayout.Children.Add(InfoFrame.Create("facebook.png", "Facebook", model.FacebookUrl));
+			}
+
+			if (model.TwitterUrl != null)
+			{
+				ProfileLayout.Children.Add(InfoFrame.Create("twitter.png", "twitter", model.TwitterUrl));
+			}
 		}
 
 		private async void Edit_Clicked(object sender, EventArgs e)

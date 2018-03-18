@@ -1,6 +1,4 @@
-﻿using SQLite;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,7 +10,6 @@ namespace IVForum.App.Data.Models
 	public class BaseModel : INotifyPropertyChanged
     {
 		private bool _isRefreshing = false;
-		[Ignore]
 		public bool IsRefreshing
 		{
 			get { return _isRefreshing; }
@@ -29,7 +26,6 @@ namespace IVForum.App.Data.Models
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		[Ignore]
 		protected ICommand RefreshCommand
 		{
 			get

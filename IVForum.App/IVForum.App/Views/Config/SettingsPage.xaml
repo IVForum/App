@@ -15,7 +15,7 @@
                 
             </Frame>
 
-            <Button Image="save_b.png" Text="Desa" Clicked="SaveChanges"></Button>
+            <Button Image="save_w.png" Text="Desa" Clicked="SaveChanges"></Button>
             
         </StackLayout>
 

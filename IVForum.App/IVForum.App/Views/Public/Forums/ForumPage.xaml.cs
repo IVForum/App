@@ -19,7 +19,7 @@ namespace IVForum.App.Views.Public.Forums
 			Model.Load();
 
 			ForumsListView.BindingContext = Model;
-			ForumsListView.ItemTapped += async (ender, args) =>
+			ForumsListView.ItemTapped += async (sender, args) =>
 			{
 				await Navigation.PushAsync(new ForumDetailTabbedPage((Forum)args.Item), true);
 			};

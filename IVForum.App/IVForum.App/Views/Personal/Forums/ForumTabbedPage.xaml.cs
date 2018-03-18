@@ -1,5 +1,4 @@
 ﻿using IVForum.App.Data.Enums;
-using IVForum.App.Data.Models;
 using IVForum.App.Services;
 using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Forums;
@@ -14,21 +13,19 @@ namespace IVForum.App.Views.Personal.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForumTabbedPage : TabbedPage
     {
-		private User Model;
-
         public ForumTabbedPage()
         {
             InitializeComponent();
 
-			Model = Settings.GetLoggedUser();
+			Guid userId = Settings.GetLoggedUser().Id;
 
-			Children.Add(new ForumPage(new ForumViewModel(Origin.User) { UserId = Model.Id }) { Title = "Personals" });
-			Children.Add(new ForumPage(new ForumViewModel(Origin.Subscription) { UserId = Model.Id }) { Title = "Participants" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.User) { UserId = userId }) { Title = "Personals" });
+			Children.Add(new ForumPage(new ForumViewModel(Origin.Subscription) { UserId = userId }) { Title = "Suscripcions" });
 		}
 
 		public async void AddNew(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new ForumCreatePage() { Title = "Afegir nou fòrum" }, true);
+			await Navigation.PushAsync(new ForumCreatePage() { Title = "Crear nou fòrum" }, true);
 		}
     }
 }

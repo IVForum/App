@@ -36,11 +36,11 @@ namespace IVForum.App.Views.Public.Forums
 				bool sub = false;
 				if (subbed.IsSuccess)
 				{
-					//bills = await ApiService.Subscriptions.Bills(Model.Id);
+					bills = await ApiService.Subscriptions.Bills(Model.Id);
 					sub = true;
 				}
 
-				Children.Add(new ForumDetailPage(Model, sub) { Title = "Informació", Subscribed = true });
+				Children.Add(new ForumDetailPage(Model, sub) { Title = "Informació" });
 				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed.IsSuccess, Bills = bills });
 			}
 			catch (Exception e)

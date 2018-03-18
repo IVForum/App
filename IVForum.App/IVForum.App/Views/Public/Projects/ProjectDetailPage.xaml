@@ -14,43 +14,17 @@
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
 
                             <Image Source="document_w.png"></Image>
                             <Label Text="{Binding Title}" FontSize="Medium"></Label>
 
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                             <Image Source="view.png" VerticalOptions="Center"></Image>
                             <Label Text="{Binding Views}" VerticalOptions="Center"></Label>
                         </StackLayout>
-
-                    </StackLayout>
-
-                </Frame>
-
-                <Frame HasShadow="True">
-
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ShowProfile"/>
-                    </Frame.GestureRecognizers>
-
-                    <StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-
-                            <Image Source="user_b.png"></Image>
-                            <Label Text="Creador"></Label>
-
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Owner.Name}"></Label>
-                            <Label Text="{Binding Owner.Surname}"></Label>
-                        </StackLayout>
-
-                        <Label Text="{Binding CreationDate}"></Label>
 
                     </StackLayout>
 
@@ -75,51 +49,25 @@
 
                 <Frame HasShadow="True">
 
-                    <StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="loading.png"></Image>
-                            <Label Text="Progrès" FontSize="Medium"></Label>
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Bills.Count}"></Label>
-                            <Label Text="€"></Label>
-                        </StackLayout>
-
-                    </StackLayout>
-
-                </Frame>
-
-                <Frame HasShadow="True">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowProfile"/>
+                    </Frame.GestureRecognizers>
 
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
 
-                            <Image Source="repo.png"></Image>
-                            <Label Text="Repositori" FontSize="Medium"></Label>
+                            <Image Source="user_b.png"></Image>
+                            <Label Text="Creador" FontSize="Medium"></Label>
 
                         </StackLayout>
-
-                        <Label Text="{Binding RepositoryUrl}" TextColor="Blue"></Label>
-
-                    </StackLayout>
-
-                </Frame>
-
-                <Frame HasShadow="True">
-
-                    <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-
-                            <Image Source="web.png"></Image>
-                            <Label Text="Pàgina web" FontSize="Medium"></Label>
-
+                            <Label Text="{Binding Owner.Name}"></Label>
+                            <Label Text="{Binding Owner.Surname}"></Label>
                         </StackLayout>
 
-                        <Label Text="{Binding WebsiteUrl}" TextColor="Blue"></Label>
+                        <Label Text="{Binding CreationDate}"></Label>
 
                     </StackLayout>
 

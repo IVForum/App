@@ -14,10 +14,10 @@
                 <StackLayout>
 
                     <Label Text="Títol: "></Label>
-                    <Entry x:Name="TitleEntry" Placeholder="{Binding Title}"></Entry>
+                    <Entry x:Name="TitleEntry" Placeholder="Títol"></Entry>
 
                     <Label Text="Descripció:"></Label>
-                    <Entry x:Name="DescriptionEntry" Placeholder="{Binding Description}"></Entry>
+                    <Entry x:Name="DescriptionEntry" Placeholder="Descripció"></Entry>
 
                     <Label Text="Data inici votacions"></Label>
                     <DatePicker x:Name="StartDatePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
@@ -61,7 +61,7 @@
 
             </Frame>
 
-            <Button Image="plus_w.png" Text="Afegir" Clicked="Add"></Button>
+            <Button Image="plus_w.png" Text="Crear" Clicked="Add"></Button>
 
             <Button Image="cross_w.png" Text="Cancel·lar" BackgroundColor="Red" Clicked="Cancel"></Button>
 

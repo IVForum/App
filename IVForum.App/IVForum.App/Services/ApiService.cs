@@ -413,6 +413,24 @@ namespace IVForum.App.Services
 					return new List<Forum>();
 				}
 			}
+			public static async Task<Forum> Select(Guid forumId)
+			{
+				try
+				{
+					string route = Routes.ForumGetById + forumId.ToString();
+
+					var response = await client.GetAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
+
+					return JsonService.Deserialize<Forum>(message);
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e);
+					return null;
+				}
+			}
 			public static async Task<HttpResult> Create(Forum model)
 			{
 				try
@@ -428,12 +446,11 @@ namespace IVForum.App.Services
 					return new HttpResult(false, e.Message);
 				}
 			}
-			public static async Task<HttpResult> Delete(Forum model)
+			public static async Task<HttpResult> Delete(Guid forumId)
 			{
 				try
 				{
-					string modelString = JsonService.Serialize(model);
-					string route = Routes.ForumDelete + model.Id.ToString();
+					string route = Routes.ForumDelete + forumId.ToString();
 
 					var response = await client.DeleteAsync(route);
 
@@ -444,7 +461,6 @@ namespace IVForum.App.Services
 				catch (Exception e)
 				{
 					return new HttpResult(false, e.Message);
-					throw;
 				}
 			}
 			public static async Task<HttpResult> AddProjectToForum(SubscriptionViewModel model)
@@ -452,7 +468,7 @@ namespace IVForum.App.Services
 				try
 				{
 					string modelString = JsonService.Serialize(model);
-					string route = Routes.ForumSubscribeProject;
+					string route = Routes.SubscriptionAddProjectToForum;
 
 					var response = await client.PostAsync(route, GetStringContent(modelString));
 					return await CheckHttpResultResponse(response);
@@ -478,11 +494,11 @@ namespace IVForum.App.Services
 					return new List<Project>();
 				}
 			}
-			public static async Task<HttpResult> AddView(Forum model)
+			public static async Task<HttpResult> AddView(Guid forumId)
 			{
 				try
 				{
-					string route = Routes.ForumView + model.Id.ToString();
+					string route = Routes.ForumView + forumId.ToString();
 
 					var response = await client.PutAsync(route, null);
 					return await CheckHttpResultResponse(response);
@@ -562,12 +578,11 @@ namespace IVForum.App.Services
 					return new HttpResult(false, e.Message);
 				}
 			}
-			public static async Task<HttpResult> Delete(Project model)
+			public static async Task<HttpResult> Delete(Guid projectId)
 			{
 				try
 				{
-					string modelString = JsonService.Serialize(model);
-					string route = Routes.ProjectDelete + model.Id.ToString();
+					string route = Routes.ProjectDelete + projectId.ToString();
 
 					var response = await client.DeleteAsync(route);
 
@@ -580,11 +595,11 @@ namespace IVForum.App.Services
 					return new HttpResult(false, e.Message);
 				}
 			}
-			public static async Task<HttpResult> AddView(Project model)
+			public static async Task<HttpResult> AddView(Guid projectId)
 			{
 				try
 				{
-					string route = Routes.ProjectView + model.Id.ToString();
+					string route = Routes.ProjectView + projectId.ToString();
 
 					var response = await client.PutAsync(route, null);
 					return await CheckHttpResultResponse(response);
@@ -653,38 +668,18 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					EnsureTokenExists();
-
 					User user = Settings.GetLoggedUser();
 					string route = Routes.AccountSubscribedForumsByUserId + user.Id.ToString();
 
-					HttpResponseMessage response = await client.GetAsync(route);
+					var response = await client.GetAsync(route);
 
-					if (response.StatusCode == System.Net.HttpStatusCode.OK)
-					{
-						string forumsString = await response.Content.ReadAsStringAsync();
-						List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-						return forums;
-					}
-					else
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							response = await client.GetAsync(Routes.ForumSubscribed + user.Id.ToString());
-							if (response.StatusCode == System.Net.HttpStatusCode.OK)
-							{
-								string forumsString = await response.Content.ReadAsStringAsync();
-								List<Forum> forums = JsonService.Deserialize<List<Forum>>(forumsString);
-								return forums;
-							}
-						}
+					string message = await response.Content.ReadAsStringAsync();
 
-						return new List<Forum>();
-					}
+					return await CheckForumListResponse(response);
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
-					Alert.Send("Error de connexió");
+					Debug.WriteLine(e);
 					return new List<Forum>();
 				}
 			}
@@ -736,6 +731,7 @@ namespace IVForum.App.Services
 				}
 				catch (Exception e)
 				{
+					Debug.WriteLine(e);
 					return new List<Bill>();
 				}
 			}
@@ -743,102 +739,25 @@ namespace IVForum.App.Services
 
 		internal class Transactions
 		{
-
-		}
-
-		#region Projects
-		public static async Task<List<Project>> RequestPersonalProjects(Guid userId)
-		{
-			try
+			public static async Task<HttpResult> Vote(VoteViewModel vote)
 			{
-				EnsureTokenExists();
-
-				string route = Routes.ProjectGetPersonal + userId.ToString();
-				HttpResponseMessage response = await client.GetAsync(route);
-
-				if (response.StatusCode == System.Net.HttpStatusCode.OK)
+				try
 				{
-					string forumsString = await response.Content.ReadAsStringAsync();
-					return JsonService.Deserialize<List<Project>>(forumsString);
-				}
-				return null;
-			}
-			catch (Exception)
-			{
-				Alert.Send("Error de connexió");
-				return new List<Project>();
-			}
-		}
+					string route = Routes.TransactionVote;
+					string modelString = JsonService.Serialize(vote);
 
-		public static async Task<List<Project>> RequestParticipatingProjects(Guid userId)
-		{
-			return new List<Project>();
-		}
+					var response = await client.PostAsync(route, GetStringContent(modelString));
 
-		public static async Task<List<Bill>> RequestProjectBills(Guid forumId)
-		{
-			try
-			{
-				string route = Routes.ProjectBills + forumId.ToString();
-				HttpResponseMessage response = await client.GetAsync(route);
-
-				if (response.StatusCode == System.Net.HttpStatusCode.OK)
-				{
-					string billsString = await response.Content.ReadAsStringAsync();
-					return JsonService.Deserialize<List<Bill>>(billsString);
-				}
-
-				return new List<Bill>();
-			}
-			catch (Exception)
-			{
-				Alert.Send("Error de connexió");
-				return new List<Bill>();
-			}
-		}
-
-		public static async Task<bool> VoteProject(VoteViewModel model)
-		{
-			try
-			{
-				EnsureTokenExists();
-				string route = Routes.ProjectVote;
-				string modelString = JsonService.Serialize(model);
-
-				HttpResponseMessage response = await client.PostAsync(route, GetStringContent(modelString));
-
-				if (response.StatusCode == System.Net.HttpStatusCode.OK)
-				{
-					return true;
-				}
-				else
-				{
 					string message = await response.Content.ReadAsStringAsync();
-					for (int i = 0; i < 3; i++)
-					{
-						response = await client.PostAsync(route, GetStringContent(modelString));
-						if (response.StatusCode == System.Net.HttpStatusCode.OK)
-						{
-							return true;
-						}
-					}
 
-					return false;
+					return await CheckHttpResultResponse(response);
+				}
+				catch (Exception e)
+				{
+					Debug.WriteLine(e);
+					return new HttpResult(false, e.Message);
 				}
 			}
-			catch (Exception)
-			{
-				Alert.Send("Error de connexio");
-				return false;
-			}
-		}
-		#endregion
-
-		public static async Task PostProject(CreateProjectViewModel model)
-		{
-			client.DefaultRequestHeaders.Add("Bearer", "");
-			string modelString = JsonService.Serialize(model);
-			HttpResponseMessage response = await client.PostAsync("projects/create", GetStringContent(modelString));
 		}
 
 		private static StringContent GetStringContent(string serializedModel)

@@ -14,15 +14,30 @@
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                             <Image Source="book_w.png"></Image>
                             <Label Text="{Binding Title}" FontSize="Medium"></Label>
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                            <Image Source="view.png"></Image>
-                            <Label Text="{Binding Views}"></Label>
+                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                            <Image Source="view.png" HorizontalOptions="Center"></Image>
+                            <Label Text="{Binding Views}" HorizontalOptions="Center"></Label>
                         </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="info.png"></Image>
+                            <Label Text="Descripció:" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding Description}"></Label>
 
                     </StackLayout>
 
@@ -65,21 +80,6 @@
                         </StackLayout>
 
                         <Label Text="{Binding CreationDate}"></Label>
-
-                    </StackLayout>
-
-                </Frame>
-
-                <Frame HasShadow="True">
-
-                    <StackLayout>
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="info.png"></Image>
-                            <Label Text="Descripció:" FontSize="Medium"></Label>
-                        </StackLayout>
-
-                        <Label Text="{Binding Description}"></Label>
 
                     </StackLayout>
 

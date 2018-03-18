@@ -2,7 +2,7 @@
 using IVForum.App.Services;
 
 using System;
-
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -91,6 +91,7 @@ namespace IVForum.App.Views.Personal.Profile
 			}
 			catch (Exception e)
 			{
+				Debug.WriteLine(e);
 				Alert.Send("Error al desar les dades");
 			}
 		}

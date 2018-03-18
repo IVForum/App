@@ -11,8 +11,6 @@ namespace IVForum.App.Views.Personal.Forums
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ForumCreatePage : ContentPage
 	{
-		private Forum Model = new Forum();
-
 		public ForumCreatePage()
 		{
 			InitializeComponent();
@@ -20,7 +18,7 @@ namespace IVForum.App.Views.Personal.Forums
 
 		private async void Add(object sender, EventArgs e)
 		{
-			Model = new Forum
+			Forum Model = new Forum
 			{
 				Id = Guid.NewGuid(),
 				Title = TitleEntry.Text,

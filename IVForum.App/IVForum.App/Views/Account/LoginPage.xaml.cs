@@ -44,13 +44,13 @@ namespace IVForum.App.Views.Account
 			try
 			{
 				btn.IsEnabled = false;
-				await Navigation.PushModalAsync(new LoadingPage(), false);
 
 				Regex email = new Regex("^[a-z0-9._%+-]+@[a-z0-9.-]+[^\\.]\\.[a-z]{2,3}$");
 
 				if (!email.IsMatch(EntryEmail.Text))
 				{
 					Alert.Send("Direcció de correu invàlida");
+					btn.IsEnabled = true;
 					return;
 				}
 
@@ -60,6 +60,8 @@ namespace IVForum.App.Views.Account
 					Email = EntryEmail.Text,
 					Password = EntryPassword.Text
 				};
+
+				await Navigation.PushModalAsync(new LoadingPage(), false);
 
 				var result = await AccountService.Login(model);
 
@@ -76,6 +78,7 @@ namespace IVForum.App.Views.Account
 				{
 					await Navigation.PopModalAsync(false);
 					Alert.Send("Error al iniciar sessió");
+					btn.IsEnabled = true;
 				}
 			}
 			catch (Exception e)
@@ -83,9 +86,6 @@ namespace IVForum.App.Views.Account
 				Debug.WriteLine(e);
 				await Navigation.PopModalAsync(false);
 				Alert.Send("Error al iniciar sessió");
-			}
-			finally
-			{
 				btn.IsEnabled = true;
 			}
 		}
