@@ -27,39 +27,38 @@ namespace IVForum.App.Services
 				BaseAddress = new Uri(Routes.Base)
 			};
 
-			if (!client.DefaultRequestHeaders.Contains("Authorization"))
+			client.DefaultRequestHeaders.Clear();
+
+			if (Settings.Contains("token"))
 			{
-				if (Settings.Contains("token"))
-				{
-					string tokenString = (string) Settings.GetValue("token");
+				string tokenString = (string) Settings.GetValue("token");
 
-					Token token = JsonService.Deserialize<Token>(tokenString);
+				Token token = JsonService.Deserialize<Token>(tokenString);
 
-					client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Auth_Token);
-				}
-				else
+				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Auth_Token);
+			}
+			else
+			{
+				if (Settings.Contains("user"))
 				{
-					if (Settings.Contains("user"))
+					string userString = (string) Settings.GetValue("user");
+					User user = JsonService.Deserialize<User>(userString);
+
+					LoginViewModel model = new LoginViewModel
 					{
-						string userString = (string) Settings.GetValue("user");
-						User user = JsonService.Deserialize<User>(userString);
+						Email = user.Email,
+						Password = user.Password
+					};
 
-						LoginViewModel model = new LoginViewModel
+					var result = Account.Login(model).GetAwaiter().GetResult();
+
+					if (!result.IsSuccess)
+					{
+						for (int i = 0; i < 3; i++)
 						{
-							Email = user.Email,
-							Password = user.Password
-						};
-
-						var result = Account.Login(model).GetAwaiter().GetResult();
-
-						if (!result.IsSuccess)
-						{
-							for (int i = 0; i < 3; i++)
-							{
-								result = Account.Login(model).GetAwaiter().GetResult();
-								if (result.IsSuccess)
-									break;
-							}
+							result = Account.Login(model).GetAwaiter().GetResult();
+							if (result.IsSuccess)
+								break;
 						}
 					}
 				}
@@ -634,7 +633,7 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.AccountIsSubscribedToForum + forumId.ToString();
+					string route = Routes.SunscriptionsIsSubscribedToForum + forumId.ToString();
 
 					var response = await client.GetAsync(route);
 
@@ -723,7 +722,7 @@ namespace IVForum.App.Services
 			{
 				try
 				{
-					string route = Routes.SubscriptionBills + forumId.ToString();
+					string route = Routes.SubscriptionWallet + forumId.ToString();
 
 					var response = await client.GetAsync(route);
 

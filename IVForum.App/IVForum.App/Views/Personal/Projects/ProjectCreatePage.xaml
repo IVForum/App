@@ -13,14 +13,14 @@
                 <StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Image Source="personal_projects.png"></Image>
-                        <Label Text="Títol" FontSize="Medium"></Label>
+                        <Image Source="document_b.png"></Image>
+                        <Label Text="*Títol" FontSize="Medium"></Label>
                     </StackLayout>
                     <Entry x:Name="TitleEntry" Placeholder="Títol"></Entry>
 
                     <StackLayout Orientation="Horizontal">
                         <Image Source="info.png"></Image>
-                        <Label Text="Descripció" FontSize="Medium"></Label>
+                        <Label Text="*Descripció" FontSize="Medium"></Label>
                     </StackLayout>
                     <Entry x:Name="DescriptionEntry" Placeholder="Descripció"></Entry>
 
@@ -35,6 +35,8 @@
                         <Label Text="Repositori" FontSize="Medium"></Label>
                     </StackLayout>
                     <Entry x:Name="RepositoryEntry" Placeholder="Repositori"></Entry>
+
+                    <Label Text="Els camps marcats amb * són obligatoris" FontAttributes="Italic"></Label>
 
                 </StackLayout>
 

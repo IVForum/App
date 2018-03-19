@@ -1,4 +1,5 @@
 ﻿using IVForum.App.Data.Models;
+using IVForum.App.Services;
 using IVForum.App.ViewModels;
 
 using System.Collections.Generic;
@@ -21,13 +22,21 @@ namespace IVForum.App.Views.Public.Projects
 			InitializeComponent();
 
 			Model = model;
-			Model.Load();
 
 			ProjectsListView.BindingContext = Model;
-			ProjectsListView.ItemTapped += async (sender, args) => 
-			{
-				await Navigation.PushAsync(new ProjectDetailPage((Project)args.Item) { Bills = Bills, Subscribed = Subscribed }, true);
-			};
+			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
+		}
+
+		private async void ProjectsListView_ItemTapped(object sender, ItemTappedEventArgs args)
+		{
+			await Navigation.PushAsync(new ProjectDetailPage((Project)args.Item) { Bills = Bills, Subscribed = Subscribed }, true);
+		}
+
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+			Bills = await ApiService.Subscriptions.Bills(Model.ForumId);
+			Model.Load();
 		}
 	}
 }

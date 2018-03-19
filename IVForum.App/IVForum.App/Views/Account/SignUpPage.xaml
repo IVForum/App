@@ -7,106 +7,110 @@
              BackgroundColor="{StaticResource LightBackgroundColor}">
     
     <ContentPage.Content>
-        
-        <StackLayout Padding="5">
 
-            <Frame HasShadow="True">
+        <ScrollView>
 
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="user_plus_b.png"></Image>
-                    <Label Text="Formulari de registre" FontSize="Medium"></Label>
-                </StackLayout>
+            <StackLayout Padding="5">
 
-            </Frame>
-
-            <Frame HasShadow="True">
-
-                <StackLayout>
-
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                        <Entry x:Name="EntryName" Text="" Placeholder="Nom" HorizontalOptions="FillAndExpand"></Entry>
-                        <Entry x:Name="EntrySurname" Text="" Placeholder="Cognom" HorizontalOptions="FillAndExpand"></Entry>
-                    </StackLayout>                    
-                    
-                    <Entry x:Name="EntryEmail" Text="" Placeholder="Correu electrònic" Keyboard="Email">
-
-                        <Entry.Triggers>
-
-                            <EventTrigger Event="TextChanged">
-
-                                <service:EmailValidatorService/>
-
-                            </EventTrigger>
-                            
-                        </Entry.Triggers>
-                        
-                    </Entry>
-                    
-                    <Entry x:Name="EntryPassword" Text="" Placeholder="Contrasenya" IsPassword="True">
-
-                        <Entry.Triggers>
-
-                            <EventTrigger Event="TextChanged">
-
-                                <service:PasswordValidatorService/>
-
-                            </EventTrigger>
-
-                        </Entry.Triggers>
-                        
-                    </Entry>
-
-                    <Entry x:Name="EntryValidatePassword" Text="" Placeholder="Confirmar contrasenya" IsPassword="True"></Entry>
-
-                </StackLayout>
-                
-            </Frame>
-
-            <Frame HasShadow="True">
-
-                <StackLayout>
+                <Frame HasShadow="True">
 
                     <StackLayout Orientation="Horizontal">
-                        <Image Source="info.png"></Image>
-                        <Label Text="Important" FontSize="Medium"></Label>
+                        <Image Source="user_plus_b.png"></Image>
+                        <Label Text="Formulari de registre" FontSize="Medium"></Label>
                     </StackLayout>
 
-                    <Label Text="Les dades personals recollides es faran servir exclusivament per aquesta aplicació amb el propòsit de millor l'experiència d'usuari. Creant un compte en l'aplicació indica que estàs d'acord que s'emmagatzemin les dades personals del formulari de registre." FontAttributes="Bold"></Label>
-                </StackLayout>
+                </Frame>
 
-            </Frame>
+                <Frame HasShadow="True">
 
-            <Button Image="user_plus_b.png" Text="Registrar" Clicked="SignUp">
+                    <StackLayout>
 
-                <Button.Triggers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                            <Entry x:Name="EntryName" Text="" Placeholder="Nom" HorizontalOptions="FillAndExpand"></Entry>
+                            <Entry x:Name="EntrySurname" Text="" Placeholder="Cognom" HorizontalOptions="FillAndExpand"></Entry>
+                        </StackLayout>
 
-                    <MultiTrigger TargetType="Button">
+                        <Entry x:Name="EntryEmail" Text="" Placeholder="Correu electrònic" Keyboard="Email">
 
-                        <MultiTrigger.Conditions>
+                            <Entry.Triggers>
 
-                            <BindingCondition Binding="{Binding Source={x:Reference EntryName}, Path=Text.Length}"
+                                <EventTrigger Event="TextChanged">
+
+                                    <service:EmailValidatorService/>
+
+                                </EventTrigger>
+
+                            </Entry.Triggers>
+
+                        </Entry>
+
+                        <Entry x:Name="EntryPassword" Text="" Placeholder="Contrasenya" IsPassword="True">
+
+                            <Entry.Triggers>
+
+                                <EventTrigger Event="TextChanged">
+
+                                    <service:PasswordValidatorService/>
+
+                                </EventTrigger>
+
+                            </Entry.Triggers>
+
+                        </Entry>
+
+                        <Entry x:Name="EntryValidatePassword" Text="" Placeholder="Confirmar contrasenya" IsPassword="True"></Entry>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="info.png"></Image>
+                            <Label Text="Important" FontSize="Medium"></Label>
+                        </StackLayout>
+
+                        <Label Text="Les dades personals recollides es faran servir exclusivament per aquesta aplicació amb el propòsit de millor l'experiència d'usuari. Creant un compte en l'aplicació indica que estàs d'acord que s'emmagatzemin les dades personals del formulari de registre." FontAttributes="Bold"></Label>
+                    </StackLayout>
+
+                </Frame>
+
+                <Button Image="user_plus_b.png" Text="Registrar" Clicked="SignUp">
+
+                    <Button.Triggers>
+
+                        <MultiTrigger TargetType="Button">
+
+                            <MultiTrigger.Conditions>
+
+                                <BindingCondition Binding="{Binding Source={x:Reference EntryName}, Path=Text.Length}"
                                                       Value="0" />
 
-                            <BindingCondition Binding="{Binding Source={x:Reference EntrySurname}, Path=Text.Length}" 
+                                <BindingCondition Binding="{Binding Source={x:Reference EntrySurname}, Path=Text.Length}" 
                                                       Value="0" />
 
-                            <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}" 
+                                <BindingCondition Binding="{Binding Source={x:Reference EntryEmail}, Path=Text.Length}" 
                                                       Value="0" />
 
-                            <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
+                                <BindingCondition Binding="{Binding Source={x:Reference EntryPassword}, Path=Text.Length}" 
                                                       Value="0" />
 
-                        </MultiTrigger.Conditions>
+                            </MultiTrigger.Conditions>
 
-                        <Setter Property="IsEnabled" Value="False" />
+                            <Setter Property="IsEnabled" Value="False" />
 
-                    </MultiTrigger>
+                        </MultiTrigger>
 
-                </Button.Triggers>
+                    </Button.Triggers>
 
-            </Button>
+                </Button>
 
-        </StackLayout>
+            </StackLayout>
+
+        </ScrollView>
         
     </ContentPage.Content>
     

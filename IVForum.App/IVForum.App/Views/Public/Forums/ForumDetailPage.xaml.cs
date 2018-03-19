@@ -16,6 +16,7 @@ namespace IVForum.App.Views.Public.Forums
 	{
 		private Forum Model = new Forum();
 		public bool Subscribed { get; set; }
+		private bool AddProjectButtonTapped { get; set; } = false;
 
 		public ForumDetailPage(Forum model)
 		{
@@ -150,7 +151,8 @@ namespace IVForum.App.Views.Public.Forums
 				ProjectDictionary.Add(p.Title, p);
 			}
 
-			Picker picker = new Picker() {
+			Picker picker = new Picker()
+			{
 				Title = "Projectes personals"
 			};
 
@@ -163,8 +165,6 @@ namespace IVForum.App.Views.Public.Forums
 
 			picker.Focus();
 
-			picker.Unfocused += (snd, arg) => { btn.IsEnabled = true; };
-
 			picker.SelectedIndexChanged += (send, args) =>
 			{
 				if (picker.SelectedIndex == -1)
@@ -176,14 +176,16 @@ namespace IVForum.App.Views.Public.Forums
 					string projectTitle = picker.Items[picker.SelectedIndex];
 					Project projectSelected = ProjectDictionary[projectTitle];
 
-					Button confirm = new Button() {
+					Button confirm = new Button()
+					{
 						Text = "Confirmar",
 						BackgroundColor = Color.ForestGreen
 					};
 
 					ForumStackLayout.Children.Add(confirm);
 
-					confirm.Clicked += async (s, a) => {
+					confirm.Clicked += async (s, a) =>
+					{
 						SubscriptionViewModel subscription = new SubscriptionViewModel()
 						{
 							ForumId = Model.Id.ToString(),
@@ -198,6 +200,7 @@ namespace IVForum.App.Views.Public.Forums
 							ForumStackLayout.Children.Remove(confirm);
 							ForumStackLayout.Children.Remove(picker);
 							btn.IsEnabled = true;
+							AddProjectButtonTapped = false;
 						}
 						else
 						{

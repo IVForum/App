@@ -310,12 +310,6 @@
     <AndroidResource Include="Resources\drawable\logout_w.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IVForum.App\IVForum.App.csproj">
-      <Project>{e340274e-7431-4716-ba6d-b1a9dc09972c}</Project>
-      <Name>IVForum.App</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\banknote_b.png" />
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +320,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\banknotes_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IVForum.App\IVForum.App.csproj">
+      <Project>{e340274e-7431-4716-ba6d-b1a9dc09972c}</Project>
+      <Name>IVForum.App</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\calendar_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\calendar_w.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

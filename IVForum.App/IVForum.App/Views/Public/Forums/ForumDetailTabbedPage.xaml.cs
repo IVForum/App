@@ -5,7 +5,6 @@ using IVForum.App.ViewModels;
 using IVForum.App.Views.Public.Projects;
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 using Xamarin.Forms;
@@ -31,17 +30,9 @@ namespace IVForum.App.Views.Public.Forums
 			try
 			{
 				var subbed = await ApiService.Subscriptions.IsSubscribedToForum(Model.Id);
-				List<Bill> bills = new List<Bill>();
-
-				bool sub = false;
-				if (subbed.IsSuccess)
-				{
-					bills = await ApiService.Subscriptions.Bills(Model.Id);
-					sub = true;
-				}
-
-				Children.Add(new ForumDetailPage(Model, sub) { Title = "Informació" });
-				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed.IsSuccess, Bills = bills });
+				
+				Children.Add(new ForumDetailPage(Model, subbed.IsSuccess) { Title = "Informació" });
+				Children.Add(new ProjectPage(new ProjectViewModel(Origin.Forum, Order.Title) { ForumId = Model.Id }) { Title = "Projectes", Subscribed = subbed.IsSuccess });
 			}
 			catch (Exception e)
 			{

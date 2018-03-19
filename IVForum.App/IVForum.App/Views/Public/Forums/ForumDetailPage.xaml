@@ -48,14 +48,16 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Data inici votacions"></Label>
-                            <Label Text="{Binding DateBeginsVote}"></Label>
+                            <Image Source="calendar_b.png"></Image>
+                            <Label Text="Inici votacions" FontSize="Medium"></Label>
                         </StackLayout>
+                        <Label Text="{Binding DateBeginsVote}"></Label>
 
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="Data final votacions"></Label>
-                            <Label Text="{Binding DateEndsVote}"></Label>
+                            <Image Source="calendar_b.png"></Image>
+                            <Label Text="Final votacions" FontSize="Medium"></Label>
                         </StackLayout>
+                        <Label Text="{Binding DateEndsVote}"></Label>
 
                     </StackLayout>
 

@@ -16,13 +16,18 @@ namespace IVForum.App.Views.Public.Forums
 			InitializeComponent();
 
 			Model = model;
-			Model.Load();
 
 			ForumsListView.BindingContext = Model;
 			ForumsListView.ItemTapped += async (sender, args) =>
 			{
 				await Navigation.PushAsync(new ForumDetailTabbedPage((Forum)args.Item), true);
 			};
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			Model.Load();
 		}
 	}
 }

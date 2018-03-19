@@ -13,13 +13,22 @@
 
                 <StackLayout>
 
-                    <Label Text="Títol: "></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="book_b.png"></Image>
+                        <Label Text="*Títol" FontSize="Medium"></Label>
+                    </StackLayout>
                     <Entry x:Name="TitleEntry" Placeholder="Títol"></Entry>
 
-                    <Label Text="Descripció:"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="info.png"></Image>
+                        <Label Text="*Descripció" FontSize="Medium"></Label>
+                    </StackLayout>
                     <Entry x:Name="DescriptionEntry" Placeholder="Descripció"></Entry>
 
-                    <Label Text="Data inici votacions"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="calendar_b.png"></Image>
+                        <Label Text="Data inici votacions" FontSize="Medium"></Label>
+                    </StackLayout>
                     <DatePicker x:Name="StartDatePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
                         <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
                         <DatePicker.MinimumDate>
@@ -38,7 +47,10 @@
                         </DatePicker.MaximumDate>
                     </DatePicker>
 
-                    <Label Text="Data final votacions"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="calendar_b.png"></Image>
+                        <Label Text="Data final votacions" FontSize="Medium"></Label>
+                    </StackLayout>
                     <DatePicker x:Name="FinalDatePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
                         <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
                         <DatePicker.MinimumDate>
@@ -57,6 +69,8 @@
                         </DatePicker.MaximumDate>
                     </DatePicker>
 
+                    <Label Text="Els camps marcats amb * són obligatoris" FontAttributes="Italic"></Label>
+                    
                 </StackLayout>
 
             </Frame>
