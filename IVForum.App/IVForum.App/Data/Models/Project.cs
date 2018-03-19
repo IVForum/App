@@ -18,8 +18,8 @@ namespace IVForum.App.Data.Models
 
 		public int TotalMoney { get; set; }
 
-		public string Website { get; set; }
-		public string Repository { get; set; }
+		public string WebsiteUrl { get; set; }
+		public string RepositoryUrl { get; set; }
 
 		public virtual Forum Forum { get; set; } = null;
 		public virtual User Owner { get; set; }

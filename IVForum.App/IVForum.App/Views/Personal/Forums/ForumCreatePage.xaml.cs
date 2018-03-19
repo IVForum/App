@@ -18,6 +18,9 @@ namespace IVForum.App.Views.Personal.Forums
 
 		private async void Add(object sender, EventArgs e)
 		{
+			Button btn = sender as Button;
+			btn.IsEnabled = false;
+
 			Forum Model = new Forum
 			{
 				Id = Guid.NewGuid(),
@@ -38,6 +41,7 @@ namespace IVForum.App.Views.Personal.Forums
 			else
 			{
 				Alert.Send("Error al afegir el fòrum");
+				btn.IsEnabled = true;
 			}
 		}
 

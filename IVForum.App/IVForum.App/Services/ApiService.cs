@@ -51,16 +51,6 @@ namespace IVForum.App.Services
 					};
 
 					var result = Account.Login(model).GetAwaiter().GetResult();
-
-					if (!result.IsSuccess)
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							result = Account.Login(model).GetAwaiter().GetResult();
-							if (result.IsSuccess)
-								break;
-						}
-					}
 				}
 			}
 		}
@@ -74,25 +64,6 @@ namespace IVForum.App.Services
 			Token token = JsonService.Deserialize<Token>(tokenString);
 
 			client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.Auth_Token);
-		}
-		private static async Task<bool> EnsureAuthorized(HttpStatusCode statusCode)
-		{
-			if (statusCode != HttpStatusCode.Unauthorized)
-			{
-				return true;
-			}
-			else
-			{
-				var result = await AccountService.Login(Settings.GetLoggedUser());
-
-				if (result.IsSuccess)
-				{
-					EnsureTokenExists();
-					return true;
-				}
-
-				return false;
-			}
 		}
 		private static async Task<HttpResult> CheckHttpResultResponse(HttpResponseMessage response)
 		{
@@ -136,8 +107,8 @@ namespace IVForum.App.Services
 		{
 			if (response.StatusCode == HttpStatusCode.OK)
 			{
-				string forumsString = await response.Content.ReadAsStringAsync();
-				return JsonService.Deserialize<List<Bill>>(forumsString);
+				string contentString = await response.Content.ReadAsStringAsync();
+				return JsonService.Deserialize<List<Bill>>(contentString);
 			}
 			return new List<Bill>();
 		}
@@ -168,6 +139,8 @@ namespace IVForum.App.Services
 							return new HttpResult(true, response.StatusCode);
 						}
 					}
+
+					string message = await response.Content.ReadAsStringAsync();
 
 					return new HttpResult(false, response.StatusCode, await response.Content.ReadAsStringAsync());
 				}
@@ -217,7 +190,7 @@ namespace IVForum.App.Services
 					string route = Routes.AccountLogin;
 					string modelString = JsonService.Serialize(model);
 
-					HttpResponseMessage response = await client.PostAsync(route, GetStringContent(modelString));
+					var response = await client.PostAsync(route, GetStringContent(modelString));
 
 					if (response.StatusCode == HttpStatusCode.OK)
 					{
@@ -385,6 +358,8 @@ namespace IVForum.App.Services
 					string route = Routes.ForumGet;
 
 					var response = await client.GetAsync(route);
+
+					string message = await response.Content.ReadAsStringAsync();
 
 					return await CheckForumListResponse(response);
 				}
@@ -763,32 +738,5 @@ namespace IVForum.App.Services
 		{
 			return new StringContent(serializedModel, Encoding.UTF8, MediaType);
 		}
-
-		public static async Task Startup()
-		{
-			if (Settings.Contains("loggedin"))
-			{
-				string email = (string)Settings.GetValue("email");
-				string password = (string)Settings.GetValue("password");
-
-				LoginViewModel model = new LoginViewModel()
-				{
-					Email = email,
-					Password = password
-				};
-
-				var result = await Account.Login(model);
-
-				if (!result.IsSuccess)
-				{
-					for (int i = 0; i < 3; i++)
-					{
-						result = await Account.Login(model);
-						if (result.IsSuccess) break;
-					}
-				}
-			}
-		}
-
 	}
 }

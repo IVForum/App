@@ -22,6 +22,7 @@ namespace IVForum.App.Views.Public.Projects
 			InitializeComponent();
 
 			Model = model;
+			Model.Load();
 
 			ProjectsListView.BindingContext = Model;
 			ProjectsListView.ItemTapped += ProjectsListView_ItemTapped;
@@ -36,7 +37,6 @@ namespace IVForum.App.Views.Public.Projects
 		{
 			base.OnAppearing();
 			Bills = await ApiService.Subscriptions.Bills(Model.ForumId);
-			Model.Load();
 		}
 	}
 }

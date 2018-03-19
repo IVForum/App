@@ -14,7 +14,7 @@ namespace IVForum.App
 		protected override void OnStart()
 		{
 			MainPage = Settings.GetStartupPage();
-			Settings.LoginWithExistingUser();
+			//Settings.LoginWithExistingUser();
 		}
 
 		protected override void OnSleep ()

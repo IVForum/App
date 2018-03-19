@@ -19,8 +19,8 @@ namespace IVForum.App.Views.Personal.Projects
 
 			Guid userId = Settings.GetLoggedUser().Id;
 
-			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User, Order.Title) { UserId = userId }) { Title = "Personals" });
-			Children.Add(new ProjectPage(new ProjectViewModel(Origin.Subscription, Order.Title)) { Title = "Participants" });
+			Children.Add(new ProjectPage(new ProjectViewModel(Origin.User) { UserId = userId }) { Title = "Personals" });
+			Children.Add(new ProjectPage(new ProjectViewModel(Origin.Subscription)) { Title = "Participants" });
 		}
 
 		public async void AddNew(object sender, EventArgs e)

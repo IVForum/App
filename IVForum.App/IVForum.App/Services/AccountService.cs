@@ -44,6 +44,7 @@ namespace IVForum.App.Services
 
 				return new HttpResult(false, "Failed to retrieve user details");
 			}
+			string message = await response.Content.ReadAsStringAsync();
 
 			return new HttpResult(false, response.StatusCode, await response.Content.ReadAsStringAsync());
 		}

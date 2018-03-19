@@ -26,8 +26,8 @@ namespace IVForum.App.Views.Personal.Projects
 				Title = TitleEntry.Text,
 				Description = DescriptionEntry.Text,
 				CreationDate = DateTime.Now,
-				Website = WebsiteEntry.Text,
-				Repository = RepositoryEntry.Text
+				WebsiteUrl = WebsiteEntry.Text,
+				RepositoryUrl = RepositoryEntry.Text
 			};
 
 			var result = await ApiService.Projects.Create(Model);

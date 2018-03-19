@@ -49,14 +49,14 @@ namespace IVForum.App.Views.Public.Projects
 				ProjectStackLayout.Children.Add(InfoFrame.Create("loading.png", "Progrès", money));
 			}
 
-			if (Model.Website != null)
+			if (Model.WebsiteUrl != null)
 			{
-				ProjectStackLayout.Children.Add(InfoFrame.Create("web.png", "Pàgina web", Model.Website));
+				ProjectStackLayout.Children.Add(InfoFrame.Create("web.png", "Pàgina web", Model.WebsiteUrl));
 			}
 
-			if (Model.Repository != null)
+			if (Model.RepositoryUrl != null)
 			{
-				ProjectStackLayout.Children.Add(InfoFrame.Create("repo.png", "Repositori", Model.Repository));
+				ProjectStackLayout.Children.Add(InfoFrame.Create("repo.png", "Repositori", Model.RepositoryUrl));
 			}
 
 			if (Model.Owner.Id == Settings.GetLoggedUser().Id)
